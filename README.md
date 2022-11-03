@@ -132,50 +132,69 @@ $ npm start
 ```
 📦src
  ┣ 📂components
- ┃ ┃ ┣ 📂issueItem
- ┃ ┃ ┃ ┣ 📜IssueItem.jsx
- ┃ ┃ ┃ ┗  📜style.js
- ┃ ┃ ┣ 📂AdBox
- ┃ ┃ ┃ ┣ 📜AbBox.jsx
- ┃ ┃ ┃ ┗  📜style.js
- ┃ ┃ ┣ 📂errorContent
- ┃ ┃ ┃ ┣ 📜ErrorContent.jsx
- ┃ ┃ ┃ ┗  📜style.js
+ ┃ ┃ ┣ 📂carItem
+ ┃ ┃ ┃ ┣ 📜CarItem.tsx
+ ┃ ┃ ┃ ┗  📜styles.ts
+ ┃ ┃ ┣ 📂carList
+ ┃ ┃ ┃ ┣ 📜CarList.tsx
+ ┃ ┃ ┃ ┗  📜styles.ts
+ ┃ ┃ ┣ 📂categories
+ ┃ ┃ ┃ ┣ 📜Categories.tsx
+ ┃ ┃ ┃ ┗  📜styles.ts
+ ┃ ┃ ┣ 📂category
+ ┃ ┃ ┃ ┣ 📜Category.tsx
+ ┃ ┃ ┃ ┗  📜styles.ts
+ ┃ ┃ ┣ 📂detailInfo
+ ┃ ┃ ┃ ┣ 📜DetailInfo.tsx
+ ┃ ┃ ┃ ┗  📜styles.ts
+ ┃ ┃ ┣ 📂detailItem
+ ┃ ┃ ┃ ┗ 📜DetailItem.tsx
+ ┃ ┃ ┣ 📂detailList
+ ┃ ┃ ┃ ┗ 📜DetailList.tsx
  ┃ ┃ ┣ 📂header
- ┃ ┃ ┃ ┣ 📜Header.jsx
- ┃ ┃ ┃ ┗  📜style.js
- ┃ ┃ ┣ 📂issueContent
- ┃ ┃ ┃ ┣ 📜IssueContent.jsx
- ┃ ┃ ┃ ┗  📜style.js
- ┃ ┃ ┣ 📂issueList
- ┃ ┃ ┃ ┣ 📜IssueList.jsx
- ┃ ┃ ┃ ┗  📜style.js
- ┃ ┃ ┣ 📂layout
- ┃ ┃ ┃ ┣ 📜Layout.jsx
- ┃ ┃ ┃ ┗  📜style.js
- ┃ ┃ ┣ 📂loader
- ┃ ┃ ┃ ┣ 📜Loader.jsx
- ┃ ┃ ┃ ┗  📜style.js
+ ┃ ┃ ┃ ┣ 📜Header.tsx
+ ┃ ┃ ┃ ┗  📜styles.ts
+ ┃ ┃ ┣ 📂meta
+ ┃ ┃ ┃ ┗ 📜Meta.tsx
+ ┃ ┃ ┣ 📂titleInfo
+ ┃ ┃ ┃ ┣ 📜TitleInfo.tsx
+ ┃ ┃ ┃ ┗  📜styles.ts
  ┣ 📂context
- ┃ ┗ 📜ListContext.jsx
+ ┃ ┣  📜carsContext.tsx
+ ┃ ┗ 📜categoryContext.tsx
  ┣ 📂hooks
- ┃ ┣ 📜useFetch.jsx
- ┃ ┗ 📜useObservation.jsx
+ ┃ ┗ 📜useCars.ts
+ ┣ 📂interfaces
+ ┃ ┣ 📜ActionEnum.ts
+ ┃ ┗ 📜CarsInterface.ts
  ┣ 📂network
- ┃ ┗ 📜httpError.js
- ┣ 📂context
- ┃ ┗ 📜LoginContext.jsx
- ┣ 📂page
- ┃ ┃ ┣ 📂Notfound
- ┃ ┃ ┃ ┣ 📜Notfound.jsx
- ┃ ┃ ┃ ┗ 📜styles.js
- ┃ ┣ 📜Detail.jsx
- ┃ ┗ 📜Home.jsx
- ┣ 📂style
- ┃ ┗ 📜GlobalStyle.js
- ┣ 📜App.js
- ┣ 📜index.js
- ┗ 📜router.js
+ ┃ ┗ 📜httpError.ts
+ ┣ 📂pages
+ ┃ ┃ ┣ 📂detail
+ ┃ ┃ ┃ ┣ 📜Detail.tsx
+ ┃ ┃ ┃ ┗ 📜styles.ts
+ ┃ ┃ ┣ 📂home
+ ┃ ┃ ┃ ┣ 📜Home.tsx
+ ┃ ┃ ┃ ┗ 📜styles.ts
+ ┃ ┃ ┣ 📂notfound
+ ┃ ┃ ┃ ┣ 📜NotFound.tsx
+ ┃ ┃ ┃ ┗ 📜styles.ts
+ ┣ 📂service
+ ┃ ┣ 📜axiosUtils.ts
+ ┃ ┗ 📜carsService.ts
+ ┣ 📂styles
+ ┃ ┣ 📜DetailLayout.ts
+ ┃ ┣ 📜GlobalStyle.ts
+ ┃ ┗ 📜theme.ts
+ ┣ 📂utils
+ ┃ ┣ 📜checkWithinOneday.ts
+ ┃ ┣ 📜formatDate.ts
+ ┃ ┗ 📜setMetatags.ts
+ ┣ 📜App.tsx
+ ┣ 📜Router.tsx
+ ┣ 📜index.css
+ ┣ 📜index.tsx
+ ┗ 📜styled.d.ts
   ```
 </div>
 </details>
