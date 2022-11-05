@@ -17,10 +17,18 @@ export const useAdTrendDispatch = () => {
   return dispatch;
 };
 
-export const useAdsValue = () => {
-  const state = useAdTrendState();
-  const { startDate, endDate } = useDateState();
+export const useStartAndLastDate = () => {
+  const { data } = useAdTrendState();
+  const startDate = data[0] && new Date(data[0].date);
+  const lastDate =
+    data[data.length - 1] && new Date(data[data.length - 1].date);
+  return { startDate, lastDate };
+};
 
-  if (!state) throw new Error("Can't find StateProvider");
+export const useAdTrendValue = () => {
+  const { data } = useAdTrendState();
+  const { startDate, endDate } = useDateState();
+  const date = startDate && new Date(startDate);
+  if (!data) throw new Error("Can't find StateProvider");
   if (!startDate || !endDate) throw new Error("Can't find CategoryProvider");
 };

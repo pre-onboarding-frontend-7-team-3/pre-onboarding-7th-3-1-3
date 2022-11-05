@@ -46,8 +46,11 @@ const App = () => {
 
   useEffect(() => {
     getAdList();
+  }, [getAdList]);
+
+  useEffect(() => {
     getAdTrend();
-  }, [getAdList, getAdTrend]);
+  }, [getAdTrend]);
   return (
     <S.Layout>
       <Sidebar />
