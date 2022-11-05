@@ -8,7 +8,7 @@ const initialState = {
 
 export const CategoryContext = createContext(initialState);
 
-export const CategoryProvider = ({
+export const CategoryContextProvider = ({
   children,
 }: {
   children: React.ReactNode;

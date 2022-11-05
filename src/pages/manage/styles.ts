@@ -5,6 +5,7 @@ const Layout = styled.section`
   display: flex;
   flex-direction: column;
   height: 100%;
+  justify-content: center;
 `;
 
 const Title = styled.div`
@@ -13,7 +14,7 @@ const Title = styled.div`
   justify-content: space-between;
   align-items: center;
   h1 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 `;
 

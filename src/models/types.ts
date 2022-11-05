@@ -16,11 +16,11 @@ type ReportType = {
 };
 
 export type AdType = {
-  id: string;
+  id: number;
   adType: string;
   title: string;
   budget: number;
-  status: 'active' | 'ended';
+  status: string;
   startDate: string;
   endDate: null | string;
   report: ReportType;

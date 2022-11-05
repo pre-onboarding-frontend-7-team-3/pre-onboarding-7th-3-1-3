@@ -6,7 +6,7 @@ import useCategory from '../../hooks/useAdList';
 const categories: CategoryType[] = ['전체 광고', '진행중', '중단됨'];
 
 const ManageHeader = () => {
-  const { setCategory } = useCategory();
+  const { category, setCategory } = useCategory();
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.currentTarget;
     setCategory(value as CategoryType);
@@ -14,9 +14,9 @@ const ManageHeader = () => {
   return (
     <S.Header>
       <S.Select onChange={handleChange}>
-        {categories.map((category) => (
-          <option value={category} key={category}>
-            {category}
+        {categories.map((item) => (
+          <option value={item} key={item} selected={category === item}>
+            {item}
           </option>
         ))}
       </S.Select>

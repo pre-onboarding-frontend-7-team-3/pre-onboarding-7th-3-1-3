@@ -16,6 +16,7 @@ const Theme: DefaultTheme = {
     red: '#eb4555',
     green: '#c0eca1',
   },
+  border: '1px solid #EDEFF1',
 };
 
 export default Theme;

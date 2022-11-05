@@ -8,7 +8,7 @@ const Wrapper = styled.div`
 `;
 
 const AdList = () => {
-  return <Wrapper>AdList</Wrapper>;
+  return <Wrapper> </Wrapper>;
 };
 
 export default AdList;

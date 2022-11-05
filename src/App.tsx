@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-
+import { CategoryContextProvider } from 'context/CategoryContext';
 import { S } from './styles/GlobalStyle';
 import Sidebar from './components/sidebar/Sidebar';
 import Header from './components/header/Header';
@@ -10,7 +10,9 @@ const App = () => {
       <Sidebar />
       <S.Main>
         <Header />
-        <Outlet />
+        <CategoryContextProvider>
+          <Outlet />
+        </CategoryContextProvider>
       </S.Main>
     </S.Layout>
   );

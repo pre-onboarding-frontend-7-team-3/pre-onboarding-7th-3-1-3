@@ -15,7 +15,7 @@ const Title = styled.h3`
 const Box = styled.div`
   background-color: white;
   border-radius: 1.5rem;
-  padding: 1.5rem;
+  padding: 1.5rem 1.7rem;
   height: 100%;
 `;
 
