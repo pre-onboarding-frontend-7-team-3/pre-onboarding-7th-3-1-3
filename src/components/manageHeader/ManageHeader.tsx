@@ -1,7 +1,7 @@
 import React from 'react';
 import { CategoryType } from 'models/types';
 import S from './styles';
-import useCategory from '../../hooks/useAdList';
+import { useCategory } from '../../hooks/useAdList';
 
 const categories: CategoryType[] = ['전체 광고', '진행중', '중단됨'];
 
@@ -13,9 +13,9 @@ const ManageHeader = () => {
   };
   return (
     <S.Header>
-      <S.Select onChange={handleChange}>
+      <S.Select onChange={handleChange} value={category}>
         {categories.map((item) => (
-          <option value={item} key={item} selected={category === item}>
+          <option value={item} key={item}>
             {item}
           </option>
         ))}

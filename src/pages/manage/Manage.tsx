@@ -10,7 +10,6 @@ import AdListJson from '../../json/ad-list-data-set.json';
 const Manage = () => {
   // fetch로직추가필요
   const adList: AdType[] = AdListJson.ads;
-
   return (
     <S.Layout>
       <S.Title>
@@ -18,7 +17,7 @@ const Manage = () => {
       </S.Title>
       <Board>
         <ManageHeader />
-        <ManageList list={adList} />
+        <ManageList />
       </Board>
     </S.Layout>
   );

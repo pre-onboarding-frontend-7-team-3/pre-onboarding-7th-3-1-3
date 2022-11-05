@@ -2,6 +2,7 @@ import Home from 'pages/home/Home';
 import Manage from 'pages/manage/Manage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
+import { AdsProvider } from './context/AdsContext';
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,11 @@ const router = createBrowserRouter([
 ]);
 
 const Router = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <AdsProvider>
+      <RouterProvider router={router} />;
+    </AdsProvider>
+  );
 };
 
 export default Router;

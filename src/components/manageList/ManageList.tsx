@@ -1,9 +1,10 @@
 import ManageItem from 'components/manageItem/ManageItem';
-import { AdType } from 'models/types';
-import React from 'react';
+import { useAdsValue } from 'hooks/useAdList';
+
 import S from './styles';
 
-const ManageList = ({ list }: { list: AdType[] }) => {
+const ManageList = () => {
+  const list = useAdsValue();
   return (
     <S.List>
       {list.map((item) => (
