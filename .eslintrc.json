@@ -46,6 +46,7 @@
     "arrow-parens": 0,
     "camelcase": 0,
     "jsx-a11y/label-has-associated-control": 0,
-    "@typescript-eslint/no-unused-vars": 0
+    "@typescript-eslint/no-unused-vars": 0,
+    "react/require-default-props": 0
   }
 }

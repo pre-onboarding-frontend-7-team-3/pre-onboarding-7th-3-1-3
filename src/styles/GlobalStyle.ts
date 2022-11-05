@@ -1,7 +1,7 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
-const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
   ${reset}
   * {
     box-sizing: border-box;
@@ -24,4 +24,20 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export default GlobalStyle;
+const Layout = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100vh;
+`;
+
+const Main = styled.main`
+  flex: 1 1 80%;
+  background-color: ${(props) => props.theme.colors.bg};
+  display: flex;
+  flex-direction: column;
+`;
+
+export const S = {
+  Layout,
+  Main,
+};

@@ -1,16 +1,8 @@
 import { AiOutlineBell, AiOutlineUser } from 'react-icons/ai';
 import { FiSettings } from 'react-icons/fi';
-import { useLocation } from 'react-router-dom';
 import S from './styles';
 
-const URL = {
-  home: '/',
-  manage: '/manage',
-};
-
 const Header = () => {
-  const location = useLocation();
-  const path = location.pathname;
   return (
     <S.Header>
       <S.Box>

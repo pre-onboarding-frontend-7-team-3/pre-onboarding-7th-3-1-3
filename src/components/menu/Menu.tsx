@@ -1,6 +1,6 @@
 import React from 'react';
 import ServiceMenu from 'components/service_menu/ServiceMenu';
-import AdMenu from 'components/ad_menu/AdMenu';
+import AdMenu from 'components/adMenu/AdMenu';
 import S from './styles';
 
 const Menu = () => {

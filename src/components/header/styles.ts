@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 
 const Header = styled.header`
-  padding: 1rem 1.5rem;
+  padding: 0.5rem 1.5rem;
   display: flex;
   justify-content: flex-end;
 `;
 const Box = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 1.5rem;
 `;
 
 const Btns = styled.div`

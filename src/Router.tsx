@@ -1,5 +1,5 @@
-import Home from 'pages/Home';
-import Manage from 'pages/Manage';
+import Home from 'pages/home/Home';
+import Manage from 'pages/manage/Manage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 
