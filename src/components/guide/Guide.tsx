@@ -1,69 +1,22 @@
 import React from 'react';
-import styled from 'styled-components';
 import { RiLightbulbLine } from 'react-icons/ri';
-
-const Layout = styled.section`
-  height: 30%;
-  p {
-    margin-left: 1rem;
-    color: ${(props) => props.theme.colors.grey};
-    font-size: 0.6rem;
-    line-height: 2;
-  }
-  p:last-child {
-    text-decoration: underline;
-  }
-`;
-
-const Box = styled.div`
-  background-color: ${(props) => props.theme.colors.lightBlue};
-  padding: 1.2rem 1em;
-  border-radius: 0.5rem;
-  display: flex;
-  align-items: center;
-  margin-bottom: 2rem;
-
-  button {
-    margin-right: 0.5rem;
-    font-size: 1.2rem;
-    width: 30px;
-    height: 30px;
-    background-color: ${(props) => props.theme.colors.blue};
-    color: ${(props) => props.theme.colors.white};
-    border-radius: 100%;
-  }
-`;
-
-const TextBox = styled.div`
-  h3 {
-    font-size: 0.8rem;
-    font-weight: bold;
-  }
-  p {
-    color: ${(props) => props.theme.colors.grey};
-    font-size: 0.6rem;
-    margin: 0;
-  }
-  p:last-child {
-    text-decoration: none;
-  }
-`;
+import S from './styles';
 
 const Guide = () => {
   return (
-    <Layout>
-      <Box>
+    <S.Layout>
+      <S.Box>
         <button type="button">
           <RiLightbulbLine />
         </button>
-        <TextBox>
+        <S.TextBox>
           <h3>레버 이용 가이드</h3>
           <p>시작하기 전에 알아보기</p>
-        </TextBox>
-      </Box>
+        </S.TextBox>
+      </S.Box>
       <p>레버는 함께 만들어갑니다.</p>
       <p>이용약관</p>
-    </Layout>
+    </S.Layout>
   );
 };
 

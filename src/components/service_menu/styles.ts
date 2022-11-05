@@ -6,7 +6,7 @@ const Layout = styled.section`
 
 const Label = styled.label`
   margin-left: 1rem;
-  color: ${(props) => props.theme.colors.grey};
+  color: ${(props) => props.theme.colors.grey_300};
   font-size: 0.6rem;
   font-weight: bold;
 `;
@@ -17,10 +17,11 @@ const Select = styled.select`
   padding: 0.8rem 1rem;
   font-weight: bold;
   border-radius: 0.5rem;
-  border: 2px solid ${(props) => props.theme.colors.lightGrey};
+  color: ${(props) => props.theme.colors.grey_800};
+  border: 1px solid ${(props) => props.theme.colors.grey_100};
   outline: none;
   option {
-    color: ${(props) => props.theme.colors.grey};
+    color: ${(props) => props.theme.colors.grey_800};
   }
 `;
 

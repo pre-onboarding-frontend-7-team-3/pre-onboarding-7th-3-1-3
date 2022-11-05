@@ -6,7 +6,7 @@ const Layout = styled.section`
 
 const Title = styled.h3`
   margin-left: 1rem;
-  color: ${(props) => props.theme.colors.grey};
+  color: ${(props) => props.theme.colors.grey_300};
   font-size: 0.6rem;
   font-weight: bold;
 `;
@@ -27,14 +27,14 @@ const Item = styled.li<{ path: boolean }>`
   background-color: ${(props) =>
     props.path ? props.theme.colors.bg : props.theme.colors.white};
   color: ${(props) =>
-    props.path ? props.theme.colors.blue : props.theme.colors.black};
+    props.path ? props.theme.colors.blue : props.theme.colors.grey_800};
 `;
 
 const Button = styled.button<{ path: boolean }>`
   font-size: 1.3rem;
   margin-right: 0.5em;
   color: ${(props) =>
-    props.path ? props.theme.colors.blue : props.theme.colors.black};
+    props.path ? props.theme.colors.blue : props.theme.colors.grey_800};
 `;
 
 const S = {

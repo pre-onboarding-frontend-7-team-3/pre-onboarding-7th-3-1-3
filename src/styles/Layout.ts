@@ -8,7 +8,7 @@ const Layout = styled.div`
 
 const Main = styled.main`
   flex: 1 1 80%;
-  background-color: ${(props) => props.theme.colors.lightGrey};
+  background-color: ${(props) => props.theme.colors.bg};
 `;
 
 const S = {
