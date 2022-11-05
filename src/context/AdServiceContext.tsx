@@ -1,6 +1,5 @@
 import { AdService } from 'models/interface';
-import { CategoryType, AdType } from 'models/types';
-import { createContext, useState, useMemo, useContext } from 'react';
+import { createContext, useMemo, useContext } from 'react';
 
 const AdServiceContext = createContext<AdService | null>(null);
 export const useAds = () => useContext(AdServiceContext);

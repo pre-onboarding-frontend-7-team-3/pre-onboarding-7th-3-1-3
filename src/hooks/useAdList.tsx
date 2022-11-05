@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { CategoryEnum } from 'models/types';
 import { CategoryContext } from '../context/CategoryContext';
 import { AdsDispatchContext, AdsStateContext } from '../context/AdsContext';
 
@@ -23,6 +24,8 @@ export const useAdsValue = () => {
   if (!state) throw new Error("Can't find StateProvider");
   if (!category) throw new Error("Can't find CategoryProvider");
   if (category === '전체 광고') return state.data;
-  const filtered = state.data.filter((item) => item.status === category);
+  const filtered = state.data.filter(
+    (item) => CategoryEnum[item.status] === category
+  );
   return filtered;
 };

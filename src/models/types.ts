@@ -3,11 +3,17 @@ export enum DateActionEnum {
   SET_END = 'SET_END',
 }
 
+export type CategoryType = '전체 광고' | '진행중' | '중단됨';
+
 export type DateActionType =
   | { type: DateActionEnum.SET_START; date: Date | null }
   | { type: DateActionEnum.SET_END; date: Date | null };
 
-export type CategoryType = '전체 광고' | '진행중' | '중단됨';
+export enum CategoryEnum {
+  all = '전체 광고',
+  active = '진행중',
+  ended = '중단됨',
+}
 
 type ReportType = {
   cost: number;
@@ -17,10 +23,10 @@ type ReportType = {
 
 export type AdType = {
   id: number;
-  adType: string;
+  adType: keyof typeof CategoryEnum;
   title: string;
   budget: number;
-  status: string;
+  status: keyof typeof CategoryEnum;
   startDate: string;
   endDate: null | string;
   report: ReportType;
