@@ -1,5 +1,5 @@
-import { DateContextProvider } from 'context/dateContext';
 import AdList from 'components/adList/AdList';
+import { DateContextProvider } from 'context/DateContext';
 import Dates from '../../components/Dates/Dates';
 import Board from '../../components/board/Board';
 import S from './styles';

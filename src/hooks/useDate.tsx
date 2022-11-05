@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { DateDispatchContext, DateStateContext } from '../context/dateContext';
+import { DateDispatchContext, DateStateContext } from '../context/DateContext';
 
 export const useDateState = () => {
   const date = useContext(DateStateContext);

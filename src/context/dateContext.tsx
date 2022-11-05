@@ -1,4 +1,4 @@
-import { ActionType, DateActionEnum } from 'models/types';
+import { DateActionType, DateActionEnum } from 'models/types';
 import { createContext, Dispatch, useReducer } from 'react';
 
 type State = {
@@ -11,12 +11,12 @@ const initialState: State = {
   endDate: new Date(),
 };
 
-type DateDispatch = Dispatch<ActionType>;
+type DateDispatch = Dispatch<DateActionType>;
 
 export const DateStateContext = createContext<State | null>(null);
 export const DateDispatchContext = createContext<DateDispatch | null>(null);
 
-const reducer = (state: State, action: ActionType) => {
+const reducer = (state: State, action: DateActionType) => {
   switch (action.type) {
     case DateActionEnum.SET_START:
       return {

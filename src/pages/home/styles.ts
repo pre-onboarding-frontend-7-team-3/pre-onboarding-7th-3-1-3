@@ -3,6 +3,8 @@ import styled from 'styled-components';
 const Layout = styled.section`
   padding: 1rem 1.5rem;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Title = styled.div`
