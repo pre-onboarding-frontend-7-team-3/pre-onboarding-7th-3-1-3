@@ -1,3 +1,5 @@
+import { Dispatch } from 'react';
+
 export enum DateActionEnum {
   SET_START = 'SET_START',
   SET_END = 'SET_END',
@@ -37,3 +39,17 @@ export enum DataActionEnum {
   SET_DATA = 'SET_DATA',
   SET_ERROR = 'SET_ERROR',
 }
+
+export type TrendType = {
+  imp: number;
+  click: number;
+  cost: number;
+  conv: number;
+  convValue: number;
+  ctr: number;
+  cvr: number;
+  cpc: number;
+  cpa: number;
+  roas: number;
+  date: string;
+};

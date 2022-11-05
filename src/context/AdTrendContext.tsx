@@ -1,18 +1,18 @@
-import { AdType, DataActionEnum } from 'models/types';
+import { DataActionEnum, TrendType } from 'models/types';
 import { createContext, Dispatch, useReducer } from 'react';
 
 type State = {
   isLoading: boolean;
-  data: AdType[];
+  data: TrendType[];
   error: string;
 };
 
 type Action =
-  | { type: DataActionEnum.SET_DATA; data: AdType[] }
+  | { type: DataActionEnum.SET_DATA; data: TrendType[] }
   | { type: DataActionEnum.SET_IS_LOADING; isLoading: boolean }
   | { type: DataActionEnum.SET_ERROR; error: string };
 
-type AdsDistpatch = Dispatch<Action>;
+type AdTrendDistpatch = Dispatch<Action>;
 
 const initialState = {
   isLoading: false,
@@ -20,8 +20,10 @@ const initialState = {
   error: '',
 };
 
-export const AdsStateContext = createContext<State | null>(initialState);
-export const AdsDispatchContext = createContext<AdsDistpatch | null>(null);
+export const AdTrendStateContext = createContext<State | null>(initialState);
+export const AdTrendDispatchContext = createContext<AdTrendDistpatch | null>(
+  null
+);
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
@@ -45,13 +47,17 @@ const reducer = (state: State, action: Action): State => {
   }
 };
 
-export const AdsProvider = ({ children }: { children: React.ReactNode }) => {
+export const AdTrendProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <AdsStateContext.Provider value={state}>
-      <AdsDispatchContext.Provider value={dispatch}>
+    <AdTrendStateContext.Provider value={state}>
+      <AdTrendDispatchContext.Provider value={dispatch}>
         {children}
-      </AdsDispatchContext.Provider>
-    </AdsStateContext.Provider>
+      </AdTrendDispatchContext.Provider>
+    </AdTrendStateContext.Provider>
   );
 };

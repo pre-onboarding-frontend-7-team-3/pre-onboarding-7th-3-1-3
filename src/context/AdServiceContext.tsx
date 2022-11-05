@@ -12,9 +12,10 @@ export const AdsServiceProvider = ({
   adService: AdService;
 }) => {
   const getAdList = adService.getAdList.bind(adService);
+  const getTrend = adService.getTrend.bind(adService);
   const value = useMemo(() => {
-    return { getAdList };
-  }, [getAdList]);
+    return { getAdList, getTrend };
+  }, [getAdList, getTrend]);
   return (
     <AdServiceContext.Provider value={value}>
       {children}

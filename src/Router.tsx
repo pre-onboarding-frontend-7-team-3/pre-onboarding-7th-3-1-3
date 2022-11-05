@@ -1,8 +1,9 @@
+import { AdTrendProvider } from 'context/AdTrendContext';
 import Home from 'pages/home/Home';
 import Manage from 'pages/manage/Manage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
-import { AdsProvider } from './context/AdsContext';
+import { AdListProvider } from './context/AdListContext';
 
 const router = createBrowserRouter([
   {
@@ -23,9 +24,11 @@ const router = createBrowserRouter([
 
 const Router = () => {
   return (
-    <AdsProvider>
-      <RouterProvider router={router} />;
-    </AdsProvider>
+    <AdListProvider>
+      <AdTrendProvider>
+        <RouterProvider router={router} />
+      </AdTrendProvider>
+    </AdListProvider>
   );
 };
 

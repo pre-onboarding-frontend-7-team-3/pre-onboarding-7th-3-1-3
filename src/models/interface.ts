@@ -1,10 +1,17 @@
-import { AdType } from './types';
+import { AdType, TrendType } from './types';
 
 export interface AdService {
-  getAdList: () => Promise<GetAdResponse>;
+  getAdList: () => Promise<GetAdListResponse>;
+  getTrend: () => Promise<GetTrendResponse>;
 }
 
-export type GetAdResponse = {
+export type GetAdListResponse = {
   ads: AdType[];
   counts: number;
+};
+
+export type GetTrendResponse = {
+  report: {
+    daily: TrendType[];
+  };
 };

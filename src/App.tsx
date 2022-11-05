@@ -3,32 +3,51 @@ import { CategoryContextProvider } from 'context/CategoryContext';
 import { DataActionEnum } from 'models/types';
 import { useCallback, useEffect } from 'react';
 import { useAds } from 'context/AdServiceContext';
+import { useAdTrendDispatch } from 'hooks/useTrend';
 import { S } from './styles/GlobalStyle';
 import Sidebar from './components/sidebar/Sidebar';
 import Header from './components/header/Header';
-import { useAdsDispatch } from './hooks/useAdList';
+import { useAdListDispatch } from './hooks/useAdList';
 
 const App = () => {
-  const dispatch = useAdsDispatch();
+  const listDispatch = useAdListDispatch();
+  const trendDispatch = useAdTrendDispatch();
   const value = useAds();
 
-  const getList = useCallback(async () => {
-    dispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading: true });
+  const getAdList = useCallback(async () => {
+    listDispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading: true });
     try {
       const response = await value?.getAdList();
-      dispatch({
+      listDispatch({
         type: DataActionEnum.SET_DATA,
         data: response?.ads || [],
       });
     } catch (e) {
       console.error(e);
     } finally {
-      dispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading: false });
+      listDispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading: false });
     }
-  }, [value, dispatch]);
+  }, [value, listDispatch]);
+
+  const getAdTrend = useCallback(async () => {
+    trendDispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading: true });
+    try {
+      const response = await value?.getTrend();
+      trendDispatch({
+        type: DataActionEnum.SET_DATA,
+        data: response?.report.daily || [],
+      });
+    } catch (e) {
+      console.error(e);
+    } finally {
+      trendDispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading: false });
+    }
+  }, [value, trendDispatch]);
+
   useEffect(() => {
-    getList();
-  }, [getList]);
+    getAdList();
+    getAdTrend();
+  }, [getAdList, getAdTrend]);
   return (
     <S.Layout>
       <Sidebar />
