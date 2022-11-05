@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { ThemeProvider } from 'styled-components';
+import GlobalStyle from 'styles/GlobalStyle';
+import Theme from 'styles/theme';
 import './index.css';
 import Router from './Router';
 
@@ -8,6 +11,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <Router />
+    <ThemeProvider theme={Theme}>
+      <GlobalStyle />
+      <Router />
+    </ThemeProvider>
   </React.StrictMode>
 );
