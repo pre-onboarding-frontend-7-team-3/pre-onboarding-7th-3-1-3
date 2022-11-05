@@ -5,11 +5,8 @@ import ManageList from 'components/manageList/ManageList';
 import { AdType } from 'models/types';
 import Board from '../../components/board/Board';
 import S from './styles';
-import AdListJson from '../../json/ad-list-data-set.json';
 
 const Manage = () => {
-  // fetch로직추가필요
-  const adList: AdType[] = AdListJson.ads;
   return (
     <S.Layout>
       <S.Title>
