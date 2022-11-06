@@ -41,6 +41,7 @@ export enum DataActionEnum {
 }
 
 export type TrendType = {
+  [index: string]: string | number;
   imp: number;
   click: number;
   cost: number;

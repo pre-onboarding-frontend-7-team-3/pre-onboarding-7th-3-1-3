@@ -11,7 +11,7 @@ const Wrapper = styled.ul`
 
 const BoardList = () => {
   const trendData = useAdTrendValue();
-  console.log(trendData);
+
   return (
     <Wrapper>
       <div />

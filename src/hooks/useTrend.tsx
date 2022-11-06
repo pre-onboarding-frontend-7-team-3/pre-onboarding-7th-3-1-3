@@ -1,6 +1,7 @@
 import { useContext, Dispatch, useMemo } from 'react';
 import { useDateDispatch } from 'hooks/useDate';
 import { DateActionEnum, TrendType } from 'models/types';
+import calculateData from 'utils/calculateData';
 import {
   AdTrendDispatchContext,
   AdTrendStateContext,
@@ -44,5 +45,6 @@ export const useAdTrendValue = () => {
       return item;
     }
   });
-  return filtered;
+  const result = calculateData(filtered);
+  return result;
 };
