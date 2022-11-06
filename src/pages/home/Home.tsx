@@ -1,4 +1,4 @@
-import AdList from 'components/adList/AdList';
+import BoardList from 'components/boardList/BoardList';
 import { DateContextProvider } from 'context/DateContext';
 import Dates from '../../components/Dates/Dates';
 import Board from '../../components/board/Board';
@@ -16,7 +16,7 @@ const Home = () => {
           <Dates />
         </S.Title>
         <Board title={BOARD_TITLE}>
-          <AdList />
+          <BoardList />
           <Graph />
         </Board>
       </DateContextProvider>

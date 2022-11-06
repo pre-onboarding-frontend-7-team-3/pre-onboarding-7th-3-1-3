@@ -1,5 +1,5 @@
 import React from 'react';
-import AdList from 'components/adList/AdList';
+import AdList from 'components/boardList/BoardList';
 import ManageHeader from 'components/manageHeader/ManageHeader';
 import ManageList from 'components/manageList/ManageList';
 import { AdType } from 'models/types';

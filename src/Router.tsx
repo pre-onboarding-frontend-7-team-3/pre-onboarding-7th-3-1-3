@@ -1,4 +1,5 @@
 import { AdTrendProvider } from 'context/AdTrendContext';
+import { CategoryContextProvider } from 'context/CategoryContext';
 import Home from 'pages/home/Home';
 import Manage from 'pages/manage/Manage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';

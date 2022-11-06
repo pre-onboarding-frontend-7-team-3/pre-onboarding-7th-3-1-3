@@ -1,4 +1,4 @@
-import { AdsServiceProvider } from 'context/AdServiceContext';
+import { AdServiceProvider } from 'context/AdServiceContext';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import AdService from 'service/AdService';
@@ -18,11 +18,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <AdsServiceProvider adService={adService}>
+    <AdServiceProvider adService={adService}>
       <ThemeProvider theme={Theme}>
         <GlobalStyle />
         <Router />
       </ThemeProvider>
-    </AdsServiceProvider>
+    </AdServiceProvider>
   </React.StrictMode>
 );

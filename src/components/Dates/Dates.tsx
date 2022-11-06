@@ -1,54 +1,36 @@
+import { useEffect } from 'react';
 import { useDateDispatch } from 'hooks/useDate';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import DatePicker from 'react-datepicker';
 import { DateActionEnum } from 'models/types';
-import styled from 'styled-components';
 import { ko } from 'date-fns/esm/locale';
 import { useDateState } from '../../hooks/useDate';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useStartAndLastDate } from '../../hooks/useTrend';
-
-const Layout = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  input {
-    width: 100%;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    padding: 0;
-    text-align: center;
-    cursor: pointer;
-    font-size: 0.8rem;
-  }
-  .react-datepicker-wrapper {
-    width: 110px;
-    text-align: center;
-    cursor: pointer;
-  }
-  .react-datepicker__day-names {
-    margin-top: 0.5em;
-  }
-  button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-`;
+import { useBaseDate } from '../../hooks/useTrend';
+import S from './styles';
 
 const Dates = () => {
-  const dates = useStartAndLastDate();
+  const baseDates = useBaseDate();
+  const { startDate, endDate } = useDateState();
   const dispatch = useDateDispatch();
+  useEffect(() => {
+    if (baseDates.startDate) {
+      dispatch({ type: DateActionEnum.SET_START, date: baseDates.startDate });
+    }
+    if (baseDates.endDate) {
+      dispatch({ type: DateActionEnum.SET_END, date: baseDates.endDate });
+    }
+  }, [baseDates.endDate, baseDates.startDate, dispatch]);
+
   return (
-    <Layout>
+    <S.Layout>
       <DatePicker
         locale={ko}
         dateFormat="yyyy년 MM월 dd일"
         closeOnScroll
-        selected={dates.startDate}
-        minDate={dates.startDate}
-        maxDate={dates.lastDate}
+        selected={startDate}
+        minDate={baseDates.startDate}
+        maxDate={baseDates.endDate}
         onChange={(date) => dispatch({ type: DateActionEnum.SET_START, date })}
       />
       <span>~</span>
@@ -56,15 +38,15 @@ const Dates = () => {
         locale={ko}
         dateFormat="yyyy년 MM월 dd일"
         closeOnScroll
-        selected={dates.lastDate}
-        minDate={dates.startDate}
-        maxDate={dates.lastDate}
+        selected={endDate}
+        minDate={baseDates.startDate}
+        maxDate={baseDates.endDate}
         onChange={(date) => dispatch({ type: DateActionEnum.SET_END, date })}
       />
       <button type="button">
         <MdKeyboardArrowDown />
       </button>
-    </Layout>
+    </S.Layout>
   );
 };
 

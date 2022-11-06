@@ -4,7 +4,7 @@ import { createContext, useMemo, useContext } from 'react';
 const AdServiceContext = createContext<AdService | null>(null);
 export const useAds = () => useContext(AdServiceContext);
 
-export const AdsServiceProvider = ({
+export const AdServiceProvider = ({
   children,
   adService,
 }: {
