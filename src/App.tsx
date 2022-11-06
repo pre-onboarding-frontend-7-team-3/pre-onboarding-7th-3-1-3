@@ -1,21 +1,33 @@
 import { Outlet } from 'react-router-dom';
 import { CategoryContextProvider } from 'context/CategoryContext';
-import { DataActionEnum } from 'models/types';
+import { DataActionEnum, DateActionEnum } from 'models/types';
 import { useCallback, useEffect } from 'react';
 import { useAds } from 'context/AdServiceContext';
-import { useAdTrendDispatch } from 'hooks/useTrend';
+import { useAdTrendDispatch, useDateDispatch } from 'hooks/useTrend';
 import { DateContextProvider } from 'context/DateContext';
 import { ChartProvider } from 'context/AdChartContext';
 import { S } from './styles/GlobalStyle';
 import Sidebar from './components/sidebar/Sidebar';
 import Header from './components/header/Header';
 import { useAdListDispatch } from './hooks/useAdList';
+import { useBaseDate } from './hooks/useTrend';
 
 const App = () => {
   const listDispatch = useAdListDispatch();
   const trendDispatch = useAdTrendDispatch();
   const adService = useAds();
+  const baseDates = useBaseDate();
+  const dateDispatch = useDateDispatch();
 
+  useEffect(() => {
+    if (baseDates.startDate) {
+      dateDispatch({
+        type: DateActionEnum.SET_START,
+        date: baseDates.startDate,
+      });
+      dateDispatch({ type: DateActionEnum.SET_END, date: baseDates.startDate });
+    }
+  }, [baseDates]);
   const getAdList = useCallback(async () => {
     listDispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading: true });
     try {
@@ -47,15 +59,11 @@ const App = () => {
   }, [adService, trendDispatch]);
 
   useEffect(() => {
-    setTimeout(() => {
-      getAdList();
-    }, 200);
+    getAdList();
   }, [getAdList]);
 
   useEffect(() => {
-    setTimeout(() => {
-      getAdTrend();
-    }, 200);
+    getAdTrend();
   }, [getAdTrend]);
   return (
     <S.Layout>
@@ -63,11 +71,9 @@ const App = () => {
       <S.Main>
         <Header />
         <CategoryContextProvider>
-          <DateContextProvider>
-            <ChartProvider>
-              <Outlet />
-            </ChartProvider>
-          </DateContextProvider>
+          <ChartProvider>
+            <Outlet />
+          </ChartProvider>
         </CategoryContextProvider>
       </S.Main>
     </S.Layout>

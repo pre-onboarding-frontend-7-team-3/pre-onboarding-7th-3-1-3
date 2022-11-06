@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import DatePicker from 'react-datepicker';
 import { DateActionEnum } from 'models/types';
@@ -12,15 +12,10 @@ import {
 import S from './styles';
 
 const Dates = () => {
+  console.log('dates');
   const baseDates = useBaseDate();
   const { startDate, endDate } = useDateState();
   const dispatch = useDateDispatch();
-  useEffect(() => {
-    if (baseDates.startDate) {
-      dispatch({ type: DateActionEnum.SET_START, date: baseDates.startDate });
-      dispatch({ type: DateActionEnum.SET_END, date: baseDates.startDate });
-    }
-  }, [baseDates.endDate, baseDates.startDate, dispatch]);
 
   return (
     <S.Layout>
@@ -50,4 +45,4 @@ const Dates = () => {
   );
 };
 
-export default Dates;
+export default React.memo(Dates);

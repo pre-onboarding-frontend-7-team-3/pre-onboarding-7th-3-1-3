@@ -1,5 +1,6 @@
 import { AdTrendProvider } from 'context/AdTrendContext';
 import { CategoryContextProvider } from 'context/CategoryContext';
+import { DateContextProvider } from 'context/DateContext';
 import Home from 'pages/home/Home';
 import Manage from 'pages/manage/Manage';
 import NotFound from 'pages/Notfound/Notfound';
@@ -29,7 +30,9 @@ const Router = () => {
   return (
     <AdTrendProvider>
       <AdListProvider>
-        <RouterProvider router={router} />
+        <DateContextProvider>
+          <RouterProvider router={router} />
+        </DateContextProvider>
       </AdListProvider>
     </AdTrendProvider>
   );
