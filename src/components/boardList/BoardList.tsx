@@ -17,22 +17,25 @@ const Wrapper = styled.ul`
 const BoardList = () => {
   const trendData = useAdTrendValue();
   const prevData = usePrevTrendValue();
-  const { cost, click, convValue, imp, conv } = calculateData(trendData);
+  const { cost, click, convValue, imp, conv, roas } = calculateData(trendData);
   const {
     cost: prevCost,
     click: prevClick,
     convValue: prevConvValue,
     imp: prevImp,
     conv: prevConv,
+    roas: prevRoas,
   } = calculateData(prevData);
+  const diffRoas =
+    prevData.length !== 0
+      ? Math.abs(roas / trendData.length - prevRoas / prevData.length)
+      : Math.abs(roas / trendData.length);
   const infoArray = [
     {
       name: 'ROAS',
-      data: `${formatTrend((convValue / cost) * 100)} %`,
-      diff: `${formatTrend(
-        Math.abs(convValue / cost - prevConvValue / prevCost) * 100
-      )} %`,
-      increased: convValue / cost - prevConvValue / prevCost >= 0,
+      data: `${formatTrend(roas / trendData.length)} %`,
+      diff: `${formatTrend(diffRoas)} %`,
+      increased: diffRoas >= 0,
     },
     {
       name: '광고비',
