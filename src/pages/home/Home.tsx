@@ -4,10 +4,20 @@ import Dates from '../../components/Dates/Dates';
 import Board from '../../components/board/Board';
 import S from './styles';
 import Graph from '../../components/graph/Graph';
+import { useAdTrendState } from '../../hooks/useTrend';
 
 const BOARD_TITLE = '통합공고 현황';
 
 const Home = () => {
+  const { isLoading } = useAdTrendState();
+  console.log(isLoading);
+  if (isLoading) {
+    return (
+      <S.Layout>
+        <span>loading중입니다</span>
+      </S.Layout>
+    );
+  }
   return (
     <S.Layout>
       <S.Title>

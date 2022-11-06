@@ -14,6 +14,7 @@ class AdServiceImpl implements AdService {
   constructor(private axiosInstance: AxiosInstance) {}
 
   async getAdList() {
+    setTimeout(() => {});
     try {
       const { data } = await this.axiosInstance.get<GetAdListResponse>(
         AD_LIST_URL

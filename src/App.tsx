@@ -14,12 +14,12 @@ import { useAdListDispatch } from './hooks/useAdList';
 const App = () => {
   const listDispatch = useAdListDispatch();
   const trendDispatch = useAdTrendDispatch();
-  const value = useAds();
+  const adService = useAds();
 
   const getAdList = useCallback(async () => {
     listDispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading: true });
     try {
-      const response = await value?.getAdList();
+      const response = await adService?.getAdList();
       listDispatch({
         type: DataActionEnum.SET_DATA,
         data: response?.ads || [],
@@ -29,12 +29,12 @@ const App = () => {
     } finally {
       listDispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading: false });
     }
-  }, [value, listDispatch]);
+  }, [adService, listDispatch]);
 
   const getAdTrend = useCallback(async () => {
     trendDispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading: true });
     try {
-      const response = await value?.getTrend();
+      const response = await adService?.getTrend();
       trendDispatch({
         type: DataActionEnum.SET_DATA,
         data: response?.report.daily || [],
@@ -44,14 +44,18 @@ const App = () => {
     } finally {
       trendDispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading: false });
     }
-  }, [value, trendDispatch]);
+  }, [adService, trendDispatch]);
 
   useEffect(() => {
-    getAdList();
+    setTimeout(() => {
+      getAdList();
+    }, 1000);
   }, [getAdList]);
 
   useEffect(() => {
-    getAdTrend();
+    setTimeout(() => {
+      getAdTrend();
+    }, 1000);
   }, [getAdTrend]);
   return (
     <S.Layout>

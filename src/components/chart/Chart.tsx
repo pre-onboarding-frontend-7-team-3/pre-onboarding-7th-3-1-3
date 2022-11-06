@@ -4,13 +4,15 @@ import { ApexOptions } from 'apexcharts';
 import { useChartData } from '../../hooks/useChart';
 
 const Chart = () => {
-  const [first, second, x] = useChartData();
+  const { firstData, secondData, x } = useChartData();
   const series = [
     {
-      data: first,
+      name: firstData.name,
+      data: firstData.data,
     },
     {
-      data: second,
+      name: secondData.name,
+      data: secondData.data,
     },
   ];
   const options: ApexOptions = {

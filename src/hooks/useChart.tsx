@@ -42,9 +42,14 @@ export const useChartData = () => {
   const { first, second } = useChartState();
   if (!data) throw new Error("Can't find TrendProvider");
   if (!first || !second) throw new Error("Can't find ChartProvider");
-
-  const firstData = data.map((item) => item[category[first]]);
-  const secondData = data.map((item) => item[category[second]]);
+  const firstData: { name: string; data: number[] } = {
+    name: category[first],
+    data: data.map((item) => Number(item[category[first]])),
+  };
+  const secondData: { name: string; data: number[] } = {
+    name: category[second],
+    data: data.map((item) => Number(item[category[second]])),
+  };
   const x = data.map((item) => item.date);
-  return [firstData, secondData, x];
+  return { firstData, secondData, x };
 };
