@@ -1,11 +1,17 @@
 import { Outlet } from 'react-router-dom';
 import { CategoryContextProvider } from 'context/CategoryContext';
-import { DataActionEnum, DateActionEnum } from 'models/types';
+import {
+  AdType,
+  DataActionEnum,
+  DateActionEnum,
+  TrendType,
+} from 'models/types';
 import { useCallback, useEffect } from 'react';
 import { useAds } from 'context/AdServiceContext';
 import { useAdTrendDispatch, useDateDispatch } from 'hooks/useTrend';
-import { DateContextProvider } from 'context/DateContext';
 import { ChartProvider } from 'context/AdChartContext';
+import { useQuery } from 'react-query';
+import { GetTrendResponse } from 'models/interface';
 import { S } from './styles/GlobalStyle';
 import Sidebar from './components/sidebar/Sidebar';
 import Header from './components/header/Header';
@@ -18,6 +24,23 @@ const App = () => {
   const adService = useAds();
   const baseDates = useBaseDate();
   const dateDispatch = useDateDispatch();
+  const { isLoading, data: trendData } = useQuery(
+    ['trend'],
+    () => adService?.getTrend(),
+    {
+      staleTime: 1000 * 60 * 60,
+      cacheTime: 1000 * 60 * 60,
+    }
+  );
+
+  const { data: listData } = useQuery(
+    ['adList'],
+    () => adService?.getAdList(),
+    {
+      staleTime: 1000 * 60 * 60,
+      cacheTime: 1000 * 60 * 60,
+    }
+  );
 
   useEffect(() => {
     if (baseDates.startDate) {
@@ -28,43 +51,22 @@ const App = () => {
       dateDispatch({ type: DateActionEnum.SET_END, date: baseDates.startDate });
     }
   }, [baseDates]);
-  const getAdList = useCallback(async () => {
-    listDispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading: true });
-    try {
-      const response = await adService?.getAdList();
-      listDispatch({
-        type: DataActionEnum.SET_DATA,
-        data: response?.ads || [],
-      });
-    } catch (e) {
-      console.error(e);
-    } finally {
-      listDispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading: false });
-    }
-  }, [adService, listDispatch]);
-
-  const getAdTrend = useCallback(async () => {
-    trendDispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading: true });
-    try {
-      const response = await adService?.getTrend();
-      trendDispatch({
-        type: DataActionEnum.SET_DATA,
-        data: response?.report.daily || [],
-      });
-    } catch (e) {
-      console.error(e);
-    } finally {
-      trendDispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading: false });
-    }
-  }, [adService, trendDispatch]);
 
   useEffect(() => {
-    getAdList();
-  }, [getAdList]);
+    trendDispatch({
+      type: DataActionEnum.SET_DATA,
+      data: trendData?.report.daily || [],
+    });
+    trendDispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading });
+  }, [trendData, isLoading]);
 
   useEffect(() => {
-    getAdTrend();
-  }, [getAdTrend]);
+    listDispatch({
+      type: DataActionEnum.SET_DATA,
+      data: listData?.ads || [],
+    });
+  }, [listData]);
+
   return (
     <S.Layout>
       <Sidebar />

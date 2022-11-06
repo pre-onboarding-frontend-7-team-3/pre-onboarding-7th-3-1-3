@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import DatePicker from 'react-datepicker';
 import { DateActionEnum } from 'models/types';
@@ -12,7 +12,6 @@ import {
 import S from './styles';
 
 const Dates = () => {
-  console.log('dates');
   const baseDates = useBaseDate();
   const { startDate, endDate } = useDateState();
   const dispatch = useDateDispatch();
