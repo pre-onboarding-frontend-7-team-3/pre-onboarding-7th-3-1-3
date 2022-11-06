@@ -4,6 +4,8 @@ import { DataActionEnum } from 'models/types';
 import { useCallback, useEffect } from 'react';
 import { useAds } from 'context/AdServiceContext';
 import { useAdTrendDispatch } from 'hooks/useTrend';
+import { DateContextProvider } from 'context/DateContext';
+import { ChartProvider } from 'context/AdChartContext';
 import { S } from './styles/GlobalStyle';
 import Sidebar from './components/sidebar/Sidebar';
 import Header from './components/header/Header';
@@ -57,7 +59,11 @@ const App = () => {
       <S.Main>
         <Header />
         <CategoryContextProvider>
-          <Outlet />
+          <DateContextProvider>
+            <ChartProvider>
+              <Outlet />
+            </ChartProvider>
+          </DateContextProvider>
         </CategoryContextProvider>
       </S.Main>
     </S.Layout>

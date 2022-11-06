@@ -1,5 +1,3 @@
-import { Dispatch } from 'react';
-
 export enum DateActionEnum {
   SET_START = 'SET_START',
   SET_END = 'SET_END',
@@ -56,10 +54,29 @@ export type TrendType = {
 };
 
 export enum TrendEnum {
-  roas = 'ROAS',
-  cost = '광고비',
-  click = '클릭수',
-  convValue = '매출',
-  imp = '노출 수',
-  conv = '전환 수',
+  ROAS = 'roas',
+  광고비 = 'cost',
+  클릭수 = 'click',
+  매출 = 'convValue',
+  '노출 수' = 'imp',
+  '전환 수' = 'conv ',
 }
+
+export type ChartType =
+  | 'ROAS'
+  | '광고비'
+  | '클릭수'
+  | '매출'
+  | '노출 수'
+  | '전환 수';
+
+export enum ChartActionEnum {
+  SET_FIRST_DATA = 'FIRST_DATA',
+  SET_SECOND_DATA = 'SECOND_DATA',
+  SET_PERIOD = 'SET_PERIOD',
+}
+
+export type ChartActionType =
+  | { type: ChartActionEnum.SET_FIRST_DATA; data: string }
+  | { type: ChartActionEnum.SET_SECOND_DATA; data: string }
+  | { type: ChartActionEnum.SET_PERIOD; data: string };
