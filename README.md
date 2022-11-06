@@ -1,10 +1,10 @@
-# 원티드 프리온보딩 프론트엔드 - Week 1-2
+# 원티드 프리온보딩 프론트엔드 - Week 2 - 2
 
 원티드 프리온보딩 **프론트엔드 8팀**의 `팔팔한 형제들`입니다.<br>
 
 ## 📅 프로젝트 기간
 
-기간 : 2022년 11월 2일 ~ 2022년 11월 4일
+기간 : 2022년 11월 5일 ~ 2022년 11월 7일 (총 3일)
 
 ## 팔팔한 형제들 팀 소개
 
@@ -90,144 +90,126 @@
 
 ## 🏁 프로젝트 실행 방법
 
-1. root폴더에 .env 파일을 생성합니다.
-
-```
-  REACT_APP_TOKEN={자신의 github에서 Developer-setting 에서 발행한 access-token 사용}
-```
-
-2. 의존성 패키지를 설치합니다.
+1. 의존성 패키지를 설치합니다.
 
 ```zsh
 $ npm install
 ```
 
-3. 리눅스와 윈도우 husky 충돌 방지 후 사용을 위해 설치합니다.
+2. 리눅스와 윈도우 husky 충돌 방지 후 사용을 위해 설치합니다.
 
 ```zsh
 $ chmod ug+x .husky/*
 ```
 
-4. 프로젝트를 실행합니다.
+3. 프로젝트를 실행합니다.
 
 ```zsh
 $ npm start
 ```
 
-## 🔗 위키 링크
-
-[ 보러가기]()
-
 ## 🔗 배포 링크
 
-[베포 링크 보러가기](https://2-1-assignment-test.netlify.app/detail/1)
+[베포 링크 보러가기](http://88-2-2-assignment.s3-website.ap-northeast-2.amazonaws.com/](http://88-2-2-assignment.s3-website.ap-northeast-2.amazonaws.com/))
 
 - 해당 프로젝트는 를 AWS S3통해 배포하였습니다.
 
-## 📦 디렉토리 구조
-
-<details>
-<summary> 구조</summary>
-<div markdown="1">
-
-```
-📦src
- ┣ 📂components
- ┃ ┃ ┣ 📂carItem
- ┃ ┃ ┃ ┣ 📜CarItem.tsx
- ┃ ┃ ┃ ┗  📜styles.ts
- ┃ ┃ ┣ 📂carList
- ┃ ┃ ┃ ┣ 📜CarList.tsx
- ┃ ┃ ┃ ┗  📜styles.ts
- ┃ ┃ ┣ 📂categories
- ┃ ┃ ┃ ┣ 📜Categories.tsx
- ┃ ┃ ┃ ┗  📜styles.ts
- ┃ ┃ ┣ 📂category
- ┃ ┃ ┃ ┣ 📜Category.tsx
- ┃ ┃ ┃ ┗  📜styles.ts
- ┃ ┃ ┣ 📂detailInfo
- ┃ ┃ ┃ ┣ 📜DetailInfo.tsx
- ┃ ┃ ┃ ┗  📜styles.ts
- ┃ ┃ ┣ 📂detailItem
- ┃ ┃ ┃ ┗ 📜DetailItem.tsx
- ┃ ┃ ┣ 📂detailList
- ┃ ┃ ┃ ┗ 📜DetailList.tsx
- ┃ ┃ ┣ 📂header
- ┃ ┃ ┃ ┣ 📜Header.tsx
- ┃ ┃ ┃ ┗  📜styles.ts
- ┃ ┃ ┣ 📂meta
- ┃ ┃ ┃ ┗ 📜Meta.tsx
- ┃ ┃ ┣ 📂titleInfo
- ┃ ┃ ┃ ┣ 📜TitleInfo.tsx
- ┃ ┃ ┃ ┗  📜styles.ts
- ┣ 📂context
- ┃ ┣  📜carsContext.tsx
- ┃ ┗ 📜categoryContext.tsx
- ┣ 📂hooks
- ┃ ┗ 📜useCars.ts
- ┣ 📂interfaces
- ┃ ┣ 📜ActionEnum.ts
- ┃ ┗ 📜CarsInterface.ts
- ┣ 📂network
- ┃ ┗ 📜httpError.ts
- ┣ 📂pages
- ┃ ┃ ┣ 📂detail
- ┃ ┃ ┃ ┣ 📜Detail.tsx
- ┃ ┃ ┃ ┗ 📜styles.ts
- ┃ ┃ ┣ 📂home
- ┃ ┃ ┃ ┣ 📜Home.tsx
- ┃ ┃ ┃ ┗ 📜styles.ts
- ┃ ┃ ┣ 📂notfound
- ┃ ┃ ┃ ┣ 📜NotFound.tsx
- ┃ ┃ ┃ ┗ 📜styles.ts
- ┣ 📂service
- ┃ ┣ 📜axiosUtils.ts
- ┃ ┗ 📜carsService.ts
- ┣ 📂styles
- ┃ ┣ 📜DetailLayout.ts
- ┃ ┣ 📜GlobalStyle.ts
- ┃ ┗ 📜theme.ts
- ┣ 📂utils
- ┃ ┣ 📜checkWithinOneday.ts
- ┃ ┣ 📜formatDate.ts
- ┃ ┗ 📜setMetatags.ts
- ┣ 📜App.tsx
- ┣ 📜Router.tsx
- ┣ 📜index.css
- ┣ 📜index.tsx
- ┗ 📜styled.d.ts
-```
-
-</div>
-</details>
 
 ## 👍 Best Practice 선정 이유
 
--
+- **의존성 주입**하여 **코드의 유지보수성**을 용이하게 만들었습니다.
+```jsx
+const BASE_URL = process.env.REACT_APP_BASE_URL || '';
+const axiosInstance = createAxiosClient(BASE_URL);
+const adService = new AdService(axiosInstance);
+const queryClient = new QueryClient();
+
+const root = ReactDOM.createRoot(
+document.getElementById('root') as HTMLElement);
+
+root.render(
+  <React.StrictMode>
+    <AdServiceProvider adService={adService}>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={Theme}>
+	  <GlobalStyle />
+	  <Router />
+        </ThemeProvider>
+      </QueryClientProvider>
+    </AdServiceProvider>
+  </React.StrictMode>
+);
+```
+
+- React 라이브러리인 Date Picker을 이용하여 **UI/UX를 향상**시켜서 선정하였습니다.
 
 ## ✏️ 개선 부분
 
 하루동안 함께 시행착오를 한 기록을 담았습니다!
 
-두개 였던 API 하나로 사용한 이유 : 디테일로 들어가든 홈으로 가든 받아오는 List는 하나이기에 라우터 설정(리다이랙트)
-무한 API 호출 문제 해결!! 상세 페이지에서 메인으로 가도 상태 그대로를 가지고 있다. 공통 헤더는 레이아웃을 하나 만들어쓰면 편하다.
+1. 리액트 쿼리를 사용하여 **코드 리팩토링 **
 
-무한 스크롤 쓰면서 성능을 신경썼다!? 그래서 배열이 아닌 객체 자료구조를 선택하여 만들었다. 만약 해당 id값을 넣어서 가진 객체를 찾아라라고 한다면 배열은 처음부터 끝까지 찾아야하지만 객체는 key만 넣어주면 바로 가져올 수 있다. 시간 복잡도 측면에서는 객체가 배열보다 유리하다.
+**전)**
+```jsx
+const getAdList = useCallback(async () => {  
+    listDispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading: true });  
+    _try_ {  
+      const response = _await_ adService?.getAdList();  
+      listDispatch({  
+        type: DataActionEnum.SET_DATA,  
+        data: response?.ads || [],  
+      });  
+    } _catch_ (e) {  
+      console.error(e);  
+    } _finally_ {  
+      listDispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading: false });  
+    }  
+  }, [adService, listDispatch]);  const getAdTrend = useCallback(async () => {  
+    trendDispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading: true });  
+    _try_ {  
+      const response = _await_ adService?.getTrend();  
+      trendDispatch({  
+        type: DataActionEnum.SET_DATA,  
+        data: response?.report.daily || [],  
+      });  
+    } _catch_ (e) {  
+      console.error(e);  
+    } _finally_ {  
+      trendDispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading: false });  
+    }  
+  }, [adService, trendDispatch]);
+```
 
-네티워크 통신을 위해 오브젝트 사용(데이터베이스 역할?) (얕은 복사)-> 중복 제거, 시간 복잡도, 캐쉬, 성능 최적화
-캐시를 하여 성능 최적화하였다.
-배열로 데이터를 캐시를 한다면 중복이 발생 -> 따라서 오브젝트 사용
+**후)**
+```Jsx
+const { isLoading, data: trendData } = useQuery(  
+    ['trend'],  
+    () => adService?.getTrend(),  
+    {  
+      staleTime: 1000 * 60 * 60,  
+      cacheTime: 1000 * 60 * 60,  
+    }  
+  );  const { data: listData } = useQuery(  
+    ['adList'],  
+    () => adService?.getAdList(),  
+    {  
+      staleTime: 1000 * 60 * 60,  
+      cacheTime: 1000 * 60 * 60,  
+    }  
+  );
 
-에러
-상세페이지에서 리로딩 했을 경우, error-screen페이지가 나타남
-해결
+useEffect(() => {  
+    trendDispatch({  
+      type: DataActionEnum.SET_DATA,  
+      data: trendData?.report.daily || [],  
+    });  
+    trendDispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading });  
+  }, [trendData, isLoading]);  useEffect(() => {  
+    listDispatch({  
+      type: DataActionEnum.SET_DATA,  
+      data: listData?.ads || [],  
+    });  
+  }, [listData]);
+```
 
-## ✏️ action-point 보러가기 [위키의 dev노트 보러가기 😗](https://github.com/wanted-freeOnBoarding-8/1-1_assignment/wiki/Dev-%EB%85%B8%ED%8A%B8)
 
-## ✨ 주요 기능
-
-<img width="700" src=""/>
-
-</br>
-
-<img width="700" src=""/>
