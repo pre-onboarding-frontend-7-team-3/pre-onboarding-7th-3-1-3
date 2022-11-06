@@ -7,12 +7,25 @@ export const formatDate = (date: string) => {
   return formattedDate;
 };
 
-export const formatMoney = (money: number): string => {
-  if (money < 1000) {
-    return money.toString();
+export const formatMoney = (number: number): string => {
+  if (number < 1000) {
+    return number.toString();
   }
-  if (money >= 1000 && money < 100000) {
-    return `${Math.trunc(money / 1000)}천원`;
+  if (number >= 1000 && number < 100000) {
+    return `${Math.trunc(number / 1000)}천`;
   }
-  return `${Math.trunc(money / 10000).toLocaleString()}만원`;
+  return `${Math.trunc(number / 10000).toLocaleString()}만`;
+};
+
+export const formatTrend = (number: number): string => {
+  if (number < 1000) {
+    return Math.trunc(number).toString();
+  }
+  if (number >= 1000 && number < 100000) {
+    return `${Math.trunc(number).toLocaleString()}`;
+  }
+  if (number >= 100000 && number < 100000000) {
+    return `${Math.trunc(number / 10000).toLocaleString()}만`;
+  }
+  return `${Math.trunc(number / 100000000).toLocaleString()}억`;
 };

@@ -20,11 +20,11 @@ const calculateData = (data: TrendType[]) => {
   data.forEach((item) => {
     Object.keys(item).forEach((key) => {
       if (key in result) {
-        result[key] += Number(item[key]) / data.length;
+        result[key] += Number(item[key]);
       }
     });
   });
-  console.log(result);
+  return result;
 };
 
 export default calculateData;

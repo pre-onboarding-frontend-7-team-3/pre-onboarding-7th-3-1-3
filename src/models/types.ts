@@ -54,3 +54,12 @@ export type TrendType = {
   roas: number;
   date: string;
 };
+
+export enum TrendEnum {
+  roas = 'ROAS',
+  cost = '광고비',
+  click = '클릭수',
+  convValue = '매출',
+  imp = '노출 수',
+  conv = '전환 수',
+}

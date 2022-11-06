@@ -1,12 +1,28 @@
 import { useContext, Dispatch, useMemo } from 'react';
-import { useDateDispatch } from 'hooks/useDate';
 import { DateActionEnum, TrendType } from 'models/types';
 import calculateData from 'utils/calculateData';
 import {
   AdTrendDispatchContext,
   AdTrendStateContext,
 } from '../context/AdTrendContext';
-import { useDateState } from './useDate';
+
+import { DateDispatchContext, DateStateContext } from '../context/DateContext';
+
+export const useDateState = () => {
+  const date = useContext(DateStateContext);
+  if (!date) {
+    throw new Error("can't find DateStateProvider");
+  }
+  return date;
+};
+
+export const useDateDispatch = () => {
+  const dispatch = useContext(DateDispatchContext);
+  if (!dispatch) {
+    throw new Error("can't find DateDispatchProvider");
+  }
+  return dispatch;
+};
 
 export const useAdTrendState = () => {
   const state = useContext(AdTrendStateContext);
@@ -45,6 +61,22 @@ export const useAdTrendValue = () => {
       return item;
     }
   });
-  const result = calculateData(filtered);
-  return result;
+  return filtered;
+};
+
+export const usePrevTrendValue = () => {
+  const { data } = useAdTrendState();
+  const { startDate } = useDateState();
+  if (!data) throw new Error("Can't find StateProvider");
+  if (!startDate) throw new Error("Can't find DateProvider");
+  const filtered: TrendType[] = data.filter((item) => {
+    const target = new Date(item.date);
+    const startTime = startDate.getTime() - 1000 * 3600 * 24 * 3;
+    const endTime = startDate.getTime();
+    const targetTime = target.getTime();
+    if (startTime <= targetTime && targetTime < endTime) {
+      return item;
+    }
+  });
+  return filtered;
 };

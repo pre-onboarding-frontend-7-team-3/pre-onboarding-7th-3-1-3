@@ -17,10 +17,10 @@ const ManageItem = (item: AdType) => {
   const infoArray = [
     { name: '상태', data: status === 'active' ? '진행중' : '완료' },
     { name: '광고 생성일', data: date },
-    { name: '일 희망 예산', data: formatMoney(budget) },
+    { name: '일 희망 예산', data: `${formatMoney(budget)}원` },
     { name: '광고수익률', data: `${roas}%` },
-    { name: '매출', data: formatMoney(convValue) },
-    { name: '광고 비용', data: formatMoney(cost) },
+    { name: '매출', data: `${formatMoney(convValue)}원` },
+    { name: '광고 비용', data: `${formatMoney(cost)}원` },
   ];
   const handleClick = () => {
     SetOnModifyMode((prev) => !prev);
