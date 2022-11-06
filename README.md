@@ -153,28 +153,28 @@ root.render(
 ```jsx
 const getAdList = useCallback(async () => {  
     listDispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading: true });  
-    _try_ {  
+     try {  
       const response = _await_ adService?.getAdList();  
       listDispatch({  
         type: DataActionEnum.SET_DATA,  
         data: response?.ads || [],  
       });  
-    } _catch_ (e) {  
+    } catch (e) {  
       console.error(e);  
-    } _finally_ {  
+    } finally {  
       listDispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading: false });  
     }  
   }, [adService, listDispatch]);  const getAdTrend = useCallback(async () => {  
     trendDispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading: true });  
-    _try_ {  
+    try {  
       const response = _await_ adService?.getTrend();  
       trendDispatch({  
         type: DataActionEnum.SET_DATA,  
         data: response?.report.daily || [],  
       });  
-    } _catch_ (e) {  
+    } catch (e) {  
       console.error(e);  
-    } _finally_ {  
+    } finally {  
       trendDispatch({ type: DataActionEnum.SET_IS_LOADING, isLoading: false });  
     }  
   }, [adService, trendDispatch]);
