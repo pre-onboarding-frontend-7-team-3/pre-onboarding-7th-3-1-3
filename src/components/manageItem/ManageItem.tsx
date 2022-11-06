@@ -26,7 +26,7 @@ const ManageItem = (item: AdType) => {
     SetOnModifyMode((prev) => !prev);
   };
   return (
-    <S.Wrapper onModifyMode={onModifyMode}>
+    <S.Wrapper modifyMode={onModifyMode}>
       <h1>{`${adType}_${title}`}</h1>
       <ManageInfoList infoArray={infoArray} onModifyMode={onModifyMode} />
       <S.Button type="button" onClick={handleClick}>

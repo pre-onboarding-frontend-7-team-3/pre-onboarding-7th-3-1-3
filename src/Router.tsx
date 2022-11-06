@@ -27,11 +27,11 @@ const router = createBrowserRouter([
 
 const Router = () => {
   return (
-    <AdListProvider>
-      <AdTrendProvider>
+    <AdTrendProvider>
+      <AdListProvider>
         <RouterProvider router={router} />
-      </AdTrendProvider>
-    </AdListProvider>
+      </AdListProvider>
+    </AdTrendProvider>
   );
 };
 

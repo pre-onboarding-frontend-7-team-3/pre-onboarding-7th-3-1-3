@@ -49,13 +49,13 @@ const App = () => {
   useEffect(() => {
     setTimeout(() => {
       getAdList();
-    }, 1000);
+    }, 200);
   }, [getAdList]);
 
   useEffect(() => {
     setTimeout(() => {
       getAdTrend();
-    }, 1000);
+    }, 200);
   }, [getAdTrend]);
   return (
     <S.Layout>

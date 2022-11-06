@@ -1,6 +1,6 @@
 import { ChartActionEnum, ChartType } from 'models/types';
 import S from './styles';
-import { useChartDispatch, useChartState } from '../hooks/useChart';
+import { useChartDispatch, useChartState } from '../../hooks/useChart';
 
 const categories: ChartType[] = [
   'ROAS',

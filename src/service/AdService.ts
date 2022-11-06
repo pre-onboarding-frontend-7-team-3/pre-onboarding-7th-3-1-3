@@ -4,7 +4,6 @@ import {
   GetAdListResponse,
   GetTrendResponse,
 } from 'models/interface';
-
 import HTTPError from '../network/httpError';
 
 const AD_LIST_URL = '/ad-list-data-set.json';
@@ -14,7 +13,6 @@ class AdServiceImpl implements AdService {
   constructor(private axiosInstance: AxiosInstance) {}
 
   async getAdList() {
-    setTimeout(() => {});
     try {
       const { data } = await this.axiosInstance.get<GetAdListResponse>(
         AD_LIST_URL

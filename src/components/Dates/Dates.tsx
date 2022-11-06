@@ -18,9 +18,7 @@ const Dates = () => {
   useEffect(() => {
     if (baseDates.startDate) {
       dispatch({ type: DateActionEnum.SET_START, date: baseDates.startDate });
-    }
-    if (baseDates.endDate) {
-      dispatch({ type: DateActionEnum.SET_END, date: baseDates.endDate });
+      dispatch({ type: DateActionEnum.SET_END, date: baseDates.startDate });
     }
   }, [baseDates.endDate, baseDates.startDate, dispatch]);
 
@@ -32,7 +30,7 @@ const Dates = () => {
         closeOnScroll
         selected={startDate}
         minDate={baseDates.startDate}
-        maxDate={baseDates.endDate}
+        maxDate={endDate}
         onChange={(date) => dispatch({ type: DateActionEnum.SET_START, date })}
       />
       <span>~</span>
@@ -41,7 +39,7 @@ const Dates = () => {
         dateFormat="yyyy년 MM월 dd일"
         closeOnScroll
         selected={endDate}
-        minDate={baseDates.startDate}
+        minDate={startDate}
         maxDate={baseDates.endDate}
         onChange={(date) => dispatch({ type: DateActionEnum.SET_END, date })}
       />

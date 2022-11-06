@@ -1,14 +1,12 @@
 import styled from 'styled-components';
 
-const Wrapper = styled.article<{ onModifyMode: boolean }>`
+const Wrapper = styled.article<{ modifyMode: boolean }>`
   border: 1px solid
     ${(props) =>
-      props.onModifyMode
-        ? props.theme.colors.blue
-        : props.theme.colors.grey_100};
+      props.modifyMode ? props.theme.colors.blue : props.theme.colors.grey_100};
   border-radius: 10px;
-  width: 250px;
-  height: 350px;
+  width: 300px;
+  height: 400px;
   padding: 0.5rem 1rem;
   h1 {
     font-family: 'Roboto';

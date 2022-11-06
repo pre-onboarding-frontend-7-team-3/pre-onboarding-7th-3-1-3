@@ -10,7 +10,6 @@ const BOARD_TITLE = '통합공고 현황';
 
 const Home = () => {
   const { isLoading } = useAdTrendState();
-  console.log(isLoading);
   if (isLoading) {
     return (
       <S.Layout>
