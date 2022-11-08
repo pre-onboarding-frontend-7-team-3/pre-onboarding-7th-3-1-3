@@ -5,18 +5,14 @@ import { searchValue } from "../../store/searchValue";
 const SearchForm = () => {
   const setSearchInput = useSetRecoilState(searchValue);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleChange = (e) => {
+    setSearchInput(e.target.value);
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form>
       <InputWrapper>
-        <SearchInput
-          onChange={(e) => {
-            setSearchInput(e.target.value);
-          }}
-        />
+        <SearchInput type="text" placeholder="질환명을 입력해 주세요" onChange={handleChange} />
         <Button type="submit">검색</Button>
       </InputWrapper>
     </Form>
@@ -25,7 +21,7 @@ const SearchForm = () => {
 
 export default SearchForm;
 
-const Form = styled.form`
+const Form = styled.section`
   display: flex;
   width: 85%;
   min-width: 400px;

@@ -9,7 +9,7 @@ const useSearch = () => {
   const searchInput = useRecoilValue(searchValue);
   const [diseaseData, setDiseaseData] = useRecoilState(searchResult);
 
-  const debounceValue = useDebounce(searchInput);
+  const [debounceValue, isDebounceDone] = useDebounce(searchInput);
 
   const handleSearch = async () => {
     if (!searchInput) return;
@@ -19,7 +19,7 @@ const useSearch = () => {
 
   useEffect(() => {
     handleSearch();
-  }, [debounceValue]);
+  }, [isDebounceDone]);
 
   return diseaseData;
 };
