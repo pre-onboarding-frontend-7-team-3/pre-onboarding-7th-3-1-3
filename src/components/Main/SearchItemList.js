@@ -1,17 +1,19 @@
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
+import { searchResult } from "../../store/searchResult";
 import SearchItem from "./SearchItem";
 
 const SearchItemList = () => {
-  const RECOMMENDATIONS = "추천 검색어";
-  // const EMPTY_INPUT = "검색어를 입력해주세요";
-  // const NO_RESULTS = "검색 결과가 없습니다";
+  const diseaseListData = useRecoilValue(searchResult);
+  // const RECOMMENDATIONS = "추천 검색어";
+  const NO_RESULTS = "검색어 없음";
   return (
     <ListWrapper>
-      <DefaultText>{RECOMMENDATIONS}</DefaultText>
+      <DefaultText>{NO_RESULTS}</DefaultText>
       <ItemWrapper>
-        <SearchItem />
-        <SearchItem />
-        <SearchItem />
+        {diseaseListData.map(({ sickCd, sickNm }) => (
+          <SearchItem key={sickCd} sickNm={sickNm} />
+        ))}
       </ItemWrapper>
     </ListWrapper>
   );
@@ -24,7 +26,7 @@ const ListWrapper = styled.section`
   flex-direction: column;
   width: 85%;
   min-width: 400px;
-  min-height: 150px;
+  min-height: 100px;
   height: 100%;
   padding: 26px;
   border-radius: 24px;

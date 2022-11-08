@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-const SearchItem = () => {
-  return <Item>asd</Item>;
+const SearchItem = ({sickNm}) => {
+  return <Item>{sickNm}</Item>;
 };
 
 export default SearchItem;
