@@ -20,5 +20,4 @@ const Template = styled.main`
   justify-content: center;
   height: 100%;
   padding: 50px 20vh;
-  background-color: #d0e8fd;
 `;
