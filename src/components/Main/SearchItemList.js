@@ -1,17 +1,18 @@
-import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { searchResult } from "../../store/searchResult";
 import SearchItem from "./SearchItem";
+import useSearch from "../../hooks/useSearch";
 
 const SearchItemList = () => {
-  const diseaseListData = useRecoilValue(searchResult);
-  // const RECOMMENDATIONS = "추천 검색어";
+  const diseaseData = useSearch();
+
   const NO_RESULTS = "검색어 없음";
+  // const RECOMMENDATIONS = "추천 검색어";
+
   return (
     <ListWrapper>
-      <DefaultText>{NO_RESULTS}</DefaultText>
       <ItemWrapper>
-        {diseaseListData.map(({ sickCd, sickNm }) => (
+      <DefaultText>{NO_RESULTS}</DefaultText>
+        {diseaseData.map(({ sickCd, sickNm }) => (
           <SearchItem key={sickCd} sickNm={sickNm} />
         ))}
       </ItemWrapper>

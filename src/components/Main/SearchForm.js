@@ -1,36 +1,22 @@
-import { useEffect } from "react";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { searchValue } from "../../store/searchValue";
-import { searchResult } from "../../store/searchResult";
 
 const SearchForm = () => {
-  const [searchInput, setSearchInput] = useRecoilState(searchValue);
-  const [diseaseData, setDiseaseData] = useRecoilState(searchResult);
-
-  const handleChange = (e) => {
-    setSearchInput(e.target.value);
-  };
+  const setSearchInput = useSetRecoilState(searchValue);
 
   const handleSubmit = (e) => {
     e.preventDefault();
   };
 
-  const handleSearch = async () => {
-    if (!searchInput) return;
-    const res = await fetch(`http://localhost:4000/sick?q=${searchInput}`);
-    const data = await res.json();
-    setDiseaseData(data);
-  };
-
-  useEffect(() => {
-    handleSearch();
-  }, [searchInput]);
-
   return (
     <Form onSubmit={handleSubmit}>
       <InputWrapper>
-        <SearchInput onChange={handleChange} />
+        <SearchInput
+          onChange={(e) => {
+            setSearchInput(e.target.value);
+          }}
+        />
         <Button type="submit">검색</Button>
       </InputWrapper>
     </Form>
