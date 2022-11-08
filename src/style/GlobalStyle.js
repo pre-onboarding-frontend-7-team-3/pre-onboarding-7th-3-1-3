@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
 }
 
 body {
-  
+  background-color: #d0e8fd;
 }
 input {
   outline: none;

@@ -14,11 +14,11 @@ const SearchForm = () => {
 export default SearchForm;
 
 const Form = styled.form`
-  position: relative;
   display: flex;
   width: 85%;
   min-width: 400px;
-  height: 50px;
+  height: 70px;
+  margin-bottom: 20px;
 `;
 
 const InputWrapper = styled.div`
@@ -29,15 +29,19 @@ const InputWrapper = styled.div`
 const SearchInput = styled.input`
   width: 100%;
   height: 100%;
-  padding-left: 10px;
+  padding-left: 26px;
+  font-size: 20px;
+  border: none;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
 `;
 
 const Button = styled.button`
   width: 15%;
   height: 100%;
-  font-size: 16px;
+  font-size: 20px;
   color: white;
   background: #357ae1;
-  border-top-right-radius: 12px;
-  border-bottom-right-radius: 12px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 `;
