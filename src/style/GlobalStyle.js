@@ -10,6 +10,14 @@ const GlobalStyle = createGlobalStyle`
 body {
   
 }
+input {
+  outline: none;
+}
+button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
 `;
 
 export default GlobalStyle;

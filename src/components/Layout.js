@@ -14,7 +14,7 @@ export default Layout;
 const Template = styled.main`
   display: flex;
   justify-content: center;
-  height: 100%;
+  height: 100vh;
   padding: 20vh;
   background-color: #d0e8fd;
 `;
