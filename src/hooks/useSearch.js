@@ -12,7 +12,7 @@ const useSearch = () => {
   const debounceValue = useDebounce(searchInput);
 
   const handleSearch = async () => {
-    if (!debounceValue) return;
+    if (!searchInput) return;
     const { data } = await clientApi.get(`/sick?q=${debounceValue}`);
     setDiseaseData(data);
   };
