@@ -4,6 +4,7 @@ import { searchResult } from "../store/searchResult";
 import { searchValue } from "../store/searchValue";
 import clientApi from "../api/client";
 import useDebounce from "./useDebounce";
+import checkEngAndNum from "../utils/checkEngAndNum";
 
 const useSearch = () => {
   const searchInput = useRecoilValue(searchValue);
@@ -11,8 +12,9 @@ const useSearch = () => {
 
   const { debounceValue } = useDebounce(searchInput);
 
+  const condition = checkEngAndNum(searchInput) && searchInput;
+
   const handleSearch = async () => {
-    if (!searchInput) return;
     try {
       const { data } = await clientApi.get(`/sick?q=${debounceValue}`);
       setDiseaseListData(data);
@@ -23,7 +25,7 @@ const useSearch = () => {
   };
 
   useEffect(() => {
-    handleSearch();
+    condition && handleSearch();
   }, [debounceValue]);
 
   return diseaseListData;
