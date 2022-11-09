@@ -23,6 +23,7 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
+    "no-restricted-exports": "off",
     "no-var": "error", // var 금지
     "no-multiple-empty-lines": "error", // 여러 줄 공백 금지
     "eqeqeq": "error", // 일치 연산자 사용 필수
