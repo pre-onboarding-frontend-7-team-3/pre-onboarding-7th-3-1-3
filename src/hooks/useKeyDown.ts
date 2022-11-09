@@ -2,19 +2,21 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { searchResult } from "../store/searchResult";
 import { selectedSearchResultIndex } from "../store/selectedSearchResultIndex";
 
-type Key = "ArrowDown" | "ArrowUp";
+// type Key = "ArrowDown" | "ArrowUp";
 
 const useKeyDown = () => {
   const [selectedIndex, setSelectedIndex] = useRecoilState(selectedSearchResultIndex);
   const diseaseListData = useRecoilValue(searchResult);
 
-  const onKeyDown = ({ key }: { key: Key }) => {
+  // keyboard event에 nativeEvent 없음
+  const onKeyDown = (e: any) => {
+    if (e.nativeEvent.isComposing) return;
     if (diseaseListData.length === 0) return;
-    if (key === "ArrowDown") {
+    if (e.key === "ArrowDown") {
       if (selectedIndex === (diseaseListData?.length as number) - 1) return;
       setSelectedIndex(selectedIndex + 1);
     }
-    if (key === "ArrowUp") {
+    if (e.key === "ArrowUp") {
       if (selectedIndex === 0) return;
       setSelectedIndex(selectedIndex - 1);
     }
