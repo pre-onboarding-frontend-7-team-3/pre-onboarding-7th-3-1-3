@@ -16,8 +16,13 @@ const SearchItemList = () => {
         <DefaultText>{DEFAULT_TEXT}</DefaultText>
         {searchInputValue && (
           <>
-            {diseaseData?.map(({ sickCd, sickNm }) => (
-              <SearchItem key={sickCd} sickNm={sickNm} searchInputValue={searchInputValue} />
+            {diseaseData?.map(({ sickCd, sickNm }, idx) => (
+              <SearchItem
+                key={sickCd}
+                idx={idx}
+                sickNm={sickNm}
+                searchInputValue={searchInputValue}
+              />
             ))}
           </>
         )}
@@ -33,7 +38,6 @@ const ListWrapper = styled.section`
   flex-direction: column;
   width: 85%;
   min-width: 500px;
-  /* min-width: 300px; */
   min-height: 100px;
   max-height: 360px;
   overflow-y: auto;
@@ -49,6 +53,7 @@ const ItemWrapper = styled.ul`
 
 const DefaultText = styled.div`
   margin-bottom: 10px;
+  padding-left: 10px;
   color: grey;
   font-size: 14px;
   font-weight: 900;

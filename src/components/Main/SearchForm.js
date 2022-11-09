@@ -1,24 +1,16 @@
-import { useEffect } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { searchValue } from "../../store/searchValue";
+import useKeyDown from "../../hooks/useKeyDown";
 
 const SearchForm = () => {
-  // const setSearchInput = useSetRecoilState(searchValue);
   const [searchInput, setSearchInput] = useRecoilState(searchValue);
+  const onKeyDown = useKeyDown();
 
   const handleChange = (e) => {
     setSearchInput(e.target.value);
   };
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setSearchInput({ [name]: value });
-  // };
-
-  // useEffect(() => {
-  //   console.log("updated");
-  // }, [searchInput]);
   return (
     <Form>
       <InputWrapper>
@@ -26,8 +18,8 @@ const SearchForm = () => {
           type="text"
           placeholder="질환명을 입력해 주세요"
           onChange={handleChange}
-          // name="input"
-          // value={searchInput.input}
+          onKeyDown={onKeyDown}
+          value={searchInput}
         />
         <Button type="submit">검색</Button>
       </InputWrapper>
@@ -53,7 +45,7 @@ const InputWrapper = styled.div`
 const SearchInput = styled.input`
   width: 100%;
   height: 100%;
-  padding-left: 26px;
+  padding-left: 36px;
   font-size: 20px;
   border: none;
   border-top-left-radius: 20px;

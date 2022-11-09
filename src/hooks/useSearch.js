@@ -13,14 +13,17 @@ const useSearch = () => {
 
   const handleSearch = async () => {
     if (!searchInput) return;
-    const { data } = await clientApi.get(`/sick?q=${debounceValue}`);
-    setDiseaseData(data);
-    console.log("api calling");
+    try {
+      const { data } = await clientApi.get(`/sick?q=${debounceValue}`);
+      setDiseaseData(data);
+      console.log("api calling");
+    } catch (err) {
+      throw new Error(err);
+    }
   };
-  
+
   useEffect(() => {
     handleSearch();
-
   }, [debounceValue]);
 
   return diseaseData;
