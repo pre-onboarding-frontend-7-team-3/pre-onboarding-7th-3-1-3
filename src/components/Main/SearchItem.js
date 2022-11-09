@@ -5,7 +5,7 @@ import formatFontWeight from "../../utils/formatFontWeight";
 
 const SearchItem = ({ idx, sickNm, searchInputValue }) => {
   const selectedIndex = useRecoilValue(selectedSearchResultIndex);
-  
+
   return (
     <Item selectedIndex={selectedIndex} idx={idx}>
       {formatFontWeight(sickNm, searchInputValue)}
@@ -16,8 +16,7 @@ const SearchItem = ({ idx, sickNm, searchInputValue }) => {
 export default SearchItem;
 
 const Item = styled.li`
-  display: flex;
-  align-items: center;
+  ${({ theme }) => theme.flexDefault}
   width: 100%;
   min-width: 400px;
   height: 44px;
@@ -28,6 +27,6 @@ const Item = styled.li`
   cursor: pointer;
 
   &:hover {
-    background-color: #d0e8fd;
+    background-color: ${({ theme }) => theme.bg.lightBlue};
   }
 `;

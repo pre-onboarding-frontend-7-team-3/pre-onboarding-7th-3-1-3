@@ -47,7 +47,6 @@ const SearchInput = styled.input`
   height: 100%;
   padding-left: 36px;
   font-size: 20px;
-  border: none;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
 `;
@@ -57,7 +56,7 @@ const Button = styled.button`
   height: 100%;
   font-size: 20px;
   color: white;
-  background: #357ae1;
+  background: ${({ theme }) => theme.bg.darkBlue};
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
 `;

@@ -12,4 +12,5 @@ const Main = () => {
     </Layout>
   );
 };
+
 export default Main;

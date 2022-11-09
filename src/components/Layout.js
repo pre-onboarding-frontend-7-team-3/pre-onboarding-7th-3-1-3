@@ -1,15 +1,7 @@
-// import React, { ReactNode } from "react";
 import styled from "styled-components";
-// interface LayoutProps {
-//   children: ReactNode;
-// }
 
 const Layout = ({ children }) => {
-  return (
-    <Template>
-      {children}
-    </Template>
-  );
+  return <Template>{children}</Template>;
 };
 
 export default Layout;

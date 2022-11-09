@@ -6,7 +6,7 @@ import { searchValue } from "../../store/searchValue";
 
 const SearchItemList = () => {
   const searchInputValue = useRecoilValue(searchValue);
-  const diseaseData = useSearch();
+  const diseaseListData = useSearch();
 
   const DEFAULT_TEXT = searchInputValue ? "추천 검색어" : "검색어 없음";
 
@@ -16,7 +16,7 @@ const SearchItemList = () => {
         <DefaultText>{DEFAULT_TEXT}</DefaultText>
         {searchInputValue && (
           <>
-            {diseaseData?.map(({ sickCd, sickNm }, idx) => (
+            {diseaseListData?.map(({ sickCd, sickNm }, idx) => (
               <SearchItem
                 key={sickCd}
                 idx={idx}
@@ -34,8 +34,7 @@ const SearchItemList = () => {
 export default SearchItemList;
 
 const ListWrapper = styled.section`
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => theme.flexColumn}
   width: 85%;
   min-width: 500px;
   min-height: 100px;
@@ -47,14 +46,13 @@ const ListWrapper = styled.section`
 `;
 
 const ItemWrapper = styled.ul`
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => theme.flexColumn}
 `;
 
 const DefaultText = styled.div`
   margin-bottom: 10px;
   padding-left: 10px;
-  color: grey;
+  color: ${({ theme }) => theme.bg.grey};
   font-size: 14px;
   font-weight: 900;
 `;

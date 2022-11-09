@@ -10,10 +10,7 @@ const GlobalStyle = createGlobalStyle`
 body {
   background-color: #d0e8fd;
 }
-input {
-  outline: none;
-}
-button {
+input, button {
   outline: none;
   border: none;
   cursor: pointer;

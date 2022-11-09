@@ -7,7 +7,7 @@ import useDebounce from "./useDebounce";
 
 const useSearch = () => {
   const searchInput = useRecoilValue(searchValue);
-  const [diseaseData, setDiseaseData] = useRecoilState(searchResult);
+  const [diseaseListData, setDiseaseListData] = useRecoilState(searchResult);
 
   const { debounceValue } = useDebounce(searchInput);
 
@@ -15,7 +15,7 @@ const useSearch = () => {
     if (!searchInput) return;
     try {
       const { data } = await clientApi.get(`/sick?q=${debounceValue}`);
-      setDiseaseData(data);
+      setDiseaseListData(data);
       console.log("api calling");
     } catch (err) {
       throw new Error(err);
@@ -26,7 +26,7 @@ const useSearch = () => {
     handleSearch();
   }, [debounceValue]);
 
-  return diseaseData;
+  return diseaseListData;
 };
 
 export default useSearch;
