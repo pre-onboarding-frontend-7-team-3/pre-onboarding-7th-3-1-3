@@ -1,13 +1,18 @@
+import { ThemeProvider } from "styled-components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Main from "pages/Main";
+import Theme from "styles/theme";
+
+import Home from "pages/home";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Main />} />
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider theme={Theme}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
