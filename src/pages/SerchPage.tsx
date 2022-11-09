@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { IoIosSearch } from "react-icons/io";
 import isMakeSense from "utils/isMakeSense";
-import { log } from "console";
 import Navbar from "../components/Navbar/Navbar";
 
 const Section = styled.section`
