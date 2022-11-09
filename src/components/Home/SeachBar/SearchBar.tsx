@@ -1,7 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { debounce } from "utils/debounce";
 import { searchDiseaseService } from "apis";
-import {trie} from 'utils/autoComplete'
 
 function SearchBar() {
   const [inputVal, setInputVal] = useState("");
@@ -10,9 +9,8 @@ function SearchBar() {
     if (keyword.length) {
       setInputVal(keyword);
       debounce(async () => {
-				
         const { data } = await searchDiseaseService.search(keyword);
-        console.log(data);
+        // console.log(data);
       }, 500);
     }
   };
