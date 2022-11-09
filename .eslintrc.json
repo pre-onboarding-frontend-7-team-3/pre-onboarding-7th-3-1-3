@@ -23,6 +23,7 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
+    "import/no-extraneous-dependencies": "off",
     "@typescript-eslint/no-unused-expressions": "off",
     "react/no-array-index-key": "off",
     "react/jsx-no-useless-fragment": "off",
