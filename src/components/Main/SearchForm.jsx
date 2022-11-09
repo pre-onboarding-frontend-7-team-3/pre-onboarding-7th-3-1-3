@@ -1,15 +1,25 @@
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { useCallback } from "react";
 import styled from "styled-components";
 import { searchValue } from "../../store/searchValue";
 import useKeyDown from "../../hooks/useKeyDown";
+import { selectedSearchResultIndex } from "../../store/selectedSearchResultIndex";
+import { searchResult } from "../../store/searchResult";
 
 const SearchForm = () => {
   const [searchInputValue, setSearchInputValue] = useRecoilState(searchValue);
+  const [currentSearchIndex, setCurrentSearchIndex] = useRecoilState(selectedSearchResultIndex);
+  const diseaseListData = useRecoilValue(searchResult);
+
   const onKeyDown = useKeyDown();
 
-  const handleChange = (e) => {
+  const handleChange = useCallback((e) => {
     setSearchInputValue(e.target.value);
-  };
+    setCurrentSearchIndex(-1);
+  }, []);
+
+  const selectedResultValue =
+    currentSearchIndex !== -1 && diseaseListData[currentSearchIndex].sickNm;
 
   return (
     <Form>
@@ -19,7 +29,8 @@ const SearchForm = () => {
           placeholder="질환명을 입력해 주세요"
           onChange={handleChange}
           onKeyDown={onKeyDown}
-          value={searchInputValue}
+          value={selectedResultValue || searchInputValue}
+          autoFocus
         />
         <Button type="submit">검색</Button>
       </InputWrapper>
