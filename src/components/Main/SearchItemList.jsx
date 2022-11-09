@@ -38,7 +38,7 @@ const ListWrapper = styled.section`
   width: 85%;
   min-width: 500px;
   min-height: 100px;
-  max-height: 360px;
+  /* max-height: 360px; */
   overflow-y: auto;
   padding: 26px;
   border-radius: 24px;
