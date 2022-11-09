@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App({ p }: { p?: number }) {
-  console.log("s");
+  // console.log("s");
 
   return (
     <BrowserRouter>

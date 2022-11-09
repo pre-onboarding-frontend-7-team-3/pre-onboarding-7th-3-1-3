@@ -1,8 +1,8 @@
 # 원티드 프리온보딩 프론트엔드 3팀 - Assignment #3
 
-> 목적 : 
+> 목적 :
 >
-> 프로젝트 기간 : 
+> 프로젝트 기간 :
 >
 > #### [배포링크]()
 
@@ -12,12 +12,9 @@
 
 ### 1. blahblah
 
-
-
 </br>
 
 ### 2. blahblah
-
 
 </br>
 
@@ -47,10 +44,9 @@ $ npm run dev
 
 1. 우선 노션에서 프로젝트를 페이지 별로 나누고 또 다시 페이지 별로 필요한 컴포넌트를 나열하여 작업을 최대한 세분화 하려고 했습니다.
 
-    - https://www.notion.so/2-1-498c225b2d814eb8b77bf1d6d312037d
+   - https://www.notion.so/2-1-498c225b2d814eb8b77bf1d6d312037d
 
 2. 본 프로젝트는 동료학습에 최적화된 과정을 찾아가며 진행했습니다. [VSC Live Code extension](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare-pack)을 활용해서 라이브 코드 리뷰를 진행하고 각자 구현한 코드에 대한 피드백 및 리팩토링 후 `페어 프로그래밍` 방식으로 Best Practice를 채택했습니다.
-
 
 3. 게더타운에 모여 화면공유를 하며 실시간으로 피드백을 주고 받았습니다.
 
@@ -61,14 +57,14 @@ $ npm run dev
 ## ☑️ Best Practice 및 채택 근거
 
 ### 1. barrel 방식의 폴더구조
+
 각 컴포넌트에 해당되는 폴더를 만들고 그 안에 index.js를 만듭니다.
 
-예를 들어 index.js안에 `export { default } from './Header'` 라고 해두면 VS CODE상에서 해당 파일을 링크하여 열었을때(ctrl를 누른상태로 클릭) vs code 에디터 상단에 `Header.jsx` 라고 뜹니다. 
+예를 들어 index.js안에 `export { default } from './Header'` 라고 해두면 VS CODE상에서 해당 파일을 링크하여 열었을때(ctrl를 누른상태로 클릭) vs code 에디터 상단에 `Header.jsx` 라고 뜹니다.
 
-이는 여러개의 파일을 link로 열었을때 `index.jsx` 라는 이름이 여러개가 떠서 헷갈리는 상황을 막아줍니다. 
+이는 여러개의 파일을 link로 열었을때 `index.jsx` 라는 이름이 여러개가 떠서 헷갈리는 상황을 막아줍니다.
 
 ![header barrel](https://user-images.githubusercontent.com/65995664/199855960-df2b2f70-3668-4777-8c57-4bedece6d857.gif)
-
 
 <br/>
 
@@ -88,7 +84,7 @@ $ npm run dev
 | hotfix   | 치명적이거나 급한 버그 수정                 |
 | remove   | 사용하지 않는 변수, 파일 etc 삭제           |
 | working  | 이미 만들어진 기능, 함수 작업중             |
-| merge  | branch merge                                 |
+| merge    | branch merge                                |
 
 - [ ] branch 컨벤션
 
@@ -99,10 +95,10 @@ $ npm run dev
 | docs     | 제품 코드 수정 없음          |
 | refactor | 코드 리팩토링                |
 | hotfix   | 치명적이거나 급한 버그 수정  |
-| feat     | 새로운 기능 추가            |
+| feat     | 새로운 기능 추가             |
 
 - issue 컨벤션과 pr컨벤션도 branch 컨벤션과 동일
-    - 단 `[ Fix ]` 이런식으로 포맷이 달라짐
+  - 단 `[ Fix ]` 이런식으로 포맷이 달라짐
 
 </br>
 
@@ -120,7 +116,7 @@ $ npm run dev
 
 ```
 📂 src
-├── 
+├──
 ```
 
 </br>
@@ -136,4 +132,3 @@ $ npm run dev
 | ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | <img src="https://avatars.githubusercontent.com/u/78708082?s=96&v=4" alt="moonkorea00" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/28257740?s=96&v=4" alt="dltkdals224" with="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/86206374?s=96&v=4" alt="365supprot" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/110365677?v=4" alt="suzz-in" width="100" height="100"> |
 | [moonkorea00](https://github.com/moonkorea00)                                                                    | [dltkdals224](https://github.com/dltkdals224)                                                                   | [365support](https://github.com/365support)                                                                     | [suzz-in](https://github.com/suzz-in)                                                                    |
-
