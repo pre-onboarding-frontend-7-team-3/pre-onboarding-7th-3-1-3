@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 /* eslint-disable no-console */
 /* eslint-disable import/no-unresolved */
 import React, { useState, useEffect } from "react";
@@ -10,7 +11,7 @@ import SearchHistory from "components/SearchHistory";
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 
   width: 100vw;
   height: 100vh;
@@ -22,13 +23,20 @@ const SearchWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  width: 800px;
+  width: 100%;
   height: auto;
-  min-height: 400px;
+  min-height: 500px;
 
   background-color: skyblue;
   border-radius: 10px;
   opacity: 0.9;
+`;
+
+const TitleWrappr = styled.div`
+  font-size: 30px;
+  font-weight: 600;
+
+  color: navy;
 `;
 
 const SearchBar = styled.input`
@@ -45,11 +53,11 @@ const SearchHistoryWrapper = styled.div`
 `;
 
 function Home() {
-  const [searchResult, setSearchResult] = useState();
+  const [searchResult, setSearchResult] = useState<React.SetStateAction<string>>();
   const [search, setSearch] = useState("");
-  const [timer, setTimer] = useState(0); // 디바운싱 타이머
+  const [timer, setTimer] = useState<React.SetStateAction<any>>(0); // 디바운싱 타이머
 
-  const onChangeSearch = (e) => {
+  const onChangeSearch = (e: any) => {
     setSearch(e.target.value);
     if (e.target.value === "") {
       setSearchResult("");
@@ -61,10 +69,44 @@ function Home() {
     }
 
     const newTimer = setTimeout(async () => {
+      const test = (text: string): Array<string> => {
+        const returnArr = [];
+        const arr = text.split("");
+
+        for (let i = 0; i < arr.length; i++) {
+          let tmp = "";
+          for (let j = 0; j <= i; j++) {
+            tmp += arr[j];
+          }
+          returnArr.push(tmp);
+        }
+
+        return returnArr;
+      };
+
+      // const test2 = (url) => {
+      //   cacheStorage;
+      // };
+
       try {
         const cacheStorage = await caches.open("search");
         const URL = `http://localhost:4000/sick?q=${e.target.value}`;
-        const responsedCache = await cacheStorage.match(URL);
+
+        //
+        const testArr = test(e.target.value);
+        console.log("testArr", testArr);
+
+        let responsedCache: any = "";
+        for (let i = 0; i < testArr.length; i++) {
+          responsedCache = await cacheStorage.match(`http://localhost:4000/sick?q=${testArr[i]}`);
+          if (responsedCache !== undefined) {
+            break;
+          }
+        }
+
+        console.log("responsedCache", responsedCache);
+
+        //
 
         if (isMakeSense(e.target.value) && responsedCache) {
           // (가치 판단,캐시에 있음)
@@ -102,7 +144,13 @@ function Home() {
   return (
     <Wrapper>
       <SearchWrapper>
-        <SearchBar type="text" value={search} onChange={onChangeSearch} />
+        <TitleWrappr>국내 모든 임상시험 검색하고 온라인으로 참여하기</TitleWrappr>
+        <SearchBar
+          type="text"
+          value={search}
+          onChange={onChangeSearch}
+          placeholder="질환명을 입력해 주세요."
+        />
         <SearchHistoryWrapper>
           {searchResult && <SearchHistory data={searchResult} search={search} />}
         </SearchHistoryWrapper>
