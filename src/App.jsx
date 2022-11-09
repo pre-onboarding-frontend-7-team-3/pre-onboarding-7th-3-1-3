@@ -1,8 +1,7 @@
 import { ThemeProvider } from "styled-components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Theme from "styles/theme";
-
-import Home from "pages/home";
+import Theme from "./style/Theme";
+import Home from "./pages/home";
 
 function App() {
   return (
