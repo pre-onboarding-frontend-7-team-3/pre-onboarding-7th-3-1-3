@@ -1,3 +1,4 @@
+import Navbar from "components/Navbar/Navbar";
 import SerchPage from "pages/SerchPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { RecoilRoot } from "recoil";
