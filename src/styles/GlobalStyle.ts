@@ -21,6 +21,13 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
     outline: inherit;
   }
+  input{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+  }
+}
 `;
 
 export default GlobalStyle;
