@@ -4,11 +4,11 @@ import { searchValue } from "../../store/searchValue";
 import useKeyDown from "../../hooks/useKeyDown";
 
 const SearchForm = () => {
-  const [searchInput, setSearchInput] = useRecoilState(searchValue);
+  const [searchInputValue, setSearchInputValue] = useRecoilState(searchValue);
   const onKeyDown = useKeyDown();
 
   const handleChange = (e) => {
-    setSearchInput(e.target.value);
+    setSearchInputValue(e.target.value);
   };
 
   return (
@@ -19,7 +19,7 @@ const SearchForm = () => {
           placeholder="질환명을 입력해 주세요"
           onChange={handleChange}
           onKeyDown={onKeyDown}
-          value={searchInput}
+          value={searchInputValue}
         />
         <Button type="submit">검색</Button>
       </InputWrapper>

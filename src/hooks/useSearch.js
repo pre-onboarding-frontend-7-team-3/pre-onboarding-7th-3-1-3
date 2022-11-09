@@ -7,12 +7,12 @@ import useDebounce from "./useDebounce";
 import checkEngAndNum from "../utils/checkEngAndNum";
 
 const useSearch = () => {
-  const searchInput = useRecoilValue(searchValue);
+  const searchInputValue = useRecoilValue(searchValue);
   const [diseaseListData, setDiseaseListData] = useRecoilState(searchResult);
 
-  const { debounceValue } = useDebounce(searchInput);
+  const { debounceValue } = useDebounce(searchInputValue);
 
-  const condition = checkEngAndNum(searchInput) && searchInput;
+  const condition = checkEngAndNum(searchInputValue) && searchInputValue;
 
   const handleSearch = async () => {
     try {
