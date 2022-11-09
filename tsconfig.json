@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "baseUrl": "./src", //이 부분 추가
+    "baseUrl": "./", //이 부분 추가
     "allowJs": true,
     "noImplicitAny": true, //이 부분도 추가, 모든 타입의 any라도 넣으라는 뜻이다.
     "skipLibCheck": true,
