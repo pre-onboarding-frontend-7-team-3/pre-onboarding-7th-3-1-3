@@ -1,14 +1,10 @@
-import React from 'react';
-import { ThemeProvider } from 'styled-components';
-import Theme from './styles/theme';
-import Router from './Router';
+import { ThemeProvider } from "styled-components";
+import Theme from "./styles/theme";
 
-const App = () => {
-  return (
-    <ThemeProvider theme={Theme}>
-      <Router />
-    </ThemeProvider>
-  );
-};
+function App() {
+  console.log("s");
+
+  return <ThemeProvider theme={Theme}>app</ThemeProvider>;
+}
 
 export default App;

@@ -25,7 +25,6 @@
   "rules": {
     "no-var": "error", // var 금지
     "no-multiple-empty-lines": "error", // 여러 줄 공백 금지
-    "no-console": ["warn", { "allow": ["warn", "error", "info"] }], // console.log() 금지
     "eqeqeq": "error", // 일치 연산자 사용 필수
     "dot-notation": "error", // 가능하다면 dot notation 사용
     "linebreak-style": 0, // CRLF 에러
@@ -37,22 +36,21 @@
     "no-unused-vars": 0,
     "no-shadow": 0,
     "react/jsx-props-no-spreading": 0,
-    "react/jsx-filename-extension": [
-      1,
-      { "extensions": [".js", ".jsx", "ts", "tsx"] }
-    ],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", "ts", "tsx"] }],
     "react/react-in-jsx-scope": 0,
     "object-curly-newline": 0,
     "arrow-parens": 0,
     "camelcase": 0,
-		"jsx-a11y/label-has-associated-control": 0,
+    "jsx-a11y/label-has-associated-control": 0,
     "@typescript-eslint/no-unused-vars": 0,
     "react/require-default-props": 0,
     "react/destructuring-assignment": 0,
     "array-callback-return": 0,
     "react-hooks/exhaustive-deps": 0,
-		"@typescript-eslint/no-explicit-any": 0,
-		"no-plusplus": 0,
-		"prefer-const": 0
+    "@typescript-eslint/no-explicit-any": 0,
+    "no-plusplus": 0,
+    "prefer-const": 0,
+    "no-console": ["error", { "allow": ["error"] }],
+    "curly": "error"
   }
 }
