@@ -24,7 +24,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 export const centerize = css`
-  display: "flex";
+  display: flex;
   justify-content: center;
   align-items: center;
 `;

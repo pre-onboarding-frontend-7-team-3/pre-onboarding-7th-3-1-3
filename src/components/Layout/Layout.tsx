@@ -3,7 +3,9 @@ import { centerize } from "styles/GlobalStyle";
 
 const Wrapper = styled.section`
   ${centerize}
-  flex-direction:'column';
+  flex-direction:column;
+  height: 100vh;
+  background-color: #d0e8fd;
 `;
 
 function Layout({ children }: { children: React.ReactNode }) {
