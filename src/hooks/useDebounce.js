@@ -13,7 +13,7 @@ const useDebounce = (value, delay = 300) => {
     };
   }, [value, delay]);
 
-  return {debounceValue};
+  return { debounceValue };
 };
 
 export default useDebounce;
