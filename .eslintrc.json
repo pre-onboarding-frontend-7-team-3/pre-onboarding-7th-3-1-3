@@ -23,6 +23,7 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
+    "@typescript-eslint/lines-between-class-members": "off",
     "no-restricted-exports": "off",
     "import/prefer-default-export": "off",
     "no-var": "error", // var 금지
@@ -52,7 +53,7 @@
     "@typescript-eslint/no-explicit-any": 0,
     "no-plusplus": 0,
     "prefer-const": 0,
-    "no-console": ["error", { "allow": ["error"] }],
+    "no-console": ["warn", { "allow": ["error"] }],
     "curly": "error"
   }
 }
