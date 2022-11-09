@@ -1,15 +1,24 @@
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { searchValue } from "../../store/searchValue";
+import { searchResult } from "../../store/searchResult";
 import useKeyDown from "../../hooks/useKeyDown";
+import { selectedSearchResultIndex } from "../../store/selectedSearchResultIndex";
 
 const SearchForm = () => {
   const [searchInputValue, setSearchInputValue] = useRecoilState(searchValue);
+  const diseaseListData = useRecoilValue(searchResult);
+  const [selectedIndex, setSelectedIndex] = useRecoilState(selectedSearchResultIndex);
+
   const onKeyDown = useKeyDown();
 
   const handleChange = (e) => {
     setSearchInputValue(e.target.value);
+    setSelectedIndex(-1);
   };
+
+  const isCurrentIndexValid = selectedIndex !== -1;
+  const selectedResultValueOfIndex = isCurrentIndexValid && diseaseListData[selectedIndex].sickNm;
 
   return (
     <Form>
@@ -19,7 +28,8 @@ const SearchForm = () => {
           placeholder="질환명을 입력해 주세요"
           onChange={handleChange}
           onKeyDown={onKeyDown}
-          value={searchInputValue}
+          value={selectedResultValueOfIndex || searchInputValue}
+          autoFocus
         />
         <Button type="submit">검색</Button>
       </InputWrapper>
@@ -49,6 +59,14 @@ const SearchInput = styled.input`
   font-size: 20px;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
+
+  &:hover {
+    background-color: rgb(244, 244, 244);
+  }
+
+  &:focus {
+    background-color: white;
+  }
 `;
 
 const Button = styled.button`
