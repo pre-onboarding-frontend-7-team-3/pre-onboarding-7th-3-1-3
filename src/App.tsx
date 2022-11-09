@@ -1,3 +1,4 @@
+import SerchPage from "pages/SerchPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App({ p }: { p?: number }) {
@@ -6,7 +7,7 @@ function App({ p }: { p?: number }) {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<div>App</div>} />
+        <Route path="/" element={<SerchPage />} />
       </Routes>
     </BrowserRouter>
   );
