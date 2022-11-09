@@ -3,11 +3,21 @@ import styled from "styled-components";
 import { selectedSearchResultIndex } from "../../store/selectedSearchResultIndex";
 import formatFontWeight from "../../utils/formatFontWeight";
 
-const SearchItem = ({ idx, sickNm, searchInputValue }) => {
+interface Props {
+  idx: number;
+  sickNm: string;
+  searchInputValue: string;
+}
+
+const SearchItem = ({ idx, sickNm, searchInputValue }: Props) => {
   const selectedIndex = useRecoilValue(selectedSearchResultIndex);
 
+  const handleFocus = (e: React.FocusEvent<HTMLLIElement>) => {
+    console.log(e.currentTarget);
+  };
   return (
-    <Item selectedIndex={selectedIndex} idx={idx}>
+    // Ts에서 tabindex=0 은 아래와 같이 해야 한다.
+    <Item tabIndex={0} selectedIndex={selectedIndex} idx={idx} onFocus={handleFocus} >
       {formatFontWeight(sickNm, searchInputValue)}
     </Item>
   );
@@ -15,7 +25,7 @@ const SearchItem = ({ idx, sickNm, searchInputValue }) => {
 
 export default SearchItem;
 
-const Item = styled.li`
+const Item = styled.li<{ selectedIndex: number; idx: number }>`
   ${({ theme }) => theme.flexDefault}
   width: 100%;
   min-width: 400px;
