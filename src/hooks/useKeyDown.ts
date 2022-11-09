@@ -2,14 +2,16 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { searchResult } from "../store/searchResult";
 import { selectedSearchResultIndex } from "../store/selectedSearchResultIndex";
 
+type Key = "ArrowDown" | "ArrowUp";
+
 const useKeyDown = () => {
   const [selectedIndex, setSelectedIndex] = useRecoilState(selectedSearchResultIndex);
   const diseaseListData = useRecoilValue(searchResult);
 
-  const onKeyDown = ({ key }) => {
+  const onKeyDown = ({ key }: { key: Key }) => {
     if (diseaseListData.length === 0) return;
     if (key === "ArrowDown") {
-      if (selectedIndex === diseaseListData?.length - 1) return;
+      if (selectedIndex === (diseaseListData?.length as number) - 1) return;
       setSelectedIndex(selectedIndex + 1);
     }
     if (key === "ArrowUp") {

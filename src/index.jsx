@@ -5,7 +5,7 @@ import { ThemeProvider } from "styled-components";
 import theme from "./style/Theme";
 import { RecoilRoot } from "recoil";
 
-const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <RecoilRoot>
     <GlobalStyle />

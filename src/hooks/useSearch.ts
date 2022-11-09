@@ -19,7 +19,7 @@ const useSearch = () => {
       const { data } = await clientApi.get(`/sick?q=${debounceValue}`);
       setDiseaseListData(data);
       console.log("api calling");
-    } catch (err) {
+    } catch (err: any) {
       throw new Error(err);
     }
   };

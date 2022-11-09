@@ -12,8 +12,8 @@
     "airbnb-typescript",
     "prettier"
   ],
-  "parser": "@typescript-eslint/parser",
   "parserOptions": {
+    "parser": "@typescript-eslint/parser",
     "ecmaFeatures": {
       "jsx": true
     },
@@ -23,6 +23,10 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
+    "react/no-array-index-key": "off",
+    "react/jsx-no-useless-fragment": "off",
+    "@typescript-eslint/no-use-before-define": "off",
+    "import/order": "off",
     "@typescript-eslint/lines-between-class-members": "off",
     "no-restricted-exports": "off",
     "import/prefer-default-export": "off",
