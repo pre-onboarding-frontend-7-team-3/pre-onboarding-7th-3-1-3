@@ -1,18 +1,34 @@
-import { useSetRecoilState } from "recoil";
+import { useEffect } from "react";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { searchValue } from "../../store/searchValue";
 
 const SearchForm = () => {
-  const setSearchInput = useSetRecoilState(searchValue);
+  // const setSearchInput = useSetRecoilState(searchValue);
+  const [searchInput, setSearchInput] = useRecoilState(searchValue);
 
   const handleChange = (e) => {
     setSearchInput(e.target.value);
   };
 
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setSearchInput({ [name]: value });
+  // };
+
+  // useEffect(() => {
+  //   console.log("updated");
+  // }, [searchInput]);
   return (
     <Form>
       <InputWrapper>
-        <SearchInput type="text" placeholder="질환명을 입력해 주세요" onChange={handleChange} />
+        <SearchInput
+          type="text"
+          placeholder="질환명을 입력해 주세요"
+          onChange={handleChange}
+          // name="input"
+          // value={searchInput.input}
+        />
         <Button type="submit">검색</Button>
       </InputWrapper>
     </Form>
@@ -24,7 +40,7 @@ export default SearchForm;
 const Form = styled.section`
   display: flex;
   width: 85%;
-  min-width: 400px;
+  min-width: 500px;
   height: 70px;
   margin-bottom: 20px;
 `;

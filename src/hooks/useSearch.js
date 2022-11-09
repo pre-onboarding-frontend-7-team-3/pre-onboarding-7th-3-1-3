@@ -9,17 +9,19 @@ const useSearch = () => {
   const searchInput = useRecoilValue(searchValue);
   const [diseaseData, setDiseaseData] = useRecoilState(searchResult);
 
-  const [debounceValue, isDebounceDone] = useDebounce(searchInput);
+  const { debounceValue } = useDebounce(searchInput);
 
   const handleSearch = async () => {
     if (!searchInput) return;
     const { data } = await clientApi.get(`/sick?q=${debounceValue}`);
     setDiseaseData(data);
+    console.log("api calling");
   };
-
+  
   useEffect(() => {
     handleSearch();
-  }, [isDebounceDone]);
+
+  }, [debounceValue]);
 
   return diseaseData;
 };

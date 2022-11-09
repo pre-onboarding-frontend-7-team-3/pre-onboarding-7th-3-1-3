@@ -1,20 +1,26 @@
 import styled from "styled-components";
 import SearchItem from "./SearchItem";
 import useSearch from "../../hooks/useSearch";
+import { useRecoilValue } from "recoil";
+import { searchValue } from "../../store/searchValue";
 
 const SearchItemList = () => {
+  const searchInputValue = useRecoilValue(searchValue);
   const diseaseData = useSearch();
 
-  const NO_RESULTS = "검색어 없음";
-  // const RECOMMENDATIONS = "추천 검색어";
+  const DEFAULT_TEXT = searchInputValue ? "추천 검색어" : "검색어 없음";
 
   return (
     <ListWrapper>
       <ItemWrapper>
-      <DefaultText>{NO_RESULTS}</DefaultText>
-        {diseaseData.map(({ sickCd, sickNm }) => (
-          <SearchItem key={sickCd} sickNm={sickNm} />
-        ))}
+        <DefaultText>{DEFAULT_TEXT}</DefaultText>
+        {searchInputValue && (
+          <>
+            {diseaseData?.map(({ sickCd, sickNm }) => (
+              <SearchItem key={sickCd} sickNm={sickNm} searchInputValue={searchInputValue} />
+            ))}
+          </>
+        )}
       </ItemWrapper>
     </ListWrapper>
   );
@@ -26,9 +32,11 @@ const ListWrapper = styled.section`
   display: flex;
   flex-direction: column;
   width: 85%;
-  min-width: 400px;
+  min-width: 500px;
+  /* min-width: 300px; */
   min-height: 100px;
-  height: 100%;
+  max-height: 360px;
+  overflow-y: auto;
   padding: 26px;
   border-radius: 24px;
   background-color: white;
