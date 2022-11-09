@@ -1,3 +1,11 @@
+# 다음과 같은 husky 에러가 뜰경우
+
+`hint: The '.husky/pre-commit' hook was ignored because it's not set as executable.`
+
+아래의 커맨드를 입력하고 다시 시도해볼것
+
+`chmod ug+x .husky/*`
+
 # 원티드 프리온보딩 프론트엔드 3팀 - Assignment #3
 
 > 목적 :
