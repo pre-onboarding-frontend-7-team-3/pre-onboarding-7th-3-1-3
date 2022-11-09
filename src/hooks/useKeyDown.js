@@ -6,13 +6,14 @@ const useKeyDown = () => {
   const [selectedIndex, setSelectedIndex] = useRecoilState(selectedSearchResultIndex);
   const diseaseListData = useRecoilValue(searchResult);
 
-  const onKeyDown = ({ key }) => {
+  const onKeyDown = (e) => {
+    if (e.nativeEvent.isComposing) return;
     if (diseaseListData.length === 0) return;
-    if (key === "ArrowDown") {
+    if (e.key === "ArrowDown") {
       if (selectedIndex === diseaseListData?.length - 1) return;
       setSelectedIndex(selectedIndex + 1);
     }
-    if (key === "ArrowUp") {
+    if (e.key === "ArrowUp") {
       if (selectedIndex === 0) return;
       setSelectedIndex(selectedIndex - 1);
     }
