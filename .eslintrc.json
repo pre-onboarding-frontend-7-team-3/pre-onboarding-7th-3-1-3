@@ -51,6 +51,7 @@
     "no-plusplus": 0,
     "prefer-const": 0,
     "no-console": ["error", { "allow": ["error"] }],
-    "curly": "error"
+    "curly": "error",
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
   }
 }
