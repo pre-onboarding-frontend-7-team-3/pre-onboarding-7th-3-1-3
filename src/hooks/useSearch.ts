@@ -6,6 +6,7 @@ import useDebounce from "./useDebounce";
 import checkEngAndNum from "../utils/checkEngAndNum";
 import { AxiosError } from "axios";
 
+
 import makeTrieBySearchWord from "../utils/makeTrieBySearchWord";
 import getCachedData from "../utils/getCachedData";
 
@@ -15,6 +16,7 @@ import filterCachedData from "../utils/filterCachedData";
 const useSearch = () => {
   const searchInputValue = useRecoilValue(searchValue);
   const [diseaseListData, setDiseaseListData] = useRecoilState<ResultData[]>(searchResultState);
+
 
   const { debounceValue } = useDebounce(searchInputValue);
 
