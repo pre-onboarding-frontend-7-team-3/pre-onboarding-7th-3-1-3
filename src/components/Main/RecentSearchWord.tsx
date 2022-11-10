@@ -1,18 +1,19 @@
 import styled from "styled-components";
 import { IoIosSearch } from "react-icons/io";
-import { useRecoilValue } from "recoil";
-import { recentSearchList } from "store/searchWord";
+import { getRecentSearch } from "utils/recentSearch";
+import { useState } from "react";
 
 const RecentSearchWord = () => {
-  const recentSearch = useRecoilValue(recentSearchList);
+  const [recentSearch] = useState(getRecentSearch());
+
   const reverseRecentSearch = [...recentSearch].reverse();
-  const maximumList = 5;
+  const MAX_LENGTH = 5;
 
   return (
     <RecentContainer>
       <Title>최근 검색어</Title>
       {recentSearch.length > 0 ? (
-        reverseRecentSearch.slice(0, maximumList).map((searched, idx) => {
+        reverseRecentSearch.slice(0, MAX_LENGTH).map((searched, idx) => {
           return (
             <RecentText key={idx}>
               <IoIosSearch className="icon" />
