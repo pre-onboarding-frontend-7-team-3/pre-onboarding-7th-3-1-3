@@ -8,7 +8,7 @@ import makeTrieBySearchWord from "utils/makeTireBySearchWord";
 import getCachedData from "utils/getCachedData";
 import filterCachedData from "utils/filterCachedData";
 
-import SearchHistory from "components/SearchHistory";
+import SearchList from "components/SearchList";
 
 const Wrapper = styled.div`
   display: flex;
@@ -37,8 +37,8 @@ const SearchWrapper = styled.div`
 const TitleWrappr = styled.div`
   margin-bottom: 10px;
 
-  font-size: 36px;
-  font-weight: 800;
+  font-size: 32px;
+  font-weight: 700;
   color: black;
 `;
 
@@ -65,12 +65,12 @@ const SearchBar = styled.input`
   border: 0px;
 `;
 
-const SearchHistoryWrapper = styled.div`
+const SearchListWrapper = styled.div`
   height: 200px;
 `;
 
 function Home() {
-  const [searchResult, setSearchResult] = useState<object[]>([]);
+  const [searchResult, setSearchResult] = useState<Array<object>>([]);
   const [searchWord, setSearchWord] = useState<string>("");
   const [timer, setTimer] = useState<NodeJS.Timeout>();
 
@@ -120,9 +120,9 @@ function Home() {
             placeholder="질환명을 입력해 주세요."
           />
         </SearchBarWrapper>
-        <SearchHistoryWrapper>
-          {searchResult && <SearchHistory data={searchResult} search={searchWord} />}
-        </SearchHistoryWrapper>
+        <SearchListWrapper>
+          {searchResult && <SearchList data={searchResult} searchWord={searchWord} />}
+        </SearchListWrapper>
       </SearchWrapper>
     </Wrapper>
   );
