@@ -14,12 +14,11 @@ const SearchItemList = () => {
   const reverseRecentSearch = [...recentSearch].reverse();
   const maximumList = 5;
 
-  // const DEFAULT_TEXT = searchInputValue ? "추천 검색어" : "검색어 없음";
+  console.log(recentSearch);
 
   return (
     <ListWrapper>
       <ItemWrapper>
-        {/* <DefaultText>{DEFAULT_TEXT}</DefaultText> */}
         {searchInputValue ? (
           <>
             {diseaseListData.length ? (
@@ -40,7 +39,7 @@ const SearchItemList = () => {
             <RecentContainer>
               <RecentTitle>최근 검색어</RecentTitle>
               {recentSearch.length > 0 ? (
-                reverseRecentSearch.map((searched) => {
+                reverseRecentSearch.slice(0, maximumList).map((searched) => {
                   return (
                     <RecentText key={searched}>
                       <IoIosSearch className="icon" />
