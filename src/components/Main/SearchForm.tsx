@@ -14,7 +14,7 @@ const SearchForm = () => {
   const [selectedIndex, setSelectedIndex] = useRecoilState(selectedSearchResultIndex);
 
   const diseaseListData = useRecoilValue(searchResultState);
-  const [recentSearch, setRecentSearch] = useRecoilState(recentSearchList);
+  const [recentSearch, setRecentSearch] = useRecoilState<string[]>(recentSearchList);
 
   const onKeyDown = useKeyDown();
 
