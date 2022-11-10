@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { searchValue } from "../../store/searchValue";
-import { recentSearchList, recommendationList } from "../../store/searchWord";
-import { IoIosSearch } from "react-icons/io";
 import RecentSearchWord from "./RecentSearchWord";
 import RecommendWord from "./RecommendWord";
 import SearchItem from "./SearchItem";
@@ -11,7 +9,6 @@ import useSearch from "hooks/useSearch";
 const SearchItemList = () => {
   const searchInputValue = useRecoilValue(searchValue);
   const diseaseListData = useSearch();
-
 
   return (
     <ListWrapper>

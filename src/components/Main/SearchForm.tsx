@@ -5,16 +5,15 @@ import styled from "styled-components";
 import useKeyDown from "hooks/useKeyDown";
 
 import { searchValue } from "store/searchValue";
-import { recentSearchList } from "store/searchWord";
 import { searchResultState } from "store/searchResult";
 import { selectedSearchResultIndex } from "store/selectedSearchResultIndex";
+import { setRecentSearch } from "utils/recentSearch";
 
 const SearchForm = () => {
   const [searchInputValue, setSearchInputValue] = useRecoilState(searchValue);
   const [selectedIndex, setSelectedIndex] = useRecoilState(selectedSearchResultIndex);
 
   const diseaseListData = useRecoilValue(searchResultState);
-  const [recentSearch, setRecentSearch] = useRecoilState<string[]>(recentSearchList);
 
   const onKeyDown = useKeyDown();
 
@@ -22,18 +21,22 @@ const SearchForm = () => {
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setSearchInputValue(e.target.value);
       setSelectedIndex(-1);
-      setRecentSearch([...recentSearch, searchInputValue]);
     },
     [diseaseListData]
   );
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    setRecentSearch(selectedResultValue || searchInputValue);
+  };
 
   const isCurrentIndexValid = selectedIndex !== -1;
   const selectedResultValue = isCurrentIndexValid && diseaseListData[selectedIndex].sickNm;
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <InputWrapper>
         <SearchInput
+          required
           type="text"
           placeholder="질환명을 입력해 주세요"
           onChange={handleChange}
@@ -49,7 +52,7 @@ const SearchForm = () => {
 
 export default SearchForm;
 
-const Form = styled.section`
+const Form = styled.form`
   display: flex;
   width: 85%;
   min-width: 500px;
