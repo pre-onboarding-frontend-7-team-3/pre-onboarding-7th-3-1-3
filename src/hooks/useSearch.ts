@@ -4,7 +4,7 @@ import { searchResult } from "../store/searchResult";
 import { searchValue } from "../store/searchValue";
 import useDebounce from "./useDebounce";
 import checkEngAndNum from "../utils/checkEngAndNum";
-import { searchDiseaseService } from "apis";
+import { searchDiseaseService } from "../apis";
 
 const useSearch = () => {
   const searchInputValue = useRecoilValue(searchValue);

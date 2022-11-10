@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import getDataAndRegisterCache from "apis/getDataAndRegisterCache";
+import getDataAndRegisterCache from "../apis/getDataAndRegisterCache";
 
-import { isMakeSense, isEmptyInput } from "utils/checkValidationOfInput";
-import makeTrieBySearchWord from "utils/makeTireBySearchWord";
-import getCachedData from "utils/getCachedData";
-import filterCachedData from "utils/filterCachedData";
+import { isMakeSense, isEmptyInput } from "../utils/checkValidationOfInput";
+import makeTrieBySearchWord from "../utils/makeTireBySearchWord";
+import getCachedData from "../utils/getCachedData";
+import filterCachedData from "../utils/filterCachedData";
 
-import SearchHistory from "components/SearchHistory";
+import SearchHistory from "../components/SearchHistory";
 
 const Wrapper = styled.div`
   display: flex;
