@@ -35,8 +35,8 @@ const SearchItemList = () => {
           </>
         ) : (
           <>
-            <RecentContainer>
-              <RecentTitle>최근 검색어</RecentTitle>
+            <RecentSearchResultContainer>
+              <Title>최근 검색어</Title>
               {recentSearch.length > 0 ? (
                 reverseRecentSearch.slice(0, maximumList).map((searched, idx) => {
                   return (
@@ -49,15 +49,15 @@ const SearchItemList = () => {
               ) : (
                 <RecentText className="none-matched">최근 검색어가 없습니다</RecentText>
               )}
-            </RecentContainer>
-            <RecommendContainer>
-              <RecentTitle>추천 검색어로 검색해보세요</RecentTitle>
+            </RecentSearchResultContainer>
+            <RecommendationsContainer>
+              <Title>추천 검색어로 검색해보세요</Title>
               <Recommendations>
                 {recommendationList.map((recommendation, idx) => (
                   <Recommendation key={idx}>{recommendation}</Recommendation>
                 ))}
               </Recommendations>
-            </RecommendContainer>
+            </RecommendationsContainer>
           </>
         )}
       </ItemWrapper>
@@ -87,7 +87,7 @@ const EmptyResult = styled.div`
   color: ${({ theme }) => theme.bg.grey};
 `;
 
-const RecentContainer = styled.div`
+const RecentSearchResultContainer = styled.div`
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -125,7 +125,7 @@ const RecentText = styled.span`
   }
 `;
 
-const RecentTitle = styled.h2`
+const Title = styled.h2`
   color: #808080;
   padding: 1.2rem 0 0.5rem 1.8rem;
   font-size: 0.9rem;
@@ -134,7 +134,7 @@ const RecentTitle = styled.h2`
   line-height: 1.6;
 `;
 
-const RecommendContainer = styled.div`
+const RecommendationsContainer = styled.div`
   display: flex;
   align-items: flex-start;
   flex-direction: column;
