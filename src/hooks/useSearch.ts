@@ -23,7 +23,7 @@ const useSearch = () => {
       // eslint-disable-next-line
       console.log("api calling");
     } catch (err: unknown) {
-      if (err instanceof AxiosError<any>) {
+      if (err instanceof AxiosError) {
         throw err;
       }
     }
