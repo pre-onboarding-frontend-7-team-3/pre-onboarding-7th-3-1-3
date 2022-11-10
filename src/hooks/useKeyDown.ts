@@ -1,13 +1,11 @@
 import { useCallback, useMemo } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { searchResult } from "../store/searchResult";
+import { searchResultState } from "../store/searchResult";
 import { selectedSearchResultIndex } from "../store/selectedSearchResultIndex";
-
-// type Key = "ArrowDown" | "ArrowUp";
 
 const useKeyDown = () => {
   const [selectedIndex, setSelectedIndex] = useRecoilState(selectedSearchResultIndex);
-  const diseaseListData = useRecoilValue(searchResult);
+  const diseaseListData = useRecoilValue(searchResultState);
 
   const keyData = useMemo(() => {
     return {
@@ -18,28 +16,37 @@ const useKeyDown = () => {
     };
   }, [diseaseListData, selectedIndex]);
 
+  const onArrowDown = () => {
+    keyData.lastItem ? setSelectedIndex(-1) : setSelectedIndex((prev) => prev + 1);
+  };
+
+  const onArrowUp = () => {
+    keyData.firstItem
+      ? setSelectedIndex(keyData.currentDataLength - 1)
+      : setSelectedIndex((prev) => prev - 1);
+  };
+
   const onKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (["ArrowDown", "ArrowUp"].includes(e.key)) {
-        e.preventDefault();
+    (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (["ArrowDown", "ArrowUp"].includes(event.key)) {
+        event.preventDefault();
       }
+      // 조합문자가 아닐때 return해야하는거 아닌가?
+      const isOneWord = event.nativeEvent.isComposing;
+      const isSearchResultEmpty = keyData.emptyData;
 
-      if (e.nativeEvent.isComposing) return;
-      if (keyData.emptyData) return;
+      if (isOneWord || isSearchResultEmpty) return;
 
-      if (e.key === "ArrowDown") {
-        if (keyData.lastItem) {
-          setSelectedIndex(-1);
-        }
-        setSelectedIndex((prev) => prev + 1);
-      }
-
-      if (e.key === "ArrowUp") {
-        if (keyData.firstItem) {
-          setSelectedIndex(keyData.currentDataLength - 1);
-          return;
-        }
-        setSelectedIndex((prev) => prev - 1);
+      switch (event.key) {
+        case "ArrowDown":
+          onArrowDown();
+          break;
+        case "ArrowUp":
+          onArrowUp();
+          break;
+        default:
+          console.log("invalid key");
+          break;
       }
     },
     [selectedIndex, diseaseListData]

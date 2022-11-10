@@ -1,20 +1,20 @@
 import { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { searchResult } from "../store/searchResult";
+import { searchResultState, ResultData } from "../store/searchResult";
 import { searchValue } from "../store/searchValue";
 import useDebounce from "./useDebounce";
 import checkEngAndNum from "../utils/checkEngAndNum";
 import { AxiosError } from "axios";
 
-import makeTrieBySearchWord from "utils/makeTrieBySearchWord";
-import getCachedData from "utils/getCachedData";
+import makeTrieBySearchWord from "../utils/makeTrieBySearchWord";
+import getCachedData from "../utils/getCachedData";
 
-import getDataAndRegisterCache from "apis/getDataAndRegisterCache";
-import filterCachedData from "utils/filterCachedData";
+import getDataAndRegisterCache from "../apis/getDataAndRegisterCache";
+import filterCachedData from "../utils/filterCachedData";
 
 const useSearch = () => {
   const searchInputValue = useRecoilValue(searchValue);
-  const [diseaseListData, setDiseaseListData] = useRecoilState<any[]>(searchResult);
+  const [diseaseListData, setDiseaseListData] = useRecoilState<ResultData[]>(searchResultState);
 
   const { debounceValue } = useDebounce(searchInputValue);
 
