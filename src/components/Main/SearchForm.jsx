@@ -21,7 +21,7 @@ const SearchForm = () => {
       setSelectedIndex(-1);
       setRecentSearch([...recentSearch, searchInputValue]);
     },
-    [searchInputValue]
+    [diseaseListData]
   );
 
   const isCurrentIndexValid = selectedIndex !== -1;
