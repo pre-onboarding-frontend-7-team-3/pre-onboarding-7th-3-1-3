@@ -9,7 +9,6 @@ const useKeyDown = () => {
   const [selectedIndex, setSelectedIndex] = useRecoilState(selectedSearchResultIndex);
   const diseaseListData = useRecoilValue(searchResult);
 
-
   const keyData = useMemo(() => {
     return {
       currentDataLength: diseaseListData.length,
@@ -45,7 +44,6 @@ const useKeyDown = () => {
     },
     [selectedIndex, diseaseListData]
   );
-
 
   return onKeyDown;
 };

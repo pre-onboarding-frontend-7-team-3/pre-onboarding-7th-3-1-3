@@ -1,4 +1,5 @@
 import { useRecoilValue } from "recoil";
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { selectedSearchResultIndex } from "../../store/selectedSearchResultIndex";
 import formatFontWeight from "../../utils/formatFontWeight";
@@ -11,13 +12,20 @@ interface Props {
 
 const SearchItem = ({ idx, sickNm, searchInputValue }: Props) => {
   const selectedIndex = useRecoilValue(selectedSearchResultIndex);
+  const selected = useRef();
+
+  useEffect(() => {
+    const isSelected = selectedIndex === idx;
+    if (isSelected) {
+      selected.current.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
+    }
+  }, [selectedIndex, idx]);
 
   const handleFocus = (e: React.FocusEvent<HTMLLIElement>) => {
     console.log(e.currentTarget);
   };
   return (
-    // Ts에서 tabindex=0 은 아래와 같이 해야 한다.
-    <Item tabIndex={0} selectedIndex={selectedIndex} idx={idx} onFocus={handleFocus} >
+    <Item selectedIndex={selectedIndex} idx={idx} ref={selected}>
       {formatFontWeight(sickNm, searchInputValue)}
     </Item>
   );
