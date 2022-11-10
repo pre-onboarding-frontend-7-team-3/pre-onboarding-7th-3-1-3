@@ -45,7 +45,6 @@ const useKeyDown = () => {
           onArrowUp();
           break;
         default:
-          console.log("invalid key");
           break;
       }
     },

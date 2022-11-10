@@ -27,7 +27,7 @@ export default Navbar;
 const Section = styled.section`
   display: flex;
   width: 85%;
-  min-width: 380px;
+  min-width: 500px;
   height: 3.5rem;
   border-radius: 24px;
   background-color: white;
