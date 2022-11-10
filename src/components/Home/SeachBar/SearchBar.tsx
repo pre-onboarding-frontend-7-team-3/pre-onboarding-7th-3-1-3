@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { debounce } from "utils/debounce";
-import { searchDiseaseService } from "apis";
+import { debounce } from "../../../utils/debounce";
+import { searchDiseaseService } from "../../../apis";
 
 function SearchBar() {
   const [inputVal, setInputVal] = useState("");
