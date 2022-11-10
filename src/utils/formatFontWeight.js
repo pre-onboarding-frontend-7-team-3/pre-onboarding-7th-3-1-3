@@ -1,3 +1,5 @@
+const makeLowerCase = (str) => str.toLowerCase();
+
 const formatFontWeight = (result, query) => {
   const filteredSearchResult = result
     .split(" ")
@@ -6,14 +8,12 @@ const formatFontWeight = (result, query) => {
     .join(" ")
     .split(new RegExp(`(${query})`, "gi"));
 
-  if (query !== "" && result.includes(query)) {
-    return (
-      <>
-        {filteredSearchResult.map((word, idx) => {
-          return word === query ? <b key={idx}>{word}</b> : word;
-        })}
-      </>
-    );
+  const parsedSentence = filteredSearchResult.map((word, idx) => {
+    return makeLowerCase(word) === makeLowerCase(query) ? <b key={idx}>{word}</b> : word;
+  });
+
+  if (query !== "" && makeLowerCase(result).includes(makeLowerCase(query))) {
+    return <>{parsedSentence}</>;
   }
   return result;
 };
