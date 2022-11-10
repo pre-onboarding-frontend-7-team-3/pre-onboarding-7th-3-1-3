@@ -33,7 +33,13 @@ const useKeyDown = () => {
       if (["ArrowDown", "ArrowUp"].includes(event.key)) {
         event.preventDefault();
       }
-      if (event.nativeEvent.isComposing || keyData.emptyData) return;
+      // 조합문자가 아닐때 return해야하는거 아닌가?
+      const isOneWord = event.nativeEvent.isComposing;
+      const isSearchResultEmpty = keyData.emptyData;
+
+      console.log(isOneWord);
+
+      if (isOneWord || isSearchResultEmpty) return;
 
       switch (event.key) {
         case "ArrowDown":
