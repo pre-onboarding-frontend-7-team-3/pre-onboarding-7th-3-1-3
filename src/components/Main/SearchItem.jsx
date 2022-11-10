@@ -1,13 +1,19 @@
 import { useRecoilValue } from "recoil";
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { selectedSearchResultIndex } from "../../store/selectedSearchResultIndex";
 import formatFontWeight from "../../utils/formatFontWeight";
 
 const SearchItem = ({ idx, sickNm, searchInputValue }) => {
   const selectedIndex = useRecoilValue(selectedSearchResultIndex);
+  const selected = useRef();
+
+  if (selectedIndex === idx) {
+    selected.current.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
+  }
 
   return (
-    <Item selectedIndex={selectedIndex} idx={idx}>
+    <Item selectedIndex={selectedIndex} idx={idx} ref={selected}>
       {formatFontWeight(sickNm, searchInputValue)}
     </Item>
   );
