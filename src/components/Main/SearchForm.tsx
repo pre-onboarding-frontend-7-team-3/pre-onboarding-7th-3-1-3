@@ -15,14 +15,11 @@ const SearchForm = () => {
 
   const onKeyDown = useKeyDown();
 
-  const handleChange = useCallback(
-    (e) => {
-      setSearchInputValue(e.target.value);
-      setSelectedIndex(-1);
-      setRecentSearch([...recentSearch, searchInputValue]);
-    },
-    [diseaseListData]
-  );
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInputValue(e.target.value);
+    setSelectedIndex(-1);
+    setRecentSearch([...recentSearch, searchInputValue]);
+  }, []);
 
   const isCurrentIndexValid = selectedIndex !== -1;
   const selectedResultValue = isCurrentIndexValid && diseaseListData[selectedIndex].sickNm;

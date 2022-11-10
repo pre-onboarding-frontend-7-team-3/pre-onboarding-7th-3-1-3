@@ -1,6 +1,11 @@
+import { ReactNode } from "react";
 import styled from "styled-components";
 
-const Layout = ({ children }) => {
+type Props = {
+  children: ReactNode;
+};
+
+const Layout = ({ children }: Props) => {
   return <Template>{children}</Template>;
 };
 
