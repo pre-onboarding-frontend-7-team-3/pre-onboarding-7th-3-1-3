@@ -1,11 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { IoIosSearch } from "react-icons/io";
-import isMakeSense from "utils/isMakeSense";
-import Navbar from "../components/Navbar/Navbar";
+import { useRecoilState } from "recoil";
+import SearchModal from "../components/SerchModal";
+import { recentSearchList } from "../recoil/SearchWord";
 
 const Section = styled.section`
-  background-color: green;
   width: 100vw;
   height: 100vh;
 `;
@@ -15,7 +15,7 @@ const Container = styled.article`
   align-items: center;
   flex-direction: column;
   background-color: #cae9ff;
-  padding: 7.5rem 0 18.125rem 0;
+  padding: 7.5rem 0 11rem 0;
 `;
 
 const Title = styled.h2`
@@ -29,7 +29,7 @@ const Title = styled.h2`
 
 const SearchBarContainer = styled.div`
   display: flex;
-  max-width: 490px;
+  max-width: 35rem;
   width: 100%;
   margin: 0 auto;
   border-radius: 42px;
@@ -43,11 +43,19 @@ const SearchBarContainer = styled.div`
   }
 `;
 
+const SearchBarForm = styled.form`
+  display: flex;
+  width: 100%;
+  align-items: center;
+`;
+
 const SearchBtn = styled.button`
   color: #fff;
   background-color: #007be9;
   padding: 0.5rem;
   border-radius: 50%;
+  width: 3.3rem;
+  height: 3.3rem;
   .icon {
     width: 2rem;
     height: 2rem;
@@ -56,7 +64,7 @@ const SearchBtn = styled.button`
 
 const InputContainer = styled.div`
   position: relative;
-  width: 26.875rem;
+  width: 100%;
   padding: 20px 10px 20px 24px;
 `;
 
@@ -78,79 +86,42 @@ const SearchBarLabel = styled.label`
 
 const SearchBarInput = styled.input`
   width: 100%;
-  font-size: 1rem;
-  font-weight: 400;
+  font-size: 1.2rem;
+  font-weight: 500;
   letter-spacing: -0.018em;
   line-height: 1.6;
   border: #fff;
 `;
-
-function SerchPage() {
-  const [inputs, setInputs] = useState<string>("");
-  const [searchResult, setSearchResult] = useState<string>("");
-  const [focus, setFocus] = useState<boolean>(false);
-  const [timer, setTimer] = useState<any>(0); // 디바운싱 타이머
-  const onFocus = () => setFocus(true);
-  const onBlur = () => setFocus(false);
+function MainPage(): React.ReactElement {
+  const [input, setInput] = useState("");
+  const [focused, setFocused] = useState(false);
+  const [recentSearch, setRecentSearch] = useRecoilState<string[]>(recentSearchList);
+  const onFocus = () => setFocused(true);
+  const onBlur = () => setFocused(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const onChangeSerch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    /* eslint-disable no-console */
-    console.log("inputRef", inputRef);
-    /* eslint-disable no-console */
-    setInputs(e.target.value);
-    if (e.target.value === "") {
-      setSearchResult("");
-    }
-    if (timer) {
-      clearTimeout(timer);
-    }
-
-    const newTimer = setTimeout(async () => {
-      try {
-        const cacheStorage = await caches.open("search");
-        const URL = `http://localhost:4000/sick?q=${e.target.value}`;
-        const responsedCache = await cacheStorage.match(URL);
-
-        if (isMakeSense(e.target.value) && responsedCache) {
-          setSearchResult(await responsedCache.json());
-
-          /* eslint-disable no-console */
-          console.log("캐시", searchResult);
-          /* eslint-disable no-console */
-        } else if (isMakeSense(e.target.value)) {
-          const res = await fetch(URL, { method: "GET" }).then((response) => {
-            const resposeClone = response.clone();
-            console.log("response", response.json());
-            console.log(resposeClone);
-            caches.open("search").then((cache) => {
-              cache.put(URL, resposeClone);
-            });
-            return JSON.parse(JSON.stringify(response));
-          });
-          setSearchResult(res);
-
-          console.log("API호출", searchResult);
-        }
-      } catch (error) {
-        console.error("error", error);
-      }
-    }, 500);
-    setTimer(newTimer);
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
   };
 
+  const handleSearch: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    if (input.length > 0) {
+      setRecentSearch([...recentSearch, input]);
+      setInput("");
+    }
+  };
   return (
-    <>
-      <Navbar />
-      <Section>
-        <Container>
-          <Title>
-            국내 모든 임상 시험 검색하고 <br />
-            온라인으로 참여하기
-          </Title>
-          <SearchBarContainer className={focus ? "focus" : "blur"}>
+    <Section>
+      <Container>
+        <Title>
+          국내 모든 임상 시험 검색하고 <br />
+          온라인으로 참여하기
+        </Title>
+        <SearchBarContainer className={focused ? "focus" : "blur"}>
+          <SearchBarForm onSubmit={handleSearch}>
             <InputContainer>
-              <SearchBarLabel htmlFor="searchBar" className={focus ? "focus" : ""}>
+              <SearchBarLabel htmlFor="searchBar" className={input || focused ? "focus" : ""}>
                 <IoIosSearch className="icon" />
                 질환명을 입력해 주세요.
               </SearchBarLabel>
@@ -162,17 +133,19 @@ function SerchPage() {
                 ref={inputRef}
                 onFocus={onFocus}
                 onBlur={onBlur}
-                onChange={onChangeSerch}
-                value={inputs}
+                onChange={onChange}
+                value={input}
               />
             </InputContainer>
             <SearchBtn>
               <IoIosSearch className="icon" />
             </SearchBtn>
-          </SearchBarContainer>
-        </Container>
-      </Section>
-    </>
+          </SearchBarForm>
+        </SearchBarContainer>
+        {focused ? <SearchModal input={input} /> : ""}
+      </Container>
+    </Section>
   );
 }
-export default SerchPage;
+
+export default MainPage;
