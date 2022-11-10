@@ -9,7 +9,7 @@ import useDebounce from "hooks/useDebounce";
 import { searchResultState, ResultData } from "store/searchResult";
 import { searchValue } from "store/searchValue";
 
-import { IsValidateText } from "utils/checkValidationOfInput";
+import { validateText } from "utils/checkValidationOfInput";
 import makeTrieBySearchWord from "utils/makeTrieBySearchWord";
 import getCachedData from "utils/getCachedData";
 import filterCachedData from "utils/filterCachedData";
@@ -20,18 +20,18 @@ const useSearch = () => {
 
   const { debounceValue } = useDebounce(searchInputValue);
 
-  const condition = IsValidateText(searchInputValue) && searchInputValue;
+  const isValidInput = validateText(searchInputValue) && searchInputValue;
 
   const handleSearch = async () => {
     const TrieWordList = makeTrieBySearchWord(searchInputValue);
     const cachedData = await getCachedData(TrieWordList);
-
+    const isCachedData = validateText(searchInputValue) && cachedData;
     try {
-      if (IsValidateText(searchInputValue) && cachedData) {
+      if (isCachedData) {
         const JsonCachedData = await cachedData.json();
         setDiseaseListData(filterCachedData(JsonCachedData, searchInputValue));
       }
-      if (IsValidateText(searchInputValue) && !cachedData) {
+      if (!isCachedData) {
         const JsonApiData = await getDataAndRegisterCache(searchInputValue);
         setDiseaseListData(JsonApiData);
       }
@@ -43,7 +43,7 @@ const useSearch = () => {
   };
 
   useEffect(() => {
-    condition && handleSearch();
+    isValidInput && handleSearch();
   }, [debounceValue]);
 
   return diseaseListData;

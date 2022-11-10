@@ -2,15 +2,16 @@ import styled from "styled-components";
 import NAV_DATA from "constants/NavData";
 
 const Navbar = (): JSX.Element => {
+  const TITLE = "한국임상정보";
   return (
     <Section>
       <Container>
         <Logocontainer>
           <LogoImg
             src="https://st3.depositphotos.com/4060975/19348/v/450/depositphotos_193487222-stock-illustration-conical-flask-colored-line-icon.jpg"
-            alt="로고 이미지"
+            alt={TITLE}
           />
-          <LogoTitle>한국임상정보</LogoTitle>
+          <LogoTitle>{TITLE}</LogoTitle>
         </Logocontainer>
         <NavBtncontainer>
           {NAV_DATA.map(({ name }, idx) => (

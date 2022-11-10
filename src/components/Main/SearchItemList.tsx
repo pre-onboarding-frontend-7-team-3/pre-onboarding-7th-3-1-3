@@ -45,8 +45,8 @@ const ListWrapper = styled.section`
   ${({ theme }) => theme.flexColumn}
   width: 85%;
   min-width: 500px;
-  max-height: 400px;
-  padding: 26px;
+  max-height: 350px;
+  padding: 30px;
   border-radius: 24px;
   background-color: white;
   overflow-y: auto;
