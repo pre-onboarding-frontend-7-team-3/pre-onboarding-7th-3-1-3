@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-interface ResultData {
+export interface ResultData {
   sickNm: string;
   sickCd: string;
 }

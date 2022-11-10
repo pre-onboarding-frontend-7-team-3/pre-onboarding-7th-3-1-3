@@ -1,4 +1,6 @@
-const getDataAndRegisterCache = (searchTarget: string): Promise<object[]> => {
+import type { ResultData } from "../store/searchResult";
+
+const getDataAndRegisterCache = (searchTarget: string): Promise<ResultData[]> => {
   return fetch(`http://localhost:4000/sick?sickNm_like=${searchTarget}`, {
     method: "get",
   }).then((fetchRes) => {
