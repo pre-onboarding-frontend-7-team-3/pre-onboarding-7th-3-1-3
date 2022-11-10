@@ -1,20 +1,21 @@
-import { ResultData } from "store/searchResult";
+import { searchDiseaseService } from ".";
+import type { ResultData } from "../store/searchResult";
 
-const getDataAndRegisterCache = async (searchTarget: string): Promise<ResultData[]> => {
-  console.log("calling api");
+const getDataAndRegisterCache = (searchTarget: string): Promise<ResultData[]> => {
+  return searchDiseaseService.search(searchTarget).then((fetchRes) => {
+    let responseClone = fetchRes.clone();
+    caches.open("search").then((cache) => {
+      cache.put(
+        `${process.env.REACT_APP_SERVER_URL}/sick?sickNm_like=${searchTarget}`,
+        responseClone
+      );
+    });
 
-  const response = await fetch(
-    `${process.env.REACT_APP_SERVER_URL}/sick?sickNm_like=${searchTarget}`
-  );
-  const responseClone = response.clone();
-  const cacheStorageName = await window.caches.open("search");
-  const registeredCache = await cacheStorageName.put(
-    `${process.env.REACT_APP_SERVER_URL}/sick?sickNm_like=${searchTarget}`,
-    responseClone
-  );
+    // eslint-disable-next-line no-console
+    console.info("calling api");
 
-  const data = await response.json();
-  return data;
+    return fetchRes.json();
+  });
 };
 
 export default getDataAndRegisterCache;
