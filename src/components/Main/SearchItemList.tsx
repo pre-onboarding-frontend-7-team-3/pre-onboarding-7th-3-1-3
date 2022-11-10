@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { searchValue } from "../../store/searchValue";
-import { recentSearchList, recommendationList } from "../../store/searchWord";
-// import { IoIosSearch } from "react-icons/io";
 import useSearch from "../../hooks/useSearch";
 import SearchItem from "./SearchItem";
 import RecentSearchWord from "./RecentSearchWord";
@@ -11,10 +9,6 @@ import RecommendWord from "./RecommendWord";
 const SearchItemList = () => {
   const searchInputValue = useRecoilValue(searchValue);
   const diseaseListData = useSearch();
-
-  const recentSearch = useRecoilValue(recentSearchList);
-  const reverseRecentSearch = [...recentSearch].reverse();
-  const maximumList = 5;
 
   return (
     <ListWrapper>
