@@ -1,7 +1,8 @@
-import { useRecoilValue } from "recoil";
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { selectedSearchResultIndex } from "../../store/selectedSearchResultIndex";
+import { useRecoilValue } from "recoil";
+
+import { selectedSearchResultIndex } from "store/selectedSearchResultIndex";
 
 import HighlightedText from "./HighlightedText";
 

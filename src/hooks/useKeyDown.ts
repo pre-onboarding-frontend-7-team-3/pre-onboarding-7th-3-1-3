@@ -1,7 +1,8 @@
 import { useCallback, useMemo } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { searchResultState } from "../store/searchResult";
-import { selectedSearchResultIndex } from "../store/selectedSearchResultIndex";
+
+import { searchResultState } from "store/searchResult";
+import { selectedSearchResultIndex } from "store/selectedSearchResultIndex";
 
 // type Key = "ArrowDown" | "ArrowUp";
 
