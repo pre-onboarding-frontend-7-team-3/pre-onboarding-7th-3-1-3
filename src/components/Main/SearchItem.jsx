@@ -8,9 +8,12 @@ const SearchItem = ({ idx, sickNm, searchInputValue }) => {
   const selectedIndex = useRecoilValue(selectedSearchResultIndex);
   const selected = useRef();
 
-  if (selectedIndex === idx) {
-    selected.current.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
-  }
+  useEffect(() => {
+    const isSelected = selectedIndex === idx;
+    if (isSelected) {
+      selected.current.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
+    }
+  }, [selectedIndex, idx]);
 
   return (
     <Item selectedIndex={selectedIndex} idx={idx} ref={selected}>
