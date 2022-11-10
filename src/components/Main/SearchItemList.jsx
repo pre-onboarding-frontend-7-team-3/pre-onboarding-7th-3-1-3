@@ -9,12 +9,14 @@ const SearchItemList = () => {
   const diseaseListData = useSearch();
 
   const DEFAULT_TEXT = searchInputValue ? "추천 검색어" : "검색어 없음";
-
+  // useRef 하나 주고, 그 ref 따라서, scrollTo
   return (
     <ListWrapper>
       <ItemWrapper>
         <DefaultText>{DEFAULT_TEXT}</DefaultText>
         {searchInputValue && (
+          // 여기 내부에서만 이용할 수 있는 ref
+          //
           <>
             {diseaseListData.length ? (
               diseaseListData.map(({ sickCd, sickNm }, idx) => (
