@@ -86,7 +86,7 @@ const EmptyResult = styled.div`
   color: ${({ theme }) => theme.bg.grey};
 `;
 
-const RecentSearchResultContainer = styled.div`
+const RecentContainer = styled.div`
   display: flex;
   align-items: flex-start;
   flex-direction: column;
