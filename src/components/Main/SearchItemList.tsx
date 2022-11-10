@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { searchValue } from "../../store/searchValue";
-import { recentSearchList, recommendationList } from "../../store/searchWord";
-import { IoIosSearch } from "react-icons/io";
 import RecentSearchWord from "./RecentSearchWord";
 import RecommendWord from "./RecommendWord";
 import SearchItem from "./SearchItem";
@@ -11,7 +9,6 @@ import useSearch from "hooks/useSearch";
 const SearchItemList = () => {
   const searchInputValue = useRecoilValue(searchValue);
   const diseaseListData = useSearch();
-
 
   return (
     <ListWrapper>
@@ -48,8 +45,8 @@ const ListWrapper = styled.section`
   ${({ theme }) => theme.flexColumn}
   width: 85%;
   min-width: 500px;
-  max-height: 400px;
-  padding: 26px;
+  max-height: 350px;
+  padding: 30px;
   border-radius: 24px;
   background-color: white;
   overflow-y: auto;

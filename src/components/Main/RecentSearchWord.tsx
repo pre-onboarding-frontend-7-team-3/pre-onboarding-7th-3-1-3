@@ -7,6 +7,7 @@ const RecentSearchWord = () => {
   const recentSearch = useRecoilValue(recentSearchList);
   const reverseRecentSearch = [...recentSearch].reverse();
   const maximumList = 5;
+
   return (
     <RecentContainer>
       <Title>최근 검색어</Title>
