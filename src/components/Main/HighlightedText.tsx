@@ -1,20 +1,25 @@
 import styled from "styled-components";
 
-const Bold = styled.span`
-  font-weight: 700;
-`;
+interface Props {
+  data: string;
+  searchWord: string;
+}
 
-const FormatFontWeight = ({ data, searchWord }) => {
+const HighlightedText = ({ data, searchWord }: Props) => {
   const boldStartIndex = data.toLowerCase().indexOf(searchWord.toLowerCase());
   const boldEndIndex = data.toLowerCase().indexOf(searchWord.toLowerCase()) + searchWord.length;
 
   return (
     <span>
       {data.substring(0, boldStartIndex)}
-      <Bold>{data.substring(boldStartIndex, boldEndIndex)}</Bold>
+      <MatchingText>{data.substring(boldStartIndex, boldEndIndex)}</MatchingText>
       {data.substring(boldEndIndex)}
     </span>
   );
 };
 
-export default FormatFontWeight;
+export default HighlightedText;
+
+const MatchingText = styled.span`
+  font-weight: 700;
+`;

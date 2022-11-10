@@ -4,7 +4,6 @@ import { searchResult } from "../store/searchResult";
 import { searchValue } from "../store/searchValue";
 import useDebounce from "./useDebounce";
 import checkEngAndNum from "../utils/checkEngAndNum";
-import { searchDiseaseService } from "../apis";
 import { AxiosError } from "axios";
 
 import makeTrieBySearchWord from "utils/makeTrieBySearchWord";
