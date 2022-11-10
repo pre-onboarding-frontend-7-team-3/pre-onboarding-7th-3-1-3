@@ -1,17 +1,14 @@
 const getDataAndRegisterCache = (searchTarget: string): Promise<object[]> => {
-  return fetch(`${process.env.REACT_APP_BASE_URL}/sick?sickNm_like=${searchTarget}`, {
+  return fetch(`http://localhost:4000/sick?sickNm_like=${searchTarget}`, {
     method: "get",
   }).then((fetchRes) => {
-    // eslint-disable-next-line no-console
-    console.info("calling api");
-
     let responseClone = fetchRes.clone();
     caches.open("search").then((cache) => {
-      cache.put(
-        `${process.env.REACT_APP_BASE_URL}/sick?sickNm_like=${searchTarget}`,
-        responseClone
-      );
+      cache.put(`http://localhost:4000/sick?sickNm_like=${searchTarget}`, responseClone);
     });
+
+    // eslint-disable-next-line no-console
+    console.info("calling api");
 
     return fetchRes.json();
   });

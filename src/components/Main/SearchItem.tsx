@@ -2,29 +2,36 @@ import { useRecoilValue } from "recoil";
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { selectedSearchResultIndex } from "../../store/selectedSearchResultIndex";
-import formatFontWeight from "../../utils/formatFontWeight";
 
-const SearchItem = ({ idx, sickNm, searchInputValue }) => {
+import FormatFontWeight from "./FormatFontWeight";
+
+interface Props {
+  idx: number;
+  sickNm: string;
+  searchInputValue: string;
+}
+
+const SearchItem = ({ idx, sickNm, searchInputValue }: Props) => {
   const selectedIndex = useRecoilValue(selectedSearchResultIndex);
-  const selected = useRef();
+  const selected = useRef<HTMLLIElement>(null);
 
   useEffect(() => {
     const isSelected = selectedIndex === idx;
     if (isSelected) {
-      selected.current.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
+      selected.current?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
     }
   }, [selectedIndex, idx]);
 
   return (
     <Item selectedIndex={selectedIndex} idx={idx} ref={selected}>
-      {formatFontWeight(sickNm, searchInputValue)}
+      <FormatFontWeight data={sickNm} searchWord={searchInputValue} />
     </Item>
   );
 };
 
 export default SearchItem;
 
-const Item = styled.li`
+const Item = styled.li<{ selectedIndex: number; idx: number }>`
   ${({ theme }) => theme.flexDefault}
   width: 100%;
   min-width: 400px;

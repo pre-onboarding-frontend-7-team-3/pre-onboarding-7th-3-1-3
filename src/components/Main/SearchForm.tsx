@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { searchValue } from "../../store/searchValue";
@@ -13,7 +13,7 @@ const SearchForm = () => {
 
   const onKeyDown = useKeyDown();
 
-  const handleChange = useCallback((e) => {
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInputValue(e.target.value);
     setSelectedIndex(-1);
   }, []);
