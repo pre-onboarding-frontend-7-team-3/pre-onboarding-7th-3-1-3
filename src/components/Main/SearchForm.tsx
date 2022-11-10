@@ -2,6 +2,10 @@ import React, { useCallback } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { searchValue } from "../../store/searchValue";
+<<<<<<< HEAD
+=======
+
+>>>>>>> ff1d650 (fix: 병합과정 중 Error 해결 (lint포함))
 import { recentSearchList } from "../../store/searchWord";
 import { searchResultState } from "../../store/searchResult";
 import { selectedSearchResultIndex } from "../../store/selectedSearchResultIndex";
