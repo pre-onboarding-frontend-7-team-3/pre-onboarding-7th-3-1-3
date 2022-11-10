@@ -1,9 +1,13 @@
 import { useRecoilState, useRecoilValue } from "recoil";
+
 import { useCallback } from "react";
+
 import styled from "styled-components";
 import { searchValue } from "../../store/searchValue";
+import { searchResult } from "../../store/searchResult";
 import useKeyDown from "../../hooks/useKeyDown";
 import { selectedSearchResultIndex } from "../../store/selectedSearchResultIndex";
+
 import { searchResult } from "../../store/searchResult";
 
 const SearchForm = () => {
@@ -11,16 +15,24 @@ const SearchForm = () => {
   const [currentSearchIndex, setCurrentSearchIndex] = useRecoilState(selectedSearchResultIndex);
   const diseaseListData = useRecoilValue(searchResult);
 
+
   const onKeyDown = useKeyDown();
 
   const handleChange = useCallback((e) => {
     setSearchInputValue(e.target.value);
+
     setCurrentSearchIndex(-1);
   }, []);
 
   const selectedResultValue =
     currentSearchIndex !== -1 && diseaseListData[currentSearchIndex].sickNm;
 
+
+  };
+
+
+  const isCurrentIndexValid = selectedIndex !== -1;
+  
   return (
     <Form>
       <InputWrapper>
@@ -60,6 +72,14 @@ const SearchInput = styled.input`
   font-size: 20px;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
+
+  &:hover {
+    background-color: rgb(244, 244, 244);
+  }
+
+  &:focus {
+    background-color: white;
+  }
 `;
 
 const Button = styled.button`

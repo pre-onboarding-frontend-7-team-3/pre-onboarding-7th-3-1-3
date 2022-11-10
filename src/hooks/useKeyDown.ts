@@ -3,11 +3,12 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { searchResult } from "../store/searchResult";
 import { selectedSearchResultIndex } from "../store/selectedSearchResultIndex";
 
-type Key = "ArrowDown" | "ArrowUp";
+// type Key = "ArrowDown" | "ArrowUp";
 
 const useKeyDown = () => {
   const [selectedIndex, setSelectedIndex] = useRecoilState(selectedSearchResultIndex);
   const diseaseListData = useRecoilValue(searchResult);
+
 
   const keyData = useMemo(() => {
     return {
@@ -44,6 +45,8 @@ const useKeyDown = () => {
     },
     [selectedIndex, diseaseListData]
   );
+
+
   return onKeyDown;
 };
 

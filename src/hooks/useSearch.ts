@@ -19,6 +19,8 @@ const useSearch = () => {
     try {
       const { data } = await searchDiseaseService.search(debounceValue);
       setDiseaseListData(data);
+      // API 호출 횟수 확인
+      // eslint-disable-next-line
       console.log("api calling");
     } catch (err: unknown) {
       if (err instanceof AxiosError<any>) {
