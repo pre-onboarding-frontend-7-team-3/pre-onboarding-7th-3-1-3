@@ -1,6 +1,11 @@
 import { atom } from "recoil";
 
-export const searchResult = atom({
+interface ResultData {
+  sickNm: string;
+  sickCd: string;
+}
+
+export const searchResult = atom<ResultData[]>({
   key: "searchResult",
   default: [],
 });
