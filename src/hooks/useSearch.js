@@ -4,7 +4,10 @@ import { searchResult } from "../store/searchResult";
 import { searchValue } from "../store/searchValue";
 import useDebounce from "./useDebounce";
 import checkEngAndNum from "../utils/checkEngAndNum";
-import { searchDiseaseService } from "../apis";
+import makeTrieBySearchWord from "../utils/makeTryByWordSearch";
+import getCachedData from "../utils/getCacheData";
+import filterCachedData from "../utils/filterCachedData";
+import getDataAndRegisterCache from "../apis/getDataAndRegisterCache";
 import { AxiosError } from "axios";
 
 const useSearch = () => {
@@ -16,16 +19,20 @@ const useSearch = () => {
   const condition = checkEngAndNum(searchInputValue) && searchInputValue;
 
   const handleSearch = async () => {
+    const TrieWordList = makeTrieBySearchWord(searchInputValue);
+    const cachedData = await getCachedData(TrieWordList);
+
     try {
-      const { data } = await searchDiseaseService.search(debounceValue);
-      setDiseaseListData(data);
-      // API 호출 횟수 확인
-      // eslint-disable-next-line
-      console.log("api calling");
-    } catch (err: unknown) {
-      if (err instanceof AxiosError<any>) {
-        throw err;
+      if (checkEngAndNum(searchInputValue) && cachedData) {
+        const JsonCachedData = await cachedData.json();
+        setDiseaseListData(filterCachedData(JsonCachedData, searchInputValue));
       }
+      if (checkEngAndNum(searchInputValue) && !cachedData) {
+        const JsonAPIData = await getDataAndRegisterCache(searchInputValue);
+        setDiseaseListData(JsonAPIData);
+      }
+    } catch (err) {
+      throw new Error(err);
     }
   };
 
