@@ -19,10 +19,11 @@ const useKeyDown = () => {
   }, [diseaseListData, selectedIndex]);
 
   const onKeyDown = useCallback(
-    (e: any) => {
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (["ArrowDown", "ArrowUp"].includes(e.key)) {
         e.preventDefault();
       }
+
       if (e.nativeEvent.isComposing) return;
       if (keyData.emptyData) return;
 

@@ -5,6 +5,7 @@ import { searchValue } from "../store/searchValue";
 import useDebounce from "./useDebounce";
 import checkEngAndNum from "../utils/checkEngAndNum";
 import { searchDiseaseService } from "../apis";
+import { AxiosError } from "axios";
 
 const useSearch = () => {
   const searchInputValue = useRecoilValue(searchValue);
@@ -19,8 +20,10 @@ const useSearch = () => {
       const { data } = await searchDiseaseService.search(debounceValue);
       setDiseaseListData(data);
       console.log("api calling");
-    } catch (err: any) {
-      throw new Error(err);
+    } catch (err: unknown) {
+      if (err instanceof AxiosError<any>) {
+        throw err;
+      }
     }
   };
 
