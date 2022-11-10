@@ -9,7 +9,7 @@ import useDebounce from "hooks/useDebounce";
 import { searchResultState, ResultData } from "store/searchResult";
 import { searchValue } from "store/searchValue";
 
-import checkEngAndNum from "utils/checkEngAndNum";
+import { IsValidateText } from "utils/checkValidationOfInput";
 import makeTrieBySearchWord from "utils/makeTrieBySearchWord";
 import getCachedData from "utils/getCachedData";
 import filterCachedData from "utils/filterCachedData";
@@ -20,18 +20,18 @@ const useSearch = () => {
 
   const { debounceValue } = useDebounce(searchInputValue);
 
-  const condition = checkEngAndNum(searchInputValue) && searchInputValue;
+  const condition = IsValidateText(searchInputValue) && searchInputValue;
 
   const handleSearch = async () => {
     const TrieWordList = makeTrieBySearchWord(searchInputValue);
     const cachedData = await getCachedData(TrieWordList);
 
     try {
-      if (checkEngAndNum(searchInputValue) && cachedData) {
+      if (IsValidateText(searchInputValue) && cachedData) {
         const JsonCachedData = await cachedData.json();
         setDiseaseListData(filterCachedData(JsonCachedData, searchInputValue));
       }
-      if (checkEngAndNum(searchInputValue) && !cachedData) {
+      if (IsValidateText(searchInputValue) && !cachedData) {
         const JsonApiData = await getDataAndRegisterCache(searchInputValue);
         setDiseaseListData(JsonApiData);
       }
