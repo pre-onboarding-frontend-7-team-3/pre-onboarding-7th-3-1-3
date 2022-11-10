@@ -1,23 +1,21 @@
 import styled from "styled-components";
-import SearchItem from "./SearchItem";
-import useSearch from "../../hooks/useSearch";
 import { useRecoilValue } from "recoil";
-import { searchValue } from "../../store/searchValue";
-
-import { recentSearchList, recommendationList } from "../../store/searchWord";
 import { IoIosSearch } from "react-icons/io";
 
+import useSearch from "hooks/useSearch";
+
+import { searchValue } from "store/searchValue";
+import { recentSearchList, recommendationList } from "store/searchWord";
+
+import SearchItem from "./SearchItem";
 
 const SearchItemList = () => {
   const searchInputValue = useRecoilValue(searchValue);
   const diseaseListData = useSearch();
 
-
   const recentSearch = useRecoilValue(recentSearchList);
   const reverseRecentSearch = [...recentSearch].reverse();
   const maximumList = 5;
-
-
 
   return (
     <ListWrapper>
@@ -37,7 +35,6 @@ const SearchItemList = () => {
               <EmptyResult>검색결과가 없습니다.</EmptyResult>
             )}
           </>
-
         ) : (
           <>
             <RecentContainer>
@@ -99,7 +96,6 @@ const EmptyResult = styled.div`
   color: ${({ theme }) => theme.bg.grey};
   ${({ theme }) => theme.flexCenter}
 `;
-
 
 const RecentContainer = styled.div`
   display: flex;
@@ -174,4 +170,3 @@ const Recommendation = styled.button`
   padding: 1.3rem 0;
   line-height: 0;
 `;
-
