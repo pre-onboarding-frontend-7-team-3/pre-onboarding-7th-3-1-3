@@ -16,14 +16,18 @@ const SearchItemList = () => {
         <DefaultText>{DEFAULT_TEXT}</DefaultText>
         {searchInputValue && (
           <>
-            {diseaseListData?.map(({ sickCd, sickNm }, idx) => (
-              <SearchItem
-                key={sickCd}
-                idx={idx}
-                sickNm={sickNm}
-                searchInputValue={searchInputValue}
-              />
-            ))}
+            {diseaseListData.length ? (
+              diseaseListData.map(({ sickCd, sickNm }, idx) => (
+                <SearchItem
+                  key={sickCd}
+                  idx={idx}
+                  sickNm={sickNm}
+                  searchInputValue={searchInputValue}
+                />
+              ))
+            ) : (
+              <EmptyResult>검색결과가 없습니다.</EmptyResult>
+            )}
           </>
         )}
       </ItemWrapper>
@@ -55,4 +59,9 @@ const DefaultText = styled.div`
   color: ${({ theme }) => theme.bg.grey};
   font-size: 14px;
   font-weight: 900;
+`;
+
+const EmptyResult = styled.div`
+  color: ${({ theme }) => theme.bg.grey};
+  ${({ theme }) => theme.flexCenter}
 `;
