@@ -4,7 +4,7 @@ const Bold = styled.span`
   font-weight: 700;
 `;
 
-const FormatFontWeight = ({ data, searchWord }) => {
+const FormatFontWeight = ({ data, searchWord }: { data: string; searchWord: string }) => {
   const boldStartIndex = data.toLowerCase().indexOf(searchWord.toLowerCase());
   const boldEndIndex = data.toLowerCase().indexOf(searchWord.toLowerCase()) + searchWord.length;
 

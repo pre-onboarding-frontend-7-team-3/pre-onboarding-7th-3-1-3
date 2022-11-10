@@ -1,11 +1,13 @@
 import styled from "styled-components";
-import SearchItem from "./SearchItem";
-import useSearch from "../../hooks/useSearch";
 import { useRecoilValue } from "recoil";
-import { searchValue } from "../../store/searchValue";
-
-import { recentSearchList, recommendationList } from "../../store/searchWord";
 import { IoIosSearch } from "react-icons/io";
+
+import useSearch from "hooks/useSearch";
+
+import { searchValue } from "store/searchValue";
+import { recentSearchList, recommendationList } from "store/searchWord";
+
+import SearchItem from "./SearchItem";
 
 const SearchItemList = () => {
   const searchInputValue = useRecoilValue(searchValue);

@@ -1,4 +1,4 @@
-export const isMakeSense = (searchTarget: string) => {
+export const IsValidateText = (searchTarget: string) => {
   const onlyKorEngNum = /^[가-힣a-zA-Z0-9]/;
   if (onlyKorEngNum.test(searchTarget)) {
     return true;
