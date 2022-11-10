@@ -1,10 +1,12 @@
-/* eslint-disable no-await-in-loop */
-/* eslint-disable no-console */
-/* eslint-disable import/no-unresolved */
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
-import isMakeSense from "utils/isMakeSense";
+import getDataAndRegisterCache from "apis/getDataAndRegisterCache";
+
+import { isMakeSense, isEmptyInput } from "utils/checkValidationOfInput";
+import makeTrieBySearchWord from "utils/makeTireBySearchWord";
+import getCachedData from "utils/getCachedData";
+import filterCachedData from "utils/filterCachedData";
 
 import SearchHistory from "components/SearchHistory";
 
@@ -24,28 +26,43 @@ const SearchWrapper = styled.div`
   align-items: center;
 
   width: 100%;
-  height: auto;
-  min-height: 500px;
+  height: 50%;
+  min-height: 800px;
 
-  background-color: skyblue;
+  background-color: #cae9ff;
   border-radius: 10px;
   opacity: 0.9;
 `;
 
 const TitleWrappr = styled.div`
-  font-size: 30px;
-  font-weight: 600;
+  margin-bottom: 10px;
 
-  color: navy;
+  font-size: 36px;
+  font-weight: 800;
+  color: black;
+`;
+
+const SearchBarWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 400px;
+  height: 60px;
+
+  border-radius: 50px;
+  background-color: white;
 `;
 
 const SearchBar = styled.input`
   display: flex;
 
-  width: 500px;
-  height: 30px;
+  width: 330px;
+  height: 40px;
 
-  border-radius: 10px;
+  margin-left: 20px;
+
+  border: 0px;
 `;
 
 const SearchHistoryWrapper = styled.div`
@@ -53,90 +70,39 @@ const SearchHistoryWrapper = styled.div`
 `;
 
 function Home() {
-  const [searchResult, setSearchResult] = useState<React.SetStateAction<string>>();
-  const [search, setSearch] = useState("");
-  const [timer, setTimer] = useState<React.SetStateAction<any>>(0); // 디바운싱 타이머
+  const [searchResult, setSearchResult] = useState<object[]>([]);
+  const [searchWord, setSearchWord] = useState<string>("");
+  const [timer, setTimer] = useState<NodeJS.Timeout>();
 
-  const onChangeSearch = (e: any) => {
-    setSearch(e.target.value);
-    if (e.target.value === "") {
-      setSearchResult("");
+  const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const CURRENT_SEARCH_TARGET = e.target.value;
+    setSearchWord(CURRENT_SEARCH_TARGET);
+
+    if (isEmptyInput(CURRENT_SEARCH_TARGET)) {
+      setSearchResult([]);
+      return;
     }
-
-    // 디바운싱
     if (timer) {
       clearTimeout(timer);
     }
 
     const newTimer = setTimeout(async () => {
-      const test = (text: string): Array<string> => {
-        const returnArr = [];
-        const arr = text.split("");
-
-        for (let i = 0; i < arr.length; i++) {
-          let tmp = "";
-          for (let j = 0; j <= i; j++) {
-            tmp += arr[j];
-          }
-          returnArr.push(tmp);
-        }
-
-        return returnArr;
-      };
-
-      // const test2 = (url) => {
-      //   cacheStorage;
-      // };
+      const TrieWordList = makeTrieBySearchWord(CURRENT_SEARCH_TARGET);
+      const cachedData = await getCachedData(TrieWordList);
 
       try {
-        const cacheStorage = await caches.open("search");
-        const URL = `http://localhost:4000/sick?q=${e.target.value}`;
-
-        //
-        const testArr = test(e.target.value);
-        console.log("testArr", testArr);
-
-        let responsedCache: any = "";
-        for (let i = 0; i < testArr.length; i++) {
-          responsedCache = await cacheStorage.match(`http://localhost:4000/sick?q=${testArr[i]}`);
-          if (responsedCache !== undefined) {
-            break;
-          }
+        if (isMakeSense(CURRENT_SEARCH_TARGET) && cachedData) {
+          const JsonCachedData = await cachedData.json();
+          setSearchResult(filterCachedData(JsonCachedData, CURRENT_SEARCH_TARGET));
         }
-
-        console.log("responsedCache", responsedCache);
-
-        //
-
-        if (isMakeSense(e.target.value) && responsedCache) {
-          // (가치 판단,캐시에 있음)
-          setSearchResult(await responsedCache.json());
-
-          console.log("캐시에서 꺼냄", searchResult);
-        } else if (isMakeSense(e.target.value)) {
-          // (가치 판단,캐시에 없음)
-
-          // API 호출
-          const res = await fetch(URL, { method: "GET" }).then((fetchRes) => {
-            // await cacheStorage.put(URL, res);
-
-            // 캐시에 저장
-            let responseClone = fetchRes.clone();
-            caches.open("search").then((cache) => {
-              cache.put(URL, responseClone);
-            });
-
-            return fetchRes.json(); // response를 이미 이곳에서 사용을 하기 때문이다.
-          });
-
-          setSearchResult(res);
-
-          console.log("API로 꺼냄", searchResult);
+        if (isMakeSense(CURRENT_SEARCH_TARGET) && !cachedData) {
+          const JsonApiData = await getDataAndRegisterCache(CURRENT_SEARCH_TARGET);
+          setSearchResult(JsonApiData);
         }
       } catch (err) {
-        console.error("error", err);
+        return new Error(String(err));
       }
-    }, 750);
+    }, 250);
 
     setTimer(newTimer);
   };
@@ -144,15 +110,18 @@ function Home() {
   return (
     <Wrapper>
       <SearchWrapper>
-        <TitleWrappr>국내 모든 임상시험 검색하고 온라인으로 참여하기</TitleWrappr>
-        <SearchBar
-          type="text"
-          value={search}
-          onChange={onChangeSearch}
-          placeholder="질환명을 입력해 주세요."
-        />
+        <TitleWrappr>국내 모든 임상시험 검색하고</TitleWrappr>
+        <TitleWrappr>온라인으로 참여하기</TitleWrappr>
+        <SearchBarWrapper>
+          <SearchBar
+            type="text"
+            value={searchWord}
+            onChange={onChangeSearch}
+            placeholder="질환명을 입력해 주세요."
+          />
+        </SearchBarWrapper>
         <SearchHistoryWrapper>
-          {searchResult && <SearchHistory data={searchResult} search={search} />}
+          {searchResult && <SearchHistory data={searchResult} search={searchWord} />}
         </SearchHistoryWrapper>
       </SearchWrapper>
     </Wrapper>
