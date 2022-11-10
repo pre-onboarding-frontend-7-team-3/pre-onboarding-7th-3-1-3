@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { searchResult } from "../store/searchResult";
+import { searchResultState } from "../store/searchResult";
 import { searchValue } from "../store/searchValue";
 import useDebounce from "./useDebounce";
 import checkEngAndNum from "../utils/checkEngAndNum";
@@ -9,7 +9,7 @@ import { AxiosError } from "axios";
 
 const useSearch = () => {
   const searchInputValue = useRecoilValue(searchValue);
-  const [diseaseListData, setDiseaseListData] = useRecoilState(searchResult);
+  const [diseaseListData, setDiseaseListData] = useRecoilState(searchResultState);
 
   const { debounceValue } = useDebounce(searchInputValue);
 

@@ -1,13 +1,13 @@
 import { useCallback, useMemo } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { searchResult } from "../store/searchResult";
+import { searchResultState } from "../store/searchResult";
 import { selectedSearchResultIndex } from "../store/selectedSearchResultIndex";
 
 // type Key = "ArrowDown" | "ArrowUp";
 
 const useKeyDown = () => {
   const [selectedIndex, setSelectedIndex] = useRecoilState(selectedSearchResultIndex);
-  const diseaseListData = useRecoilValue(searchResult);
+  const diseaseListData = useRecoilValue(searchResultState);
 
   const keyData = useMemo(() => {
     return {
@@ -36,8 +36,6 @@ const useKeyDown = () => {
       // 조합문자가 아닐때 return해야하는거 아닌가?
       const isOneWord = event.nativeEvent.isComposing;
       const isSearchResultEmpty = keyData.emptyData;
-
-      console.log(isOneWord);
 
       if (isOneWord || isSearchResultEmpty) return;
 
