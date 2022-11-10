@@ -4,8 +4,6 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { searchResultState } from "store/searchResult";
 import { selectedSearchResultIndex } from "store/selectedSearchResultIndex";
 
-// type Key = "ArrowDown" | "ArrowUp";
-
 const useKeyDown = () => {
   const [selectedIndex, setSelectedIndex] = useRecoilState(selectedSearchResultIndex);
   const diseaseListData = useRecoilValue(searchResultState);
@@ -48,7 +46,6 @@ const useKeyDown = () => {
           onArrowUp();
           break;
         default:
-          console.log("invalid key");
           break;
       }
     },

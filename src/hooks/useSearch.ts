@@ -36,7 +36,7 @@ const useSearch = () => {
         setDiseaseListData(JsonApiData);
       }
     } catch (err: unknown) {
-      if (err instanceof AxiosError<any>) {
+      if (err instanceof AxiosError) {
         throw err;
       }
     }

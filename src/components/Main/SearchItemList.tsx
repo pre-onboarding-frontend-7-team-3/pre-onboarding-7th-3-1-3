@@ -37,29 +37,29 @@ const SearchItemList = () => {
           </>
         ) : (
           <>
-            <RecentContainer>
-              <RecentTitle>최근 검색어</RecentTitle>
+            <RecentSearchResultContainer>
+              <Title>최근 검색어</Title>
               {recentSearch.length > 0 ? (
-                reverseRecentSearch.slice(0, maximumList).map((searched) => {
+                reverseRecentSearch.slice(0, maximumList).map((searched, idx) => {
                   return (
-                    <RecentText key={searched}>
+                    <RecentText key={idx}>
                       <IoIosSearch className="icon" />
                       {searched}
                     </RecentText>
                   );
                 })
               ) : (
-                <RecentText className="noting">최근 검색어가 없습니다</RecentText>
+                <RecentText className="none-matched">최근 검색어가 없습니다</RecentText>
               )}
-            </RecentContainer>
-            <RecommendContainer>
-              <RecentTitle>추천 검색어로 검색해보세요</RecentTitle>
+            </RecentSearchResultContainer>
+            <RecommendationsContainer>
+              <Title>추천 검색어로 검색해보세요</Title>
               <Recommendations>
-                {recommendationList.map((recommendation) => (
-                  <Recommendation key={recommendation}>{recommendation}</Recommendation>
+                {recommendationList.map((recommendation, idx) => (
+                  <Recommendation key={idx}>{recommendation}</Recommendation>
                 ))}
               </Recommendations>
-            </RecommendContainer>
+            </RecommendationsContainer>
           </>
         )}
       </ItemWrapper>
@@ -74,30 +74,22 @@ const ListWrapper = styled.section`
   width: 85%;
   min-width: 500px;
   max-height: 400px;
-  overflow-y: auto;
   padding: 26px;
   border-radius: 24px;
   background-color: white;
+  overflow-y: auto;
 `;
 
 const ItemWrapper = styled.ul`
   ${({ theme }) => theme.flexColumn}
 `;
 
-const DefaultText = styled.div`
-  margin-bottom: 10px;
-  padding-left: 10px;
-  color: ${({ theme }) => theme.bg.grey};
-  font-size: 14px;
-  font-weight: 900;
-`;
-
 const EmptyResult = styled.div`
-  color: ${({ theme }) => theme.bg.grey};
   ${({ theme }) => theme.flexCenter}
+  color: ${({ theme }) => theme.bg.grey};
 `;
 
-const RecentContainer = styled.div`
+const RecentSearchResultContainer = styled.div`
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -109,16 +101,16 @@ const RecentContainer = styled.div`
 
 const RecentText = styled.span`
   width: 100%;
+  padding: 0.5rem 2.2rem 0.5rem 2.2rem;
   font-size: 1.2rem;
   font-weight: 500;
   letter-spacing: -0.06em;
   line-height: 1.7;
-  padding: 0.5rem 2.2rem 0.5rem 2.2rem;
   &:hover {
     background-color: #f5f5f5;
     cursor: pointer;
   }
-  &.noting {
+  &.none-matched {
     color: #b3b3b3;
     &:hover {
       background-color: #fff;
@@ -129,13 +121,13 @@ const RecentText = styled.span`
     position: relative;
     top: 6px;
     left: -7px;
-    color: #808080;
     width: 1.5rem;
     height: 1.5rem;
+    color: #808080;
   }
 `;
 
-const RecentTitle = styled.h2`
+const Title = styled.h2`
   color: #808080;
   padding: 1.2rem 0 0.5rem 1.8rem;
   font-size: 0.9rem;
@@ -144,7 +136,7 @@ const RecentTitle = styled.h2`
   line-height: 1.6;
 `;
 
-const RecommendContainer = styled.div`
+const RecommendationsContainer = styled.div`
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -156,17 +148,17 @@ const Recommendations = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
-  gap: 0.2rem;
   padding: 0.8rem 1.8rem 2rem 2rem;
+  gap: 0.2rem;
 `;
 
 const Recommendation = styled.button`
   width: 100%;
   height: 1.5rem;
-  color: #007be9;
+  padding: 1.3rem 0;
   font-weight: bold;
+  line-height: 0;
   background-color: #eef8ff;
   border-radius: 20px;
-  padding: 1.3rem 0;
-  line-height: 0;
+  color: #007be9;
 `;

@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import { selectedSearchResultIndex } from "store/selectedSearchResultIndex";
 
-import FormatFontWeight from "./FormatFontWeight";
+import HighlightedText from "./HighlightedText";
 
 interface Props {
   idx: number;
@@ -25,7 +25,7 @@ const SearchItem = ({ idx, sickNm, searchInputValue }: Props) => {
 
   return (
     <Item selectedIndex={selectedIndex} idx={idx} ref={selected}>
-      <FormatFontWeight data={sickNm} searchWord={searchInputValue} />
+      <HighlightedText data={sickNm} searchWord={searchInputValue} />
     </Item>
   );
 };
