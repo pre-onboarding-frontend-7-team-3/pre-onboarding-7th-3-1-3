@@ -5,7 +5,8 @@ export interface ResultData {
   sickCd: string;
 }
 
-export const searchResult = atom<ResultData[]>({
+
+export const searchResultState = atom<ResultData[]>({
   key: "searchResult",
-  default: [],
+  default: [], // new Set() , trie, {}
 });
