@@ -13,7 +13,7 @@ const SearchForm = () => {
 
   const onKeyDown = useKeyDown();
 
-  const handleChange = useCallback((e) => {
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInputValue(e.target.value);
     setSelectedIndex(-1);
   }, []);

@@ -1,6 +1,6 @@
-import { css } from "styled-components";
+import { css, DefaultTheme } from "styled-components";
 
-const theme = {
+export const theme: DefaultTheme = {
   flexCenter: css`
     display: flex;
     justify-content: center;
