@@ -15,7 +15,7 @@ import filterCachedData from "utils/filterCachedData";
 
 const useSearch = () => {
   const searchInputValue = useRecoilValue(searchValue);
-  const [diseaseListData, setDiseaseListData] = useRecoilState<any>(searchResult);
+  const [diseaseListData, setDiseaseListData] = useRecoilState<any[]>(searchResult);
 
   const { debounceValue } = useDebounce(searchInputValue);
 
