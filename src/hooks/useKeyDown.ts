@@ -9,7 +9,6 @@ const useKeyDown = () => {
   const [selectedIndex, setSelectedIndex] = useRecoilState(selectedSearchResultIndex);
   const diseaseListData = useRecoilValue(searchResult);
 
-
   const keyData = useMemo(() => {
     return {
       currentDataLength: diseaseListData.length,
@@ -19,33 +18,37 @@ const useKeyDown = () => {
     };
   }, [diseaseListData, selectedIndex]);
 
+  const onArrowDown = () => {
+    keyData.lastItem ? setSelectedIndex(-1) : setSelectedIndex((prev) => prev + 1);
+  };
+
+  const onArrowUp = () => {
+    keyData.firstItem
+      ? setSelectedIndex(keyData.currentDataLength - 1)
+      : setSelectedIndex((prev) => prev - 1);
+  };
+
   const onKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (["ArrowDown", "ArrowUp"].includes(e.key)) {
-        e.preventDefault();
+    (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (["ArrowDown", "ArrowUp"].includes(event.key)) {
+        event.preventDefault();
       }
+      if (event.nativeEvent.isComposing || keyData.emptyData) return;
 
-      if (e.nativeEvent.isComposing) return;
-      if (keyData.emptyData) return;
-
-      if (e.key === "ArrowDown") {
-        if (keyData.lastItem) {
-          setSelectedIndex(-1);
-        }
-        setSelectedIndex((prev) => prev + 1);
-      }
-
-      if (e.key === "ArrowUp") {
-        if (keyData.firstItem) {
-          setSelectedIndex(keyData.currentDataLength - 1);
-          return;
-        }
-        setSelectedIndex((prev) => prev - 1);
+      switch (event.key) {
+        case "ArrowDown":
+          onArrowDown();
+          break;
+        case "ArrowUp":
+          onArrowUp();
+          break;
+        default:
+          console.log("invalid key");
+          break;
       }
     },
     [selectedIndex, diseaseListData]
   );
-
 
   return onKeyDown;
 };
