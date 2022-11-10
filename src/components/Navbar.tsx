@@ -76,3 +76,61 @@ const Navbar = (): JSX.Element => {
 };
 
 export default Navbar;
+
+const Section = styled.section`
+  display: flex;
+  width: 85%;
+  min-width: 500px;
+  height: 3.5rem;
+  border-radius: 24px;
+  background-color: white;
+  overflow-x: hidden;
+`;
+
+const Container = styled.article`
+  position: static;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 70rem;
+  padding: 14px;
+  margin: 0 auto;
+  border-radius: 40px;
+`;
+
+const Logocontainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const LogoImg = styled.img`
+  height: 2.2rem;
+`;
+
+const LogoTitle = styled.button`
+  min-width: 130px;
+  line-height: 1.6;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.1em;
+  background-color: transparent;
+  color: #1e2025;
+  border: none;
+`;
+
+const NavBtncontainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+const NavBtn = styled.button`
+  min-width: 80px;
+  font-size: 1rem;
+  line-height: 1.6;
+  font-weight: 600;
+  letter-spacing: -0.018em;
+  background-color: transparent;
+  color: #1e2025;
+  border: none;
+`;

@@ -10,6 +10,7 @@ const getDataAndRegisterCache = async (searchTarget: string): Promise<object[]> 
     `${process.env.REACT_APP_BASE_URL}/sick?sickNm_like=${searchTarget}`,
     responseClone
   );
+
   const data = await response.json();
   return data;
 };
