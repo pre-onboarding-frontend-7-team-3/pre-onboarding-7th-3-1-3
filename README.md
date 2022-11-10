@@ -22,8 +22,6 @@
 
 ## ⌨️ 실행 방법
 
-2. 의존성 패키지를 설치합니다.
-
 ```zsh
 $ git clone https://github.com/pre-onboarding-frontend-7-team-3/pre-onboarding-7th-3-1-3.git
 $ npm install
