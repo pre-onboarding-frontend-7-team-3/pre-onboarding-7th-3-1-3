@@ -1,12 +1,13 @@
 import React, { useCallback } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { searchValue } from "../../store/searchValue";
 
-import { recentSearchList } from "../../store/searchWord";
-import { searchResultState } from "../../store/searchResult";
-import { selectedSearchResultIndex } from "../../store/selectedSearchResultIndex";
-import useKeyDown from "../../hooks/useKeyDown";
+import useKeyDown from "hooks/useKeyDown";
+
+import { searchValue } from "store/searchValue";
+import { recentSearchList } from "store/searchWord";
+import { searchResultState } from "store/searchResult";
+import { selectedSearchResultIndex } from "store/selectedSearchResultIndex";
 
 const SearchForm = () => {
   const [searchInputValue, setSearchInputValue] = useRecoilState(searchValue);
