@@ -23,7 +23,7 @@ export class SearchDiseaseServiceImp implements SearchDiseaseService {
   }
 
   async search(keyword: string) {
-    const res = await this.client.request({ method: "get", url: `sick?q=${keyword}` });
+    const res = await this.client.request({ method: "get", url: `sick?sickNm_like=${keyword}` });
 
     return res;
   }

@@ -4,7 +4,8 @@ import { searchResult } from "../store/searchResult";
 import { searchValue } from "../store/searchValue";
 import useDebounce from "./useDebounce";
 import checkEngAndNum from "../utils/checkEngAndNum";
-import { searchDiseaseService } from "apis";
+import { searchDiseaseService } from "../apis";
+import { AxiosError } from "axios";
 
 const useSearch = () => {
   const searchInputValue = useRecoilValue(searchValue);
@@ -21,8 +22,10 @@ const useSearch = () => {
       // API 호출 횟수 확인
       // eslint-disable-next-line
       console.log("api calling");
-    } catch (err: any) {
-      throw new Error(err);
+    } catch (err: unknown) {
+      if (err instanceof AxiosError<any>) {
+        throw err;
+      }
     }
   };
 
