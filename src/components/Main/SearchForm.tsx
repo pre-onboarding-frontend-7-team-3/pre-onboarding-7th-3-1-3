@@ -2,18 +2,17 @@ import React, { useCallback } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { searchValue } from "../../store/searchValue";
-import useKeyDown from "../../hooks/useKeyDown";
+
 import { recentSearchList } from "../../store/searchWord";
 import { searchResultState } from "../../store/searchResult";
 import { selectedSearchResultIndex } from "../../store/selectedSearchResultIndex";
 import useKeyDown from "../../hooks/useKeyDown";
 
-
 const SearchForm = () => {
   const [searchInputValue, setSearchInputValue] = useRecoilState(searchValue);
   const [selectedIndex, setSelectedIndex] = useRecoilState(selectedSearchResultIndex);
 
-  const diseaseListData = useRecoilValue(searchResult);
+  const diseaseListData = useRecoilValue(searchResultState);
   const [recentSearch, setRecentSearch] = useRecoilState(recentSearchList);
 
   const onKeyDown = useKeyDown();
@@ -26,7 +25,6 @@ const SearchForm = () => {
     },
     [diseaseListData]
   );
-
 
   const isCurrentIndexValid = selectedIndex !== -1;
   const selectedResultValue = isCurrentIndexValid && diseaseListData[selectedIndex].sickNm;
