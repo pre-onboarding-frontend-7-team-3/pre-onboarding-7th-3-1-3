@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { AxiosError } from "axios";
-
-import makeTrieBySearchWord from "../utils/makeTrieBySearchWord";
-import getCachedData from "../utils/getCachedData";
-
-import { IsValidateText } from "utils/checkValidationOfInput";
-import makeTrieBySearchWord from "utils/makeTrieBySearchWord";
+import { IsValidateText } from "../utils/checkValidationOfInput";
+import makeTrieBySearchWord from "../utils/makeTireBySearchWord";
 import getCachedData from "utils/getCachedData";
 import filterCachedData from "utils/filterCachedData";
+import useDebounce from "./useDebounce";
+import { ResultData, searchResultState } from "store/searchResult";
+import getDataAndRegisterCache from "apis/getDataAndRegisterCache";
+import { searchValue } from "store/searchValue";
 
 const useSearch = () => {
   const searchInputValue = useRecoilValue(searchValue);
