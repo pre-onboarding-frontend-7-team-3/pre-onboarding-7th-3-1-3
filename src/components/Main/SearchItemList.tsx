@@ -3,13 +3,7 @@ import { useRecoilValue } from "recoil";
 import { searchValue } from "../../store/searchValue";
 import { recentSearchList, recommendationList } from "../../store/searchWord";
 import { IoIosSearch } from "react-icons/io";
-
-import useSearch from "hooks/useSearch";
-
-import { searchValue } from "store/searchValue";
-import { recentSearchList, recommendationList } from "store/searchWord";
-
-import SearchItem from "./SearchItem";
+import useSearch from "../../hooks/useSearch";
 
 const SearchItemList = () => {
   const searchInputValue = useRecoilValue(searchValue);
@@ -39,7 +33,7 @@ const SearchItemList = () => {
           </>
         ) : (
           <>
-            <RecentSearchResultContainer>
+            <RecentContainer>
               <Title>최근 검색어</Title>
               {recentSearch.length > 0 ? (
                 reverseRecentSearch.slice(0, maximumList).map((searched, idx) => {
@@ -53,7 +47,7 @@ const SearchItemList = () => {
               ) : (
                 <RecentText className="none-matched">최근 검색어가 없습니다</RecentText>
               )}
-            </RecentSearchResultContainer>
+            </RecentContainer>
             <RecommendationsContainer>
               <Title>추천 검색어로 검색해보세요</Title>
               <Recommendations>

@@ -2,12 +2,8 @@ import { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { AxiosError } from "axios";
 
-import getDataAndRegisterCache from "apis/getDataAndRegisterCache";
-
-import useDebounce from "hooks/useDebounce";
-
-import { searchResultState, ResultData } from "store/searchResult";
-import { searchValue } from "store/searchValue";
+import makeTrieBySearchWord from "../utils/makeTrieBySearchWord";
+import getCachedData from "../utils/getCachedData";
 
 import { IsValidateText } from "utils/checkValidationOfInput";
 import makeTrieBySearchWord from "utils/makeTrieBySearchWord";
