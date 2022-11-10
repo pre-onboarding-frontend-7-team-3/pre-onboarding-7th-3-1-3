@@ -25,18 +25,9 @@
 2. 의존성 패키지를 설치합니다.
 
 ```zsh
+$ git clone https://github.com/pre-onboarding-frontend-7-team-3/pre-onboarding-7th-3-1-3.git
 $ npm install
-```
-
-3. 리눅스와 윈도우 husky 충돌 방지 후 사용을 위해 설치합니다.
-
-```zsh
 $ chmod ug+x .husky/*
-```
-
-4. 프로젝트를 실행합니다.
-
-```zsh
 $ npm start
 ```
 
