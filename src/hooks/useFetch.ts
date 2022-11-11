@@ -14,7 +14,7 @@ import makeTrieBySearchWord from "utils/makeTrieBySearchWord";
 import getCachedData from "utils/getCachedData";
 import filterCachedData from "utils/filterCachedData";
 
-const useSearch = () => {
+const useFetch = () => {
   const searchInputValue = useRecoilValue(searchValue);
   const [diseaseListData, setDiseaseListData] = useRecoilState<ResultData[]>(searchResultState);
 
@@ -49,4 +49,4 @@ const useSearch = () => {
   return diseaseListData;
 };
 
-export default useSearch;
+export default useFetch;
