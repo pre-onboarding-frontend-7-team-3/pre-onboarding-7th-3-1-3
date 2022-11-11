@@ -36,7 +36,9 @@ const useKeyDown = () => {
       const isOneWord = event.nativeEvent.isComposing;
       const isSearchResultEmpty = keyData.emptyData;
 
-      if (isOneWord || isSearchResultEmpty) return;
+      if (isOneWord || isSearchResultEmpty) {
+        return;
+      }
 
       switch (event.key) {
         case "ArrowDown":
