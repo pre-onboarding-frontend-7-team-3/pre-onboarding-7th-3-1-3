@@ -17,7 +17,7 @@ export default Header;
 const HeaderWrapper = styled.div`
   width: 550px;
   min-width: 380px;
-  margin-bottom: 20px;
+  margin: 20px 0;
   line-height: 70px;
   text-align: center;
   font-size: 40px;

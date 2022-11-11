@@ -1,10 +1,11 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 
 import { selectedSearchResultIndex } from "store/selectedSearchResultIndex";
+import useScroll from "hooks/useScroll";
 
-import FormatFontWeight from "./FormatFontWeight";
+import HighlightedText from "./HighlightedText";
 
 interface Props {
   idx: number;
@@ -14,18 +15,13 @@ interface Props {
 
 const SearchItem = ({ idx, sickNm, searchInputValue }: Props) => {
   const selectedIndex = useRecoilValue(selectedSearchResultIndex);
-  const selected = useRef<HTMLLIElement>(null);
+  const selectedItemRef = useRef<HTMLLIElement>(null);
 
-  useEffect(() => {
-    const isSelected = selectedIndex === idx;
-    if (isSelected) {
-      selected.current?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
-    }
-  }, [selectedIndex, idx]);
+  useScroll(selectedIndex, idx, selectedItemRef);
 
   return (
-    <Item selectedIndex={selectedIndex} idx={idx} ref={selected}>
-      <FormatFontWeight data={sickNm} searchWord={searchInputValue} />
+    <Item selectedIndex={selectedIndex} idx={idx} ref={selectedItemRef}>
+      <HighlightedText data={sickNm} searchWord={searchInputValue} />
     </Item>
   );
 };
@@ -35,12 +31,13 @@ export default SearchItem;
 const Item = styled.li<{ selectedIndex: number; idx: number }>`
   ${({ theme }) => theme.flexDefault}
   width: 100%;
-  min-width: 400px;
+  min-width: 500px;
   height: 44px;
   padding: 10px;
   background-color: ${({ selectedIndex, idx }) => selectedIndex === idx && "#D0E8FD"};
   border-radius: 12px;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 100;
   cursor: pointer;
 
   &:hover {
