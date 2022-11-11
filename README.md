@@ -26,6 +26,13 @@
 $ git clone https://github.com/pre-onboarding-frontend-7-team-3/pre-onboarding-7th-3-1-3.git
 $ npm install
 $ chmod ug+x .husky/*
+```
+- API 서버 실행
+```
+$ npm run serve-json
+```
+- 별도 터미널에서 Client 실행
+```
 $ npm start
 ```
 
