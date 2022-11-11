@@ -26,12 +26,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "postinstall": "husky install",
     "format": "prettier --cache --write .",
     "lint": "eslint --cache .",
-    "start": "react-scripts start",
-    "serve-json": "json-server --watch db.json --port 4000",
+    "heroku-prebuild": "npm ci && npm run build",
+    "start": "node server",
     "build": "react-scripts build",
+    "serve-json": "json-server --watch db.json --port 4000",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
