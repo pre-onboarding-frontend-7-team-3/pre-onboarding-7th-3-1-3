@@ -1,10 +1,10 @@
-# 원티드 프리온보딩 프론트엔드 3팀 - Assignment #3
+# 원티드 프리온보딩 프론트엔드 3팀 - Assignment #5
 
 > [한국임상정보](https://clinicaltrialskorea.com/) 홈페이지 검색창 및 검색어 추천 구축
 >
 > 프로젝트 기간 : 2022년 11월 8일 ~ 2022년 11월 11일
 >
-> #### [배포링크]()
+> #### [배포링크](https://disease-search-3.herokuapp.com/)
 
 </br>
 
@@ -26,6 +26,17 @@
 $ git clone https://github.com/pre-onboarding-frontend-7-team-3/pre-onboarding-7th-3-1-3.git
 $ npm install
 $ chmod ug+x .husky/*
+```
+
+- API 서버 실행
+
+```
+$ npm run serve-json
+```
+
+- 별도 터미널에서 Client 실행
+
+```
 $ npm start
 ```
 
@@ -37,7 +48,7 @@ $ npm start
 
    > [노션 링크](https://www.notion.so/2-1-498c225b2d814eb8b77bf1d6d312037d)
 
-2. 본 프로젝트는 동료학습에 최적화된 과정을 찾아가며 진행했습니다. [VSC Live Code extension](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare-pack)을 활용해서 라이브 코드 리뷰를 진행하고 각자 구현한 코드에 대한 피드백 및 리팩토링 후 `페어 프로그래밍` 방식으로 Best Practice를 채택했습니다.
+2. 본 프로젝트는 동료학습에 최적화된 과정을 찾아가며 진행했습니다. [VSC Live Code extension](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare-pack)을 활용하여 라이브 코드 리뷰를 진행하고 각자 구현한 코드에 대한 피드백을 진행하여 Best Practice를 추가해 나가는 과정을 거쳤습니다. 후의 리팩토링도 동일한 과정을 거쳐 진행하였습니다.
 
 3. 소통 플랫폼으로 게더타운과 디스코드를 활용해서 협업을 진행했습니다.
 
@@ -54,36 +65,63 @@ $ npm start
 ### 2. API 호출 최적화
 
 - 서버에 대한 API 호출 최적화를 위해 응답으로 받은 데이터는 `캐싱` 처리하고 비동기 호출 횟수의 단축을 위해 `디바운싱` 처리했습니다.
-- [ ] API 호출별로 로컬 캐싱
+- [ ] 2-1. API 호출별로 로컬 캐싱
 
-  - [ ] 클라이언트에서 매번 API 호출을 하기 전, 서버로 보낼 `쿼리 스트링`과 캐시 스토리지에 저장된 `캐시 object key`를 비교하여 일치할 경우 일치하는 캐시 key의 캐시 데이터를 사용해 검색 결과를 출력하였고 일치하지 않을 경우(캐시 처리된 데이터가 없는 경우) 서버에 GET 요청을 보내 응답으로 받은 데이터를 `key(요청 URL)`, `value(응답)` 형태로 캐시 스토리지에 저장했습니다.
+  - [ ] 클라이언트에서 디바운싱 시간을 이탈하여 API 호출을 이룰 때마다, 트라이(Trie) 자료구조 형식으로 캐시 스토리지에 데이터를 저장합니다.
+
+  - [ ] 후에 클라이언트에서 다시 API 호출을 하기 전, 서버로 보낼 `쿼리 스트링`을 캐시 스토리지에 저장된 `캐시 object key`를 비교하여 일치하는 캐시 데이터의 필요 부분을 추출하여 관련 검색어를 출력하였고, 일치하지 않을 때(캐시 처리된 데이터가 없는 경우) 서버에 다시 API 요청을 보내는 방식으로 구현했습니다.
 
   ![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/78708082/201212899-eddd696f-0d69-4566-b4a4-ceed37a8050f.gif)
 
-- [ ] API 호출 횟수 최적화
+  https://github.com/pre-onboarding-frontend-7-team-3/pre-onboarding-7th-3-1-3/blob/845e8d7d4424fdddabc1f67207840e7993020bbf/src/hooks/useSearch.ts#L23-L43
 
-  - [ ] 팀원 간 live share 중 사용자가 검색창에 검색어를 입력했 때 onChange 이벤트가 발생할 때마다 서버에 GET 요청을 보내는 것은 비효율적인 프로세스라고 공통된 의견을 나누었습니다. 따라서 첫 onChange 이벤트의 발생 시점으로부터 의도적인 지연시간을 두어 API 호출 횟수를 줄였습니다. 검색창의 onChange 이벤트가 비동기적으로 input의 상태 값을 업데이트하되, 사용자가 입력한 검색 결과에 대한 비동기 요청은 `디바운싱 함수`에서 설정한 시간(300ms)이 지난 뒤에 최종적으로 업데이트된 상태 값을 쿼리 스트링으로 보내 호출되게 구현했습니다.
+<br/>
+
+- [ ] 2-2. API 호출 횟수 최적화
+
+  - [ ] 검색창에 검색어를 입력했을 때 onChange 이벤트가 발생할 때마다 서버에 GET 요청을 보내는 것은 비효율적인 프로세스라고 공통된 의견을 나누었습니다.
+
+  - [ ] 따라서 첫 onChange 이벤트의 발생 시점으로부터 의도적인 `지연시간`을 두어 API 호출 횟수를 줄였습니다.
+
+  - [ ] 검색창의 onChange 이벤트가 비동기적으로 input의 상태 값을 업데이트하되, 사용자가 입력한 검색 결과에 대한 비동기 요청은 `디바운싱 함수`에서 설정한 시간(600ms)이 지난 뒤에 최종적으로 업데이트된 상태 값을 쿼리 스트링으로 보내 호출되게 구현했습니다.
 
   ![3-1 디바운싱 후](https://user-images.githubusercontent.com/78708082/201217822-64ce8a7a-596e-4a65-9001-6bb85ce7e553.gif)
 
   ![3-1 디바운싱 전](https://user-images.githubusercontent.com/78708082/201217815-904a2ec5-822f-4ea1-9b48-677428121ed0.gif)
 
+  https://github.com/pre-onboarding-frontend-7-team-3/pre-onboarding-7th-3-1-3/blob/845e8d7d4424fdddabc1f67207840e7993020bbf/src/hooks/useDebounce.ts#L1-L19
+
+<br/>
+
 ### 3. 키보드만으로 추천 검색어들로 이동 가능한 UX 구축
 
-- [ ] 사용자가 추천 검색어 간 `키 이벤트`(ArrowUp, ArrowDown)로 자유롭게 이동할 수 있게 구현했습니다. 검색창 이동 간 선택된 검색어는 하이라이트 처리로 UI를 구성했고 검색 목록 하단에 도달했을 때 ArrowDown, ArrowUp 이벤트에는 자동으로 목록 내 검색어 위치로 따라가도록 구현했습니다. 일반적인 사용자 검색 유형을 고려하여 페이지를 다시 돌아오거나 새로고침 했을 시에도 최근 검색어가 유지되도록 구현하였습니다. onKeyDown 이벤트가 발생했을 때 호출되는 함수는 커스텀 훅으로 분리하여 뷰 단에서의 로직을 최소화하고자 노력했습니다.
+- [ ] 사용자가 추천 검색어 간 `키 이벤트`(ArrowUp, ArrowDown)로 자유롭게 이동할 수 있게 구현했습니다.
+
+- [ ] 검색창 이동 간 선택된 검색어는 하이라이트 처리로 UI를 구성했고 검색 목록 하단에 도달했을 때 ArrowUp, ArrowDown 이벤트에는 자동으로 목록 내 검색어 위치로 따라가도록 구현했습니다.
+
+- [ ] 일반적인 사용자 검색 유형을 고려하여 페이지를 다시 돌아오거나 새로고침 했을 시에도 최근 검색어가 유지되도록 구현하였습니다. onKeyDown 이벤트가 발생했을 때 호출되는 함수는 커스텀 훅으로 분리하여 뷰 단에서의 로직을 최소화하고자 노력했습니다.
+
   ![3-1 스크롤](https://user-images.githubusercontent.com/78708082/201228395-ac315854-cc85-4a11-82d2-1cb974e662c0.gif)
+
+  https://github.com/pre-onboarding-frontend-7-team-3/pre-onboarding-7th-3-1-3/blob/845e8d7d4424fdddabc1f67207840e7993020bbf/src/hooks/useKeyDown.ts#L1-L58
+
+<br/>
 
 ### 4. 객체지향형 프로그래밍
 
-- [ ] live share로 코드 리뷰 중 재사용성이 높고 독립적으로 반복하는 코드에 대한 리팩토링이 필요하다는 의견을 공유했습니다. 컴포넌트(모듈, 유틸리티 함수, React 컴포넌트 등) 간 직접적인 의존성을 낮추고, 둘 다 공통된 추상화에 의존해야 한다는 `의존성 역전 원칙`을 적용하고자 API 통신 함수에 적용을 했습니다. 다만 이러한 원칙을 코드 전체적으로 적용하는 것은 악영향을 주거나 오버 엔지니어링된 코드로 이어질 수 있다는 공통된 의견을 모았습니다.
+- [ ] live share로 코드 리뷰 중 재사용성이 높고 독립적으로 반복하는 코드에 대한 리팩토링이 필요하다는 의견을 공유했습니다.
 
-https://github.com/pre-onboarding-frontend-7-team-3/pre-onboarding-7th-3-1-3/blob/6fbb9995ca3609b16f01eb9434dd0367426224ef/src/apis/SearchDiseaseService.ts#L1-L30
+- [ ] 컴포넌트(모듈, 유틸리티 함수, React 컴포넌트 등) 간 직접적인 의존성을 낮추고, 둘 다 공통된 추상화에 의존해야 한다는 `의존성 역전 원칙`을 적용하고자 API 통신 함수에 적용했습니다.
+
+- [ ] 다만 이러한 원칙을 코드 전체적으로 적용하는 것은 악영향을 주거나 오버 엔지니어링된 코드로 이어질 수 있다는 공통된 의견을 모았습니다.
+
+  https://github.com/pre-onboarding-frontend-7-team-3/pre-onboarding-7th-3-1-3/blob/6fbb9995ca3609b16f01eb9434dd0367426224ef/src/apis/SearchDiseaseService.ts#L1-L30
 
 <br/>
 
 ## 🔒 팀 코드 컨벤션
 
-- [ ] git commit message 컨벤션
+- [ ] git commit message
 
 | 커밋명   | 내용                                        |
 | -------- | ------------------------------------------- |
@@ -99,7 +137,7 @@ https://github.com/pre-onboarding-frontend-7-team-3/pre-onboarding-7th-3-1-3/blo
 | working  | 이미 만들어진 기능, 함수 작업중             |
 | merge    | branch merge                                |
 
-- [ ] branch 컨벤션
+- [ ] branch
 
 | 브랜치명 | 내용                         |
 | -------- | ---------------------------- |
@@ -114,29 +152,78 @@ https://github.com/pre-onboarding-frontend-7-team-3/pre-onboarding-7th-3-1-3/blo
 
 ## 🔨 사용 기술
 
-<img alt="HTML5" src ="https://img.shields.io/badge/HTML5-E34F26?&style=flat&logo=HTML5&logoColor=white"/> <img alt="CSS3" src ="https://img.shields.io/badge/CSS3-1572B6?&style=flat&logo=CSS3&logoColor=white"/> <img alt="JavaScript" src ="https://img.shields.io/badge/JavaScript-F7DF1E?&style=flat&logo=JavaScript&logoColor=white"/> <img alt="React" src ="https://img.shields.io/badge/React-61DAFB?&style=flat&logo=React&logoColor=white"/> <img alt="NextJS" src ="https://img.shields.io/badge/Next.js-000000?&style=flat&logo=Next.js&logoColor=white"/>
+<img alt="HTML5" src ="https://img.shields.io/badge/HTML5-E34F26?&style=flat&logo=HTML5&logoColor=white"/> <img alt="CSS3" src ="https://img.shields.io/badge/CSS3-1572B6?&style=flat&logo=CSS3&logoColor=white"/> <img alt="JavaScript" src ="https://img.shields.io/badge/JavaScript-F7DF1E?&style=flat&logo=JavaScript&logoColor=white"/> <img alt="React" src ="https://img.shields.io/badge/React-61DAFB?&style=flat&logo=React&logoColor=white"/> <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-blue?style=flat&logo=TypeScript&logoColor=white"/>
 
-<img alt="Axios" src ="https://img.shields.io/badge/Axios-5A29E4?&style=flat&logo=Axios&logoColor=white"/> <img alt="styled-components" src ="https://img.shields.io/badge/styled components-DB7093?&style=flat&logo=styled-components&logoColor=white"/> <img alt="react-responsive" src ="https://img.shields.io/badge/react responsive-000000?&style=flat&logoColor=white"/>
+<img alt="styled-components" src ="https://img.shields.io/badge/styled components-DB7093?&style=flat&logo=styled-components&logoColor=white"/> <img alt="recoil" src ="https://img.shields.io/badge/recoil-4082bc?&style=flat&logo=Recoils&logoColor=white"/>
 
-<img alt="Git" src ="https://img.shields.io/badge/Git-F05032?&style=flat&logo=Git&logoColor=white"/> <img alt="GitHub" src ="https://img.shields.io/badge/GitHub-181717?&style=flat&logo=GitHub&logoColor=white"/> <img alt="Notion" src ="https://img.shields.io/badge/Notion-000000?&style=flat&logo=Notion&logoColor=white"/>
+<img alt="Git" src ="https://img.shields.io/badge/Git-F05032?&style=flat&logo=Git&logoColor=white"/> <img alt="GitHub" src ="https://img.shields.io/badge/GitHub-181717?&style=flat&logo=GitHub&logoColor=white"/> <img alt="Notion" src ="https://img.shields.io/badge/Notion-green?&style=flat&logo=Notion&logoColor=white"/>
 
 </br>
 
 ## 📦 폴더 구조
 
 ```
-📂 src
-├──
+📂 src
+│  ├─ App.tsx
+│  ├─ apis
+│  │  ├─ SearchDiseaseService.ts // axios를 통한 기본적인 API 호출
+│  │  ├─ getDataAndRegisterCache.ts // fetch를 통해 cache storage에 저장
+│  │  ├─ index.ts
+│  │  └─ request.ts // axios baseurl
+│  ├─ components
+│  │  ├─ Header.tsx
+│  │  ├─ Layout
+│  │  │  ├─ Layout.tsx
+│  │  │  └─ index.ts
+│  │  ├─ Main
+│  │  │  ├─ HighlightedText.tsx
+│  │  │  ├─ RecentSearchWord.tsx
+│  │  │  ├─ RecommendWord.tsx
+│  │  │  ├─ SearchForm.tsx
+│  │  │  ├─ SearchItem.tsx
+│  │  │  └─ SearchItemList.tsx
+│  │  └─ Navbar.tsx
+│  ├─ constants
+│  │  └─ NavData.ts
+│  ├─ hooks
+│  │  ├─ useDebounce.ts // 검색에 대한 디바운스 처리 (useSearch에 종속적)
+│  │  ├─ useKeyDown.ts // 검색어 방항키 이동에 대해 'item index'를 전역화
+│  │  ├─ useScroll.ts // 전역 item index를 받아 뷰 단을 구현
+│  │  └─ useSearch.ts // '검색중인 내용' 전역화
+│  ├─ index.css
+│  ├─ index.jsx
+│  ├─ pages
+│  │  └─ Main
+│  │     ├─ Main.tsx
+│  │     └─ index.ts
+│  ├─ react-app-env.d.ts
+│  ├─ store
+│  │  ├─ searchResult.ts
+│  │  ├─ searchValue.ts
+│  │  ├─ searchWord.ts
+│  │  └─ selectedSearchResultIndex.ts
+│  ├─ style
+│  │  ├─ GlobalStyle.ts
+│  │  └─ Theme.ts
+│  ├─ styled.d.ts
+│  └─ utils
+│     ├─ checkValidationOfInput.ts // 검색 값의 유효성(단일 자음, 단일 모음 false) 판단
+│     ├─ filterCachedData.ts // 캐시 데이터 필요 부분(현재 검색된 단어와 일치되는 부분 까지만) 추출
+│     ├─ getCachedData.ts // 캐시 데이터에 검색 중인 값이 존재하는지 확인, 존재하면 가져오기
+│     ├─ makeTrieBySearchWord.ts // 검색된 단어로 자료구조(Trie) 생성
+│     └─ recentSearch.ts // 최근 검색어 파싱
+└─ tsconfig.json
+
 ```
 
 </br>
 
 ## 👨‍👩‍👧‍👦 팀원
 
-| 조은지<br/>(팀장)                                                                                                | 고영훈<br/>(서기)                                                                                               | 김창희<br/>(팀원)                                                                                               | 박정민<br/>(팀원)                                                                                           |
-| ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| <img src="https://avatars.githubusercontent.com/u/95282989?s=96&v=4" alt="Joeunji0119" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/65995664?s=96&v=4" alt="YeonghunKO" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/45018724?s=96&v=4" alt="PiperChang" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/55550034?s=96&v=4" alt="ono212" width="100" height="100"> |
-| [Joeunji0119](https://github.com/Joeunji0119)                                                                    | [YeonghunKO](https://github.com/YeonghunKO)                                                                     | [PiperChang](https://github.com/PiperChang)                                                                     | [ono212](https://github.com/ono212)                                                                         |
+| 고영훈<br/>(팀장)                                                                                               | 조은지<br/>(팀원)                                                                                                | 김창희<br/>(팀원)                                                                                               | 박정민<br/>(팀원)                                                                                           |
+| --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| <img src="https://avatars.githubusercontent.com/u/65995664?s=96&v=4" alt="YeonghunKO" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/95282989?s=96&v=4" alt="Joeunji0119" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/45018724?s=96&v=4" alt="PiperChang" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/55550034?s=96&v=4" alt="ono212" width="100" height="100"> |
+| [YeonghunKO](https://github.com/YeonghunKO)                                                                     | [Joeunji0119](https://github.com/Joeunji0119)                                                                    | [PiperChang](https://github.com/PiperChang)                                                                     | [ono212](https://github.com/ono212)                                                                         |
 
 | 문지원<br/>(팀원)                                                                                                | 이상민<br/>(공지)                                                                                               | 이지원<br/>(팀원)                                                                                               | 조수진<br/>(팀원)                                                                                        |
 | ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
