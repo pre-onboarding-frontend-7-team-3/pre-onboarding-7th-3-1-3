@@ -27,11 +27,15 @@ $ git clone https://github.com/pre-onboarding-frontend-7-team-3/pre-onboarding-7
 $ npm install
 $ chmod ug+x .husky/*
 ```
+
 - API 서버 실행
+
 ```
 $ npm run serve-json
 ```
+
 - 별도 터미널에서 Client 실행
+
 ```
 $ npm start
 ```
@@ -63,49 +67,49 @@ $ npm start
 - 서버에 대한 API 호출 최적화를 위해 응답으로 받은 데이터는 `캐싱` 처리하고 비동기 호출 횟수의 단축을 위해 `디바운싱` 처리했습니다.
 - [ ] 2-1. API 호출별로 로컬 캐싱
 
-  - [ ] 클라이언트에서 디바운싱 시간을 이탈하여 API 호출을 이룰 때마다, 트라이(Trie) 자료구조 형식으로 캐시 스토리지에 데이터를 저장합니다. 
-  
+  - [ ] 클라이언트에서 디바운싱 시간을 이탈하여 API 호출을 이룰 때마다, 트라이(Trie) 자료구조 형식으로 캐시 스토리지에 데이터를 저장합니다.
+
   - [ ] 후에 클라이언트에서 다시 API 호출을 하기 전, 서버로 보낼 `쿼리 스트링`을 캐시 스토리지에 저장된 `캐시 object key`를 비교하여 일치하는 캐시 데이터의 필요 부분을 추출하여 관련 검색어를 출력하였고, 일치하지 않을 때(캐시 처리된 데이터가 없는 경우) 서버에 다시 API 요청을 보내는 방식으로 구현했습니다.
 
   ![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/78708082/201212899-eddd696f-0d69-4566-b4a4-ceed37a8050f.gif)
 
   https://github.com/pre-onboarding-frontend-7-team-3/pre-onboarding-7th-3-1-3/blob/845e8d7d4424fdddabc1f67207840e7993020bbf/src/hooks/useSearch.ts#L23-L43
-  
+
 <br/>
 
 - [ ] 2-2. API 호출 횟수 최적화
 
-  - [ ] 검색창에 검색어를 입력했을 때 onChange 이벤트가 발생할 때마다 서버에 GET 요청을 보내는 것은 비효율적인 프로세스라고 공통된 의견을 나누었습니다. 
-  
-  - [ ] 따라서 첫 onChange 이벤트의 발생 시점으로부터 의도적인 `지연시간`을 두어 API 호출 횟수를 줄였습니다. 
-  
+  - [ ] 검색창에 검색어를 입력했을 때 onChange 이벤트가 발생할 때마다 서버에 GET 요청을 보내는 것은 비효율적인 프로세스라고 공통된 의견을 나누었습니다.
+
+  - [ ] 따라서 첫 onChange 이벤트의 발생 시점으로부터 의도적인 `지연시간`을 두어 API 호출 횟수를 줄였습니다.
+
   - [ ] 검색창의 onChange 이벤트가 비동기적으로 input의 상태 값을 업데이트하되, 사용자가 입력한 검색 결과에 대한 비동기 요청은 `디바운싱 함수`에서 설정한 시간(600ms)이 지난 뒤에 최종적으로 업데이트된 상태 값을 쿼리 스트링으로 보내 호출되게 구현했습니다.
 
   ![3-1 디바운싱 후](https://user-images.githubusercontent.com/78708082/201217822-64ce8a7a-596e-4a65-9001-6bb85ce7e553.gif)
 
   ![3-1 디바운싱 전](https://user-images.githubusercontent.com/78708082/201217815-904a2ec5-822f-4ea1-9b48-677428121ed0.gif)
-  
-    https://github.com/pre-onboarding-frontend-7-team-3/pre-onboarding-7th-3-1-3/blob/845e8d7d4424fdddabc1f67207840e7993020bbf/src/hooks/useDebounce.ts#L1-L19
-    
+
+  https://github.com/pre-onboarding-frontend-7-team-3/pre-onboarding-7th-3-1-3/blob/845e8d7d4424fdddabc1f67207840e7993020bbf/src/hooks/useDebounce.ts#L1-L19
+
 <br/>
 
 ### 3. 키보드만으로 추천 검색어들로 이동 가능한 UX 구축
 
-- [ ] 사용자가 추천 검색어 간 `키 이벤트`(ArrowUp, ArrowDown)로 자유롭게 이동할 수 있게 구현했습니다. 
+- [ ] 사용자가 추천 검색어 간 `키 이벤트`(ArrowUp, ArrowDown)로 자유롭게 이동할 수 있게 구현했습니다.
 
 - [ ] 검색창 이동 간 선택된 검색어는 하이라이트 처리로 UI를 구성했고 검색 목록 하단에 도달했을 때 ArrowUp, ArrowDown 이벤트에는 자동으로 목록 내 검색어 위치로 따라가도록 구현했습니다.
 
 - [ ] 일반적인 사용자 검색 유형을 고려하여 페이지를 다시 돌아오거나 새로고침 했을 시에도 최근 검색어가 유지되도록 구현하였습니다. onKeyDown 이벤트가 발생했을 때 호출되는 함수는 커스텀 훅으로 분리하여 뷰 단에서의 로직을 최소화하고자 노력했습니다.
 
   ![3-1 스크롤](https://user-images.githubusercontent.com/78708082/201228395-ac315854-cc85-4a11-82d2-1cb974e662c0.gif)
-  
-    https://github.com/pre-onboarding-frontend-7-team-3/pre-onboarding-7th-3-1-3/blob/845e8d7d4424fdddabc1f67207840e7993020bbf/src/hooks/useKeyDown.ts#L1-L58
-  
+
+  https://github.com/pre-onboarding-frontend-7-team-3/pre-onboarding-7th-3-1-3/blob/845e8d7d4424fdddabc1f67207840e7993020bbf/src/hooks/useKeyDown.ts#L1-L58
+
 <br/>
 
 ### 4. 객체지향형 프로그래밍
 
-- [ ] live share로 코드 리뷰 중 재사용성이 높고 독립적으로 반복하는 코드에 대한 리팩토링이 필요하다는 의견을 공유했습니다. 
+- [ ] live share로 코드 리뷰 중 재사용성이 높고 독립적으로 반복하는 코드에 대한 리팩토링이 필요하다는 의견을 공유했습니다.
 
 - [ ] 컴포넌트(모듈, 유틸리티 함수, React 컴포넌트 등) 간 직접적인 의존성을 낮추고, 둘 다 공통된 추상화에 의존해야 한다는 `의존성 역전 원칙`을 적용하고자 API 통신 함수에 적용했습니다.
 
@@ -165,7 +169,7 @@ $ npm start
 │  │  ├─ SearchDiseaseService.ts // axios를 통한 기본적인 API 호출
 │  │  ├─ getDataAndRegisterCache.ts // fetch를 통해 cache storage에 저장
 │  │  ├─ index.ts
-│  │  └─ request.ts // axios baseurl 
+│  │  └─ request.ts // axios baseurl
 │  ├─ components
 │  │  ├─ Header.tsx
 │  │  ├─ Layout
@@ -216,10 +220,10 @@ $ npm start
 
 ## 👨‍👩‍👧‍👦 팀원
 
-| 고영훈<br/>(팀장)                                                                                               | 조은지<br/>(팀원)                                                                                               | 김창희<br/>(팀원)                                                                                               | 박정민<br/>(팀원)                                                                                           |
-| ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| 고영훈<br/>(팀장)                                                                                               | 조은지<br/>(팀원)                                                                                                | 김창희<br/>(팀원)                                                                                               | 박정민<br/>(팀원)                                                                                           |
+| --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
 | <img src="https://avatars.githubusercontent.com/u/65995664?s=96&v=4" alt="YeonghunKO" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/95282989?s=96&v=4" alt="Joeunji0119" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/45018724?s=96&v=4" alt="PiperChang" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/55550034?s=96&v=4" alt="ono212" width="100" height="100"> |
-| [YeonghunKO](https://github.com/YeonghunKO)           |     [Joeunji0119](https://github.com/Joeunji0119)                                                             | [PiperChang](https://github.com/PiperChang)                                                                     | [ono212](https://github.com/ono212)                                                                         |
+| [YeonghunKO](https://github.com/YeonghunKO)                                                                     | [Joeunji0119](https://github.com/Joeunji0119)                                                                    | [PiperChang](https://github.com/PiperChang)                                                                     | [ono212](https://github.com/ono212)                                                                         |
 
 | 문지원<br/>(팀원)                                                                                                | 이상민<br/>(공지)                                                                                               | 이지원<br/>(팀원)                                                                                               | 조수진<br/>(팀원)                                                                                        |
 | ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |

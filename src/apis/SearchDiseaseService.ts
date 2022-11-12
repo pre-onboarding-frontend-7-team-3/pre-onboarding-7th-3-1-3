@@ -1,8 +1,6 @@
-import { AxiosResponse } from "axios";
-
 interface SearchDiseaseService {
-  get(url: string): Promise<AxiosResponse>;
-  search(keyword: string): Promise<AxiosResponse>;
+  get(url: string): Promise<any>;
+  search(keyword: string): Promise<any>;
 }
 
 export class SearchDiseaseServiceImp implements SearchDiseaseService {

@@ -4,11 +4,11 @@ import { searchValue } from "../../store/searchValue";
 import RecentSearchWord from "./RecentSearchWord";
 import RecommendWord from "./RecommendWord";
 import SearchItem from "./SearchItem";
-import useSearch from "hooks/useSearch";
+import useFetch from "hooks/useFetch";
 
 const SearchItemList = () => {
   const searchInputValue = useRecoilValue(searchValue);
-  const diseaseListData = useSearch();
+  const diseaseListData = useFetch();
 
   return (
     <ListWrapper>

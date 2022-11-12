@@ -25,7 +25,7 @@ const SearchForm = () => {
     [diseaseListData]
   );
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (_e: React.FormEvent<HTMLFormElement>) => {
     setRecentSearch(selectedResultValue || searchInputValue);
   };
 

@@ -1,4 +1,4 @@
-export class AxiosHttpClient {
+export class HttpClient {
   private baseURL: string;
 
   constructor(baseURL: string) {
