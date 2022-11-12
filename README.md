@@ -115,9 +115,8 @@ $ npm start
 
 - [ ] 다만 이러한 원칙을 코드 전체적으로 적용하는 것은 악영향을 주거나 오버 엔지니어링된 코드로 이어질 수 있다는 공통된 의견을 모았습니다.
 
-  https://github.com/pre-onboarding-frontend-7-team-3/pre-onboarding-7th-3-1-3/blob/6fbb9995ca3609b16f01eb9434dd0367426224ef/src/apis/SearchDiseaseService.ts#L1-L30
+https://github.com/pre-onboarding-frontend-7-team-3/pre-onboarding-7th-3-1-3/blob/d3353c9a790858c8fbfff15ab3c5b7f1bbc11c10/src/apis/SearchDiseaseService.ts#L1-L28
 
-<br/>
 
 ## 🔒 팀 코드 컨벤션
 
