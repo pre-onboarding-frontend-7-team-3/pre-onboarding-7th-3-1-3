@@ -1,12 +1,14 @@
+import { HttpClient } from "./request";
+
 interface SearchDiseaseService {
   get(url: string): Promise<any>;
   search(keyword: string): Promise<any>;
 }
 
 export class SearchDiseaseServiceImp implements SearchDiseaseService {
-  private httpClient: any;
+  private httpClient: HttpClient;
 
-  constructor(httpClient: any) {
+  constructor(httpClient: HttpClient) {
     this.httpClient = httpClient;
   }
 
